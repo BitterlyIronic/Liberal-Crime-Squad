@@ -29,7 +29,7 @@ This file is part of Liberal Crime Squad.                                       
 // Note: this file is encoded in the PC-8 / Code Page 437 / OEM-US character set
 // (The same character set used by Liberal Crime Squad when it is running)
 // Certain special characters won't display correctly unless your text editor is
-// set to use that character set, such as this e with an accent: ‚
+// set to use that character set, such as this e with an accent: ï¿½
 
 // In Windows Notepad with the Terminal font, OEM/DOS encoding it should work fine.
 // You can set this in Notepad by going to Format->Font and choosing the Terminal font,
@@ -90,7 +90,7 @@ void title() {
       strcpy(str,"shall we transgress them at once? ... I say, break the law.\"");
       move(8,39-((len(str)-1)>>1));
       addstr(str);
-      strcpy(str,"ÄÄ Henry David Thoreau");
+      strcpy(str,"-- Henry David Thoreau");
       move(9,39-((len(str)-1)>>1));
       addstr(str);
       break;
@@ -104,7 +104,7 @@ void title() {
       strcpy(str,"has a moral responsibility to disobey unjust laws.\"");
       move(8,39-((len(str)-1)>>1));
       addstr(str);
-      strcpy(str,"ÄÄ Martin Luther King, Jr.");
+      strcpy(str,"-- Martin Luther King, Jr.");
       move(9,39-((len(str)-1)>>1));
       addstr(str);
       break;
@@ -118,7 +118,7 @@ void title() {
       strcpy(str,"departure from democracy; it is absolutely essential to it.\"");
       move(8,39-((len(str)-1)>>1));
       addstr(str);
-      strcpy(str,"ÄÄ Howard Zinn");
+      strcpy(str,"-- Howard Zinn");
       move(9,39-((len(str)-1)>>1));
       addstr(str);
       break;
@@ -132,7 +132,7 @@ void title() {
       strcpy(str,"not physically in an active rebellion, then it's spiritual death.\"");
       move(8,39-((len(str)-1)>>1));
       addstr(str);
-      strcpy(str,"ÄÄ Chris Hedges");
+      strcpy(str,"-- Chris Hedges");
       move(9,39-((len(str)-1)>>1));
       addstr(str);
       break;
@@ -146,7 +146,7 @@ void title() {
       strcpy(str,"with evil is as much a duty as cooperation with good.\"");
       move(8,39-((len(str)-1)>>1));
       addstr(str);
-      strcpy(str,"ÄÄ Mahatma Gandhi");
+      strcpy(str,"-- Mahatma Gandhi");
       move(9,39-((len(str)-1)>>1));
       addstr(str);
       break;
@@ -160,7 +160,7 @@ void title() {
       strcpy(str,"Well, sometimes that is a good tactic, sometimes not.\"");
       move(8,39-((len(str)-1)>>1));
       addstr(str);
-      strcpy(str,"ÄÄ Noam Chomsky");
+      strcpy(str,"-- Noam Chomsky");
       move(9,39-((len(str)-1)>>1));
       addstr(str);
       break;
@@ -174,7 +174,7 @@ void title() {
       strcpy(str,"harm our country and our people, and neither do we.\"");
       move(8,39-((len(str)-1)>>1));
       addstr(str);
-      strcpy(str,"ÄÄ George W. Bush");
+      strcpy(str,"-- George W. Bush");
       move(9,39-((len(str)-1)>>1));
       addstr(str);
       break;
@@ -188,21 +188,21 @@ void title() {
       strcpy(str,"million, it is a statistic.\"");
       move(8,39-((len(str)-1)>>1));
       addstr(str);
-      strcpy(str,"ÄÄ Josef Stalin");
+      strcpy(str,"-- Josef Stalin");
       move(9,39-((len(str)-1)>>1));
       addstr(str);
       break;
    case 8:
-      strcpy(str,"\"There's an old saying in Tennessee ÄÄ I know it's in Texas,");
+      strcpy(str,"\"There's an old saying in Tennessee -- I know it's in Texas,");
       move(6,39-((len(str)-1)>>1));
       addstr(str);
-      strcpy(str,"probably in Tennessee ÄÄ that says, fool me once, shame on");
+      strcpy(str,"probably in Tennessee -- that says, fool me once, shame on");
       move(7,39-((len(str)-1)>>1));
       addstr(str);
-      strcpy(str,"ÄÄ shame on you. Fool me ÄÄ you can't get fooled again.\"");
+      strcpy(str,"-- shame on you. Fool me -- you can't get fooled again.\"");
       move(8,39-((len(str)-1)>>1));
       addstr(str);
-      strcpy(str,"ÄÄ George W. Bush");
+      strcpy(str,"-- George W. Bush");
       move(9,39-((len(str)-1)>>1));
       addstr(str);
       break;
@@ -216,7 +216,7 @@ void title() {
       strcpy(str,"conspiring against my husband since the day he announced for President.\"");
       move(8,39-((len(str)-1)>>1));
       addstr(str);
-      strcpy(str,"ÄÄ Hillary Clinton");
+      strcpy(str,"-- Hillary Clinton");
       move(9,39-((len(str)-1)>>1));
       addstr(str);
       break;
@@ -230,7 +230,7 @@ void title() {
       strcpy(str,"don't have a strategy yet.\"");
       move(8,39-((len(str)-1)>>1));
       addstr(str);
-      strcpy(str,"ÄÄ Barack Obama");
+      strcpy(str,"-- Barack Obama");
       move(9,39-((len(str)-1)>>1));
       addstr(str);
       break;
@@ -244,7 +244,7 @@ void title() {
       strcpy(str,"'em are even dumber than THAT.\"");
       move(8,39-((len(str)-1)>>1));
       addstr(str);
-      strcpy(str,"ÄÄ J.R. \"Bob\" Dobbs");
+      strcpy(str,"-- J.R. \"Bob\" Dobbs");
       move(9,39-((len(str)-1)>>1));
       addstr(str);
       break;
@@ -255,10 +255,10 @@ void title() {
       strcpy(str,"trend toward more freedom and");
       move(7,39-((len(str)-1)>>1));
       addstr(str);
-      strcpy(str,"democracy ÄÄ but that could change.\"");
+      strcpy(str,"democracy -- but that could change.\"");
       move(8,39-((len(str)-1)>>1));
       addstr(str);
-      strcpy(str,"ÄÄ Dan Quayle");
+      strcpy(str,"-- Dan Quayle");
       move(9,39-((len(str)-1)>>1));
       addstr(str);
       break;
@@ -272,7 +272,7 @@ void title() {
       strcpy(str,"and his top officers.  We carpet-bombed German cities; we killed civilians.\"");
       move(8,39-((len(str)-1)>>1));
       addstr(str);
-      strcpy(str,"ÄÄ Ann Coulter");
+      strcpy(str,"-- Ann Coulter");
       move(9,39-((len(str)-1)>>1));
       addstr(str);
       break;
@@ -286,7 +286,7 @@ void title() {
       strcpy(str,"Shirkers will be shot, regardless of past service.\"");
       move(8,39-((len(str)-1)>>1));
       addstr(str);
-      strcpy(str,"ÄÄ Leon Trotsky");
+      strcpy(str,"-- Leon Trotsky");
       move(9,39-((len(str)-1)>>1));
       addstr(str);
       break;
@@ -300,7 +300,7 @@ void title() {
       strcpy(str,"Bring me Fegelein!  Fegelein!  Fegelein!\"");
       move(8,39-((len(str)-1)>>1));
       addstr(str);
-      strcpy(str,"ÄÄ Adolf Hitler");
+      strcpy(str,"-- Adolf Hitler");
       move(9,39-((len(str)-1)>>1));
       addstr(str);
       break;
@@ -314,7 +314,7 @@ void title() {
       strcpy(str,"Russia forever.  We begin bombing in five minutes.\"");
       move(8,39-((len(str)-1)>>1));
       addstr(str);
-      strcpy(str,"ÄÄ Ronald Reagan");
+      strcpy(str,"-- Ronald Reagan");
       move(9,39-((len(str)-1)>>1));
       addstr(str);
       break;
@@ -328,7 +328,7 @@ void title() {
       strcpy(str,"then, they get bitter, they cling to guns or religion...\"");
       move(8,39-((len(str)-1)>>1));
       addstr(str);
-      strcpy(str,"ÄÄ Barack Obama");
+      strcpy(str,"-- Barack Obama");
       move(9,39-((len(str)-1)>>1));
       addstr(str);
       break;
@@ -342,7 +342,7 @@ void title() {
       strcpy(str,"There's no such thing as a nonviolent revolution.\"");
       move(8,39-((len(str)-1)>>1));
       addstr(str);
-      strcpy(str,"ÄÄ Malcolm X");
+      strcpy(str,"-- Malcolm X");
       move(9,39-((len(str)-1)>>1));
       addstr(str);
       break;
@@ -356,7 +356,7 @@ void title() {
       strcpy(str,"politics with bloodshed.\"");
       move(8,39-((len(str)-1)>>1));
       addstr(str);
-      strcpy(str,"ÄÄ Chairman Mao");
+      strcpy(str,"-- Chairman Mao");
       move(9,39-((len(str)-1)>>1));
       addstr(str);
       break;
@@ -370,7 +370,7 @@ void title() {
       strcpy(str,"daughter against her mother, a daughter-in-law against her mother-in-law...\"");
       move(8,39-((len(str)-1)>>1));
       addstr(str);
-      strcpy(str,"ÄÄ Jesus Christ");
+      strcpy(str,"-- Jesus Christ");
       move(9,39-((len(str)-1)>>1));
       addstr(str);
       break;
@@ -384,7 +384,7 @@ void title() {
       strcpy(str,"the blood of patriots and tyrants.  It is its natural manure.\"");
       move(8,39-((len(str)-1)>>1));
       addstr(str);
-      strcpy(str,"ÄÄ Thomas Jefferson");
+      strcpy(str,"-- Thomas Jefferson");
       move(9,39-((len(str)-1)>>1));
       addstr(str);
       break;
@@ -398,7 +398,7 @@ void title() {
       strcpy(str,"is far safer to be feared than loved, if you cannot be both.\"");
       move(8,39-((len(str)-1)>>1));
       addstr(str);
-      strcpy(str,"ÄÄ Niccolo Machiavelli");
+      strcpy(str,"-- Niccolo Machiavelli");
       move(9,39-((len(str)-1)>>1));
       addstr(str);
       break;
@@ -412,7 +412,7 @@ void title() {
       strcpy(str,"have a tremendous impact on history.\"");
       move(8,39-((len(str)-1)>>1));
       addstr(str);
-      strcpy(str,"ÄÄ Dan Quayle");
+      strcpy(str,"-- Dan Quayle");
       move(9,39-((len(str)-1)>>1));
       addstr(str);
       break;
@@ -426,7 +426,7 @@ void title() {
       strcpy(str,"you need not fear the results of a hundred battles.\"");
       move(8,39-((len(str)-1)>>1));
       addstr(str);
-      strcpy(str,"ÄÄ Sun Tzu");
+      strcpy(str,"-- Sun Tzu");
       move(9,39-((len(str)-1)>>1));
       addstr(str);
       break;
@@ -440,7 +440,7 @@ void title() {
       strcpy(str,"I'm not sure about the former.\"");
       move(8,39-((len(str)-1)>>1));
       addstr(str);
-      strcpy(str,"ÄÄ Albert Einstein");
+      strcpy(str,"-- Albert Einstein");
       move(9,39-((len(str)-1)>>1));
       addstr(str);
       break;
@@ -448,13 +448,13 @@ void title() {
       strcpy(str,"\"As Putin rears his head and comes into the airspace of");
       move(6,39-((len(str)-1)>>1));
       addstr(str);
-      strcpy(str,"the United States of America, where ÄÄ where do they");
+      strcpy(str,"the United States of America, where -- where do they");
       move(7,39-((len(str)-1)>>1));
       addstr(str);
       strcpy(str,"go?  It's Alaska.  It's just right over the border.\"");
       move(8,39-((len(str)-1)>>1));
       addstr(str);
-      strcpy(str,"ÄÄ Sarah Palin");
+      strcpy(str,"-- Sarah Palin");
       move(9,39-((len(str)-1)>>1));
       addstr(str);
       break;
@@ -468,7 +468,7 @@ void title() {
       strcpy(str,"If anything is certain, it is that I myself am not a Marxist.\"");
       move(8,39-((len(str)-1)>>1));
       addstr(str);
-      strcpy(str,"ÄÄ Karl Marx");
+      strcpy(str,"-- Karl Marx");
       move(9,39-((len(str)-1)>>1));
       addstr(str);
       break;
@@ -476,13 +476,13 @@ void title() {
       strcpy(str,"\"If ignorant of the almighty Time Cube Creation Truth, you");
       move(6,39-((len(str)-1)>>1));
       addstr(str);
-      strcpy(str,"deserve to be killed.  Killing you is not immoral ÄÄ but");
+      strcpy(str,"deserve to be killed.  Killing you is not immoral -- but");
       move(7,39-((len(str)-1)>>1));
       addstr(str);
       strcpy(str,"justified to save life on Earth for future generations.\"");
       move(8,39-((len(str)-1)>>1));
       addstr(str);
-      strcpy(str,"ÄÄ Gene Ray");
+      strcpy(str,"-- Gene Ray");
       move(9,39-((len(str)-1)>>1));
       addstr(str);
       break;
@@ -496,7 +496,7 @@ void title() {
       strcpy(str,"Frankenstein earphone radio slavery for the Communist gangster government.\"");
       move(8,39-((len(str)-1)>>1));
       addstr(str);
-      strcpy(str,"ÄÄ Francis E. Dec");
+      strcpy(str,"-- Francis E. Dec");
       move(9,39-((len(str)-1)>>1));
       addstr(str);
       break;
@@ -510,7 +510,7 @@ void title() {
       strcpy(str,"group thinks they can do it.  Their number is negligible and they are stupid.\"");
       move(8,39-((len(str)-1)>>1));
       addstr(str);
-      strcpy(str,"ÄÄ Dwight D. Eisenhower");
+      strcpy(str,"-- Dwight D. Eisenhower");
       move(9,39-((len(str)-1)>>1));
       addstr(str);
       break;
@@ -524,7 +524,7 @@ void title() {
       strcpy(str,"and that way let them kill as many as possible.\"");
       move(8,39-((len(str)-1)>>1));
       addstr(str);
-      strcpy(str,"ÄÄ Harry S. Truman");
+      strcpy(str,"-- Harry S. Truman");
       move(9,39-((len(str)-1)>>1));
       addstr(str);
       break;
@@ -602,7 +602,7 @@ void mode_title()
       if(c==ESC||c=='x') end_game();
 
       c=getkey();
-   } while(c=='m'||c=='h'||c=='x'||c==ESC);
+   } while(c=='m'||c=='h'||c=='x'||c==ESC||c==KEY_RESIZE);
 
    savefiles = std::move(LCSSaveFiles());
 
@@ -633,7 +633,7 @@ void mode_title()
             mvaddstr(0,0,"Choose a Save File");
          }
          set_color(COLOR_WHITE,COLOR_BLACK,0);
-         mvaddstr(1,0,"ÄÄÄÄTitleÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ");
+         mvaddstr(1,0,"----Title-----------------------------------------------------------------------");
          for(p=page*19,y=2;p<savefiles.size()&&p<page*19+19;p++,y++)
          {
             set_color(COLOR_WHITE,COLOR_BLACK,0); //c==y+'a'-2);
