@@ -1,5 +1,7 @@
 Makefile*
 config.h
+config.sub
+config.guess
 crimesquad
 *.o
 *.dirstamp
