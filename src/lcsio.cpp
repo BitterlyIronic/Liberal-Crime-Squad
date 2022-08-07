@@ -67,7 +67,7 @@ bool LCSInitHomeDir()
       str+="/";
 
    #ifndef WIN32
-   str+=".lcs/";
+   str+=".local/share/lcs/";
    #endif
 
    strncpy(homedir,str,MAX_PATH_SIZE);

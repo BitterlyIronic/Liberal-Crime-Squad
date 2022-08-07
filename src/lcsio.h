@@ -58,7 +58,7 @@ enum LCSIO_FLAGS
     Use the prefix flags to access files in platform-specific locations.
     Prefix art will give you <lcsartdir>/<filename>.
     Prefix home will give you <lcshomedir>/<filename>.
-        Home defaults to '~/.lcs/' on *nix, '.' on Windows.
+        Home defaults to '~/.local/share/lcs/' on *nix, '.' on Windows.
     Never mix prefixes, behavior is undefined in that case and may
     cause files to be deleted or corrupted.
 
