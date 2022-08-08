@@ -1,9 +1,15 @@
 #!/bin/fish
-#example LCS starter script for fish, using the kitty terminal
-kitty \
-    -o initial_window_width=80c \
-    -o initial_window_height=25c \
-    -o font_family="source code pro" \
-    -o font_size=16 \
-    -T="Liberal Crime Squad" \
-    fish -c "xseticon -id \"\$WINDOWID\" icon.png && ./crimesquad" &
+#example LCS starter script for fish, using the alacritty terminal
+set -l font_family "droid sans mono"
+
+alacritty \
+    -o window.dimensions.columns=80 \
+    -o window.dimensions.lines=25 \
+    -o font.normal.family=$font_family \
+    -o font.bold.family=$font_family \
+    -o font.italic.family=$font_family \
+    -o font.bold_italic.family=$font_family \
+    -o font.size=16 \
+    -o draw_bold_text_with_bright_colors=true \
+    -t="Liberal Crime Squad" \
+    -e sh -c "seticon -id \"\$WINDOWID\" icon.png && ./crimesquad" &
