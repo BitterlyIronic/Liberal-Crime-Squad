@@ -70,7 +70,7 @@
 //#define MORERANDOM
 
 // Allow experimental, incomplete Stalinist Comrade Squad mode to be chosen for new games
-#define ALLOWSTALIN
+// #define ALLOWSTALIN
 
 //PACKAGE_VERSION must be defined here or the game won't compile on Windows! Don't remove it!!!
 // -- yetisyny
