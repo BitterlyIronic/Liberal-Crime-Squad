@@ -602,7 +602,7 @@ void mode_title()
       if(c==ESC||c=='x') end_game();
 
       c=getkey();
-   } while(c=='m'||c=='h'||c=='x'||c==ESC||c==KEY_RESIZE);
+   } while(c=='m'||c=='h'||c=='x'||c==ESC);
 
    savefiles = std::move(LCSSaveFiles());
 

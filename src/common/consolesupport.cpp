@@ -152,7 +152,12 @@ int getkey()
    nodelay(stdscr,TRUE);
    while(getch()!=ERR);
    nodelay(stdscr,FALSE);
-   int c=getch();
+   int c;
+
+   do {
+      c = getch();
+   } while (c==KEY_RESIZE);
+   
    translategetch(c);
    return c;
 }
@@ -166,7 +171,13 @@ int getkey_cap()
    nodelay(stdscr,TRUE);
    while(getch()!=ERR);
    nodelay(stdscr,FALSE);
-   int c=getch();
+
+   int c;
+
+   do {
+      c = getch();
+   } while (c==KEY_RESIZE);
+
    translategetch_cap(c);
    return c;
 }
