@@ -56,9 +56,10 @@ bool LCSFileExists(const char* filename)
 bool LCSInitHomeDir()
 {
    #ifndef WIN32
-   char* homeenv=getenv("HOME");
+   char* datadir = getenv("XDG_DATA_HOME");
+   char* homeenv = datadir ? datadir : getenv("HOME");
    #else
-   char* homeenv=(char*)"./";
+   char* homeenv = (char*)"./";
    #endif
 
    //Do everything using STL String, it is safer that way.
@@ -67,7 +68,10 @@ bool LCSInitHomeDir()
       str+="/";
 
    #ifndef WIN32
-   str+=".local/share/lcs/";
+   if (!datadir)
+      str += ".local/share/";
+
+   str += "lcs/";
    #endif
 
    strncpy(homedir,str,MAX_PATH_SIZE);
