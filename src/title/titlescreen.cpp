@@ -90,7 +90,7 @@ void title() {
       strcpy(str,"shall we transgress them at once? ... I say, break the law.\"");
       move(8,39-((len(str)-1)>>1));
       addstr(str);
-      strcpy(str,"-- Henry David Thoreau");
+      strcpy(str,"컴 Henry David Thoreau");
       move(9,39-((len(str)-1)>>1));
       addstr(str);
       break;
@@ -104,7 +104,7 @@ void title() {
       strcpy(str,"has a moral responsibility to disobey unjust laws.\"");
       move(8,39-((len(str)-1)>>1));
       addstr(str);
-      strcpy(str,"-- Martin Luther King, Jr.");
+      strcpy(str,"컴 Martin Luther King, Jr.");
       move(9,39-((len(str)-1)>>1));
       addstr(str);
       break;
@@ -118,7 +118,7 @@ void title() {
       strcpy(str,"departure from democracy; it is absolutely essential to it.\"");
       move(8,39-((len(str)-1)>>1));
       addstr(str);
-      strcpy(str,"-- Howard Zinn");
+      strcpy(str,"컴 Howard Zinn");
       move(9,39-((len(str)-1)>>1));
       addstr(str);
       break;
@@ -132,7 +132,7 @@ void title() {
       strcpy(str,"not physically in an active rebellion, then it's spiritual death.\"");
       move(8,39-((len(str)-1)>>1));
       addstr(str);
-      strcpy(str,"-- Chris Hedges");
+      strcpy(str,"컴 Chris Hedges");
       move(9,39-((len(str)-1)>>1));
       addstr(str);
       break;
@@ -146,7 +146,7 @@ void title() {
       strcpy(str,"with evil is as much a duty as cooperation with good.\"");
       move(8,39-((len(str)-1)>>1));
       addstr(str);
-      strcpy(str,"-- Mahatma Gandhi");
+      strcpy(str,"컴 Mahatma Gandhi");
       move(9,39-((len(str)-1)>>1));
       addstr(str);
       break;
@@ -160,7 +160,7 @@ void title() {
       strcpy(str,"Well, sometimes that is a good tactic, sometimes not.\"");
       move(8,39-((len(str)-1)>>1));
       addstr(str);
-      strcpy(str,"-- Noam Chomsky");
+      strcpy(str,"컴 Noam Chomsky");
       move(9,39-((len(str)-1)>>1));
       addstr(str);
       break;
@@ -174,7 +174,7 @@ void title() {
       strcpy(str,"harm our country and our people, and neither do we.\"");
       move(8,39-((len(str)-1)>>1));
       addstr(str);
-      strcpy(str,"-- George W. Bush");
+      strcpy(str,"컴 George W. Bush");
       move(9,39-((len(str)-1)>>1));
       addstr(str);
       break;
@@ -188,21 +188,21 @@ void title() {
       strcpy(str,"million, it is a statistic.\"");
       move(8,39-((len(str)-1)>>1));
       addstr(str);
-      strcpy(str,"-- Josef Stalin");
+      strcpy(str,"컴 Josef Stalin");
       move(9,39-((len(str)-1)>>1));
       addstr(str);
       break;
    case 8:
-      strcpy(str,"\"There's an old saying in Tennessee -- I know it's in Texas,");
+      strcpy(str,"\"There's an old saying in Tennessee 컴 I know it's in Texas,");
       move(6,39-((len(str)-1)>>1));
       addstr(str);
-      strcpy(str,"probably in Tennessee -- that says, fool me once, shame on");
+      strcpy(str,"probably in Tennessee 컴 that says, fool me once, shame on");
       move(7,39-((len(str)-1)>>1));
       addstr(str);
-      strcpy(str,"-- shame on you. Fool me -- you can't get fooled again.\"");
+      strcpy(str,"컴 shame on you. Fool me 컴 you can't get fooled again.\"");
       move(8,39-((len(str)-1)>>1));
       addstr(str);
-      strcpy(str,"-- George W. Bush");
+      strcpy(str,"컴 George W. Bush");
       move(9,39-((len(str)-1)>>1));
       addstr(str);
       break;
@@ -216,7 +216,7 @@ void title() {
       strcpy(str,"conspiring against my husband since the day he announced for President.\"");
       move(8,39-((len(str)-1)>>1));
       addstr(str);
-      strcpy(str,"-- Hillary Clinton");
+      strcpy(str,"컴 Hillary Clinton");
       move(9,39-((len(str)-1)>>1));
       addstr(str);
       break;
@@ -230,7 +230,7 @@ void title() {
       strcpy(str,"don't have a strategy yet.\"");
       move(8,39-((len(str)-1)>>1));
       addstr(str);
-      strcpy(str,"-- Barack Obama");
+      strcpy(str,"컴 Barack Obama");
       move(9,39-((len(str)-1)>>1));
       addstr(str);
       break;
@@ -244,7 +244,7 @@ void title() {
       strcpy(str,"'em are even dumber than THAT.\"");
       move(8,39-((len(str)-1)>>1));
       addstr(str);
-      strcpy(str,"-- J.R. \"Bob\" Dobbs");
+      strcpy(str,"컴 J.R. \"Bob\" Dobbs");
       move(9,39-((len(str)-1)>>1));
       addstr(str);
       break;
@@ -258,7 +258,7 @@ void title() {
       strcpy(str,"democracy -- but that could change.\"");
       move(8,39-((len(str)-1)>>1));
       addstr(str);
-      strcpy(str,"-- Dan Quayle");
+      strcpy(str,"컴 Dan Quayle");
       move(9,39-((len(str)-1)>>1));
       addstr(str);
       break;
@@ -272,7 +272,7 @@ void title() {
       strcpy(str,"and his top officers.  We carpet-bombed German cities; we killed civilians.\"");
       move(8,39-((len(str)-1)>>1));
       addstr(str);
-      strcpy(str,"-- Ann Coulter");
+      strcpy(str,"컴 Ann Coulter");
       move(9,39-((len(str)-1)>>1));
       addstr(str);
       break;
@@ -286,7 +286,7 @@ void title() {
       strcpy(str,"Shirkers will be shot, regardless of past service.\"");
       move(8,39-((len(str)-1)>>1));
       addstr(str);
-      strcpy(str,"-- Leon Trotsky");
+      strcpy(str,"컴 Leon Trotsky");
       move(9,39-((len(str)-1)>>1));
       addstr(str);
       break;
@@ -300,7 +300,7 @@ void title() {
       strcpy(str,"Bring me Fegelein!  Fegelein!  Fegelein!\"");
       move(8,39-((len(str)-1)>>1));
       addstr(str);
-      strcpy(str,"-- Adolf Hitler");
+      strcpy(str,"컴 Adolf Hitler");
       move(9,39-((len(str)-1)>>1));
       addstr(str);
       break;
@@ -314,7 +314,7 @@ void title() {
       strcpy(str,"Russia forever.  We begin bombing in five minutes.\"");
       move(8,39-((len(str)-1)>>1));
       addstr(str);
-      strcpy(str,"-- Ronald Reagan");
+      strcpy(str,"컴 Ronald Reagan");
       move(9,39-((len(str)-1)>>1));
       addstr(str);
       break;
@@ -328,7 +328,7 @@ void title() {
       strcpy(str,"then, they get bitter, they cling to guns or religion...\"");
       move(8,39-((len(str)-1)>>1));
       addstr(str);
-      strcpy(str,"-- Barack Obama");
+      strcpy(str,"컴 Barack Obama");
       move(9,39-((len(str)-1)>>1));
       addstr(str);
       break;
@@ -342,7 +342,7 @@ void title() {
       strcpy(str,"There's no such thing as a nonviolent revolution.\"");
       move(8,39-((len(str)-1)>>1));
       addstr(str);
-      strcpy(str,"-- Malcolm X");
+      strcpy(str,"컴 Malcolm X");
       move(9,39-((len(str)-1)>>1));
       addstr(str);
       break;
@@ -356,7 +356,7 @@ void title() {
       strcpy(str,"politics with bloodshed.\"");
       move(8,39-((len(str)-1)>>1));
       addstr(str);
-      strcpy(str,"-- Chairman Mao");
+      strcpy(str,"컴 Chairman Mao");
       move(9,39-((len(str)-1)>>1));
       addstr(str);
       break;
@@ -370,7 +370,7 @@ void title() {
       strcpy(str,"daughter against her mother, a daughter-in-law against her mother-in-law...\"");
       move(8,39-((len(str)-1)>>1));
       addstr(str);
-      strcpy(str,"-- Jesus Christ");
+      strcpy(str,"컴 Jesus Christ");
       move(9,39-((len(str)-1)>>1));
       addstr(str);
       break;
@@ -384,7 +384,7 @@ void title() {
       strcpy(str,"the blood of patriots and tyrants.  It is its natural manure.\"");
       move(8,39-((len(str)-1)>>1));
       addstr(str);
-      strcpy(str,"-- Thomas Jefferson");
+      strcpy(str,"컴 Thomas Jefferson");
       move(9,39-((len(str)-1)>>1));
       addstr(str);
       break;
@@ -398,7 +398,7 @@ void title() {
       strcpy(str,"is far safer to be feared than loved, if you cannot be both.\"");
       move(8,39-((len(str)-1)>>1));
       addstr(str);
-      strcpy(str,"-- Niccolo Machiavelli");
+      strcpy(str,"컴 Niccolo Machiavelli");
       move(9,39-((len(str)-1)>>1));
       addstr(str);
       break;
@@ -412,7 +412,7 @@ void title() {
       strcpy(str,"have a tremendous impact on history.\"");
       move(8,39-((len(str)-1)>>1));
       addstr(str);
-      strcpy(str,"-- Dan Quayle");
+      strcpy(str,"컴 Dan Quayle");
       move(9,39-((len(str)-1)>>1));
       addstr(str);
       break;
@@ -426,7 +426,7 @@ void title() {
       strcpy(str,"you need not fear the results of a hundred battles.\"");
       move(8,39-((len(str)-1)>>1));
       addstr(str);
-      strcpy(str,"-- Sun Tzu");
+      strcpy(str,"컴 Sun Tzu");
       move(9,39-((len(str)-1)>>1));
       addstr(str);
       break;
@@ -440,7 +440,7 @@ void title() {
       strcpy(str,"I'm not sure about the former.\"");
       move(8,39-((len(str)-1)>>1));
       addstr(str);
-      strcpy(str,"-- Albert Einstein");
+      strcpy(str,"컴 Albert Einstein");
       move(9,39-((len(str)-1)>>1));
       addstr(str);
       break;
@@ -454,7 +454,7 @@ void title() {
       strcpy(str,"go?  It's Alaska.  It's just right over the border.\"");
       move(8,39-((len(str)-1)>>1));
       addstr(str);
-      strcpy(str,"-- Sarah Palin");
+      strcpy(str,"컴 Sarah Palin");
       move(9,39-((len(str)-1)>>1));
       addstr(str);
       break;
@@ -468,7 +468,7 @@ void title() {
       strcpy(str,"If anything is certain, it is that I myself am not a Marxist.\"");
       move(8,39-((len(str)-1)>>1));
       addstr(str);
-      strcpy(str,"-- Karl Marx");
+      strcpy(str,"컴 Karl Marx");
       move(9,39-((len(str)-1)>>1));
       addstr(str);
       break;
@@ -482,7 +482,7 @@ void title() {
       strcpy(str,"justified to save life on Earth for future generations.\"");
       move(8,39-((len(str)-1)>>1));
       addstr(str);
-      strcpy(str,"-- Gene Ray");
+      strcpy(str,"컴 Gene Ray");
       move(9,39-((len(str)-1)>>1));
       addstr(str);
       break;
@@ -496,7 +496,7 @@ void title() {
       strcpy(str,"Frankenstein earphone radio slavery for the Communist gangster government.\"");
       move(8,39-((len(str)-1)>>1));
       addstr(str);
-      strcpy(str,"-- Francis E. Dec");
+      strcpy(str,"컴 Francis E. Dec");
       move(9,39-((len(str)-1)>>1));
       addstr(str);
       break;
@@ -510,7 +510,7 @@ void title() {
       strcpy(str,"group thinks they can do it.  Their number is negligible and they are stupid.\"");
       move(8,39-((len(str)-1)>>1));
       addstr(str);
-      strcpy(str,"-- Dwight D. Eisenhower");
+      strcpy(str,"컴 Dwight D. Eisenhower");
       move(9,39-((len(str)-1)>>1));
       addstr(str);
       break;
@@ -524,7 +524,7 @@ void title() {
       strcpy(str,"and that way let them kill as many as possible.\"");
       move(8,39-((len(str)-1)>>1));
       addstr(str);
-      strcpy(str,"-- Harry S. Truman");
+      strcpy(str,"컴 Harry S. Truman");
       move(9,39-((len(str)-1)>>1));
       addstr(str);
       break;
@@ -633,7 +633,7 @@ void mode_title()
             mvaddstr(0,0,"Choose a Save File");
          }
          set_color(COLOR_WHITE,COLOR_BLACK,0);
-         mvaddstr(1,0,"----Title-----------------------------------------------------------------------");
+         mvaddstr(1,0,"컴컴Title컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴컴�");
          for(p=page*19,y=2;p<savefiles.size()&&p<page*19+19;p++,y++)
          {
             set_color(COLOR_WHITE,COLOR_BLACK,0); //c==y+'a'-2);
