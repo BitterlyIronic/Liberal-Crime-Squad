@@ -1,0 +1,8 @@
+{
+    "[cpp]": {
+        "files.encoding": "cp437"
+    },
+    "[h]": {
+        "files.encoding": "cp437"
+    }
+}
