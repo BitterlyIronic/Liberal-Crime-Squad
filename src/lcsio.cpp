@@ -111,14 +111,21 @@ bool LCSInitArtDir()
    return true;
 }
 
+// check if storage dirs have been initialized and do so if they haven't been
+void LCSInitDirs()
+{
+   if(!initialized) //Check if the directories have not been initialized.
+   {
+      LCSInitHomeDir(); //Initialize the home directory of LCS. Where stuff like the save and score files are stored.
+      LCSInitArtDir(); //Initialize the art dir.
+      initialized = true; //Initialized.
+   }
+}
+
 void LCSRenameFile(const char* old_filename,const char* new_filename,int flags)
 {
-   if(!initialized)
-   {
-      LCSInitHomeDir();
-      LCSInitArtDir();
-      initialized=true;
-   }
+   LCSInitDirs();
+
    std::string old_filepath;
    std::string new_filepath;
    if(flags & LCSIO_PRE_ART)
@@ -135,12 +142,8 @@ void LCSRenameFile(const char* old_filename,const char* new_filename,int flags)
 
 FILE* LCSOpenFile(const char* filename,const char* mode,int flags)
 {
-   if(!initialized)
-   {
-      LCSInitHomeDir();
-      LCSInitArtDir();
-      initialized=true;
-   }
+   LCSInitDirs();
+
    std::string filepath;
    if(flags & LCSIO_PRE_ART)
       filepath=artdir;
@@ -174,12 +177,7 @@ vector<string> LCSSaveFiles()
 //C++ file i/o version of the above.
 bool LCSOpenFileCPP(std::string filename, std::ios_base::openmode mode, int flags, std::fstream &file)
 {
-   if(!initialized) //Check if the directories have not been initialized.
-   {
-      LCSInitHomeDir(); //Initialize the home directory of LCS. Where stuff like the save and score files are stored.
-      LCSInitArtDir(); //Initialize the art dir.
-      initialized = true; //Initialized.
-   }
+   LCSInitDirs(); //Initialize the storage directories if they haven't been
 
    std::string filepath = ""; //The actual path to the file.
 
@@ -198,12 +196,7 @@ bool LCSOpenFileCPP(std::string filename, std::ios_base::openmode mode, int flag
 
 void LCSDeleteFile(const char* filename,int flags)
 {
-   if(!initialized)
-   {
-      LCSInitHomeDir();
-      LCSInitArtDir();
-      initialized=true;
-   }
+   LCSInitDirs();
 
    std::string str;
 
