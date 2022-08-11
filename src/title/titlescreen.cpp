@@ -542,7 +542,7 @@ void title() {
    strcpy(str,"v" PACKAGE_VERSION " Maintained by the Open Source Community");
    move(15,39-((len(str)-1)>>1));
    addstr(str);
-   strcpy(str,"https://github.com/Kamal-Sadek/Liberal-Crime-Squad");
+   strcpy(str,"https://github.com/BitterlyIronic/Liberal-Crime-Squad/");
    move(16,39-((len(str)-1)>>1));
    addstr(str);
    strcpy(str,"http://sourceforge.net/projects/lcsgame/");
