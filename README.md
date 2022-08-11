@@ -20,6 +20,7 @@ The changes so far:
     - The script specifically uses Alacritty as the terminal, as that's what I use
 - When your Liberals are studying, it displays what topic they're actually studying.
     - Pulled from a pull request on the 4.10.1 repository
+- Updated the autoconf files so the game should compile properly against ncurses6
 
 ## Augmentations
 
