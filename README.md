@@ -6,6 +6,21 @@ This version of Liberal Crime Squad is an unofficial transfer from SourceForge. 
 
 Read [COMPILE_README.txt](COMPILE_README.txt) for instructions on how to compile on all platforms.
 
+## This Repo
+
+This repo is a fork of [4.10.1](https://github.com/Kamal-Sadek/Liberal-Crime-Squad), which is the last version/fork of vanilla LCS that compiles for Linux. There are a few Linux specific tweaks and whatever other little changes I thought would be nice.
+
+The changes so far:
+
+- Resizing the terminal window the game is running in is no longer considered a keypress
+- The game respects the XDG Base Directory specification
+    - The default save directory is now ~/.local/share/lcs
+    - If the XDG_DATA_HOME environment variable it'll be stored there instead
+- There's a `start.fish` script in the repository, giving an example of how to launch the game under Linux
+    - The script specifically uses Alacritty as the terminal, as that's what I use
+- When your Liberals are studying, it displays what topic they're actually studying.
+    - Pulled from a pull request on the 4.10.1 repository
+
 ## Augmentations
 
 This version of Liberal Crime Squad includes changes such as small bug fixes, game mechanic tweaks so that it plays better, and new features, such as the new Augmentation system!
