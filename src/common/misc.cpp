@@ -461,7 +461,7 @@ void MusicClass::init()
       endwin();
       exit(EXIT_FAILURE);
    }
-   if((Mix_Init(MIX_INIT_OGG|MIX_INIT_FLUIDSYNTH)&MIX_INIT_OGG)!=MIX_INIT_OGG) // initialize Ogg Vorbis support (and FluidSynth if it's there for better MIDI quality)
+   if((Mix_Init(MIX_INIT_OGG)&MIX_INIT_OGG)!=MIX_INIT_OGG) // initialize Ogg Vorbis support
    {  // Ogg Vorbis support failed to load, we'll use MIDI instead
       gamelog.log("Ogg Vorbis support failed to load. MIDI music will be used instead if possible.");
       gamelog.nextMessage();

@@ -198,8 +198,8 @@
 #endif
 
 #ifndef DONT_INCLUDE_SDL
-#include "sdl/SDL.h"
-#include "sdl/SDL_mixer.h"
+#include "SDL.h"
+#include "SDL_mixer.h"
 #endif // DONT_INCLUDE_SDL
 
 #ifndef WIN32_PRE_DOTNET
