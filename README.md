@@ -22,6 +22,7 @@ The changes so far:
         - This window is not resizable (it just causes visual garbage if you do, so it's disabled)
     - Source for PDCurses is included in the repo and automagically built and statically linked in using autotools
     - I probably broke Windows compilation setting this up
+    - The code within the /src/pdcurses directory is in the public domain
 
 ## Augmentations
 
