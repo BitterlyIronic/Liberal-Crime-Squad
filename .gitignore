@@ -1,9 +1,12 @@
-Makefile*
+Makefile
+Makefile.in
+Makefile.vc
 config.h
 config.sub
 config.guess
 crimesquad
 *.o
+*.a
 *.dirstamp
 
 aclocal.m4

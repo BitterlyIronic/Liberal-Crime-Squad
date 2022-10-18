@@ -16,8 +16,13 @@
 #define COMMON_H_INCLUDED
 
 #if defined __linux__ || defined __APPLE__ // BSD and SVr4 too
-#define NCURSES
+//#define NCURSES
 #endif
+
+#ifndef DONT_INCLUDE_SDL
+#include "SDL.h"
+#include "SDL_mixer.h"
+#endif // DONT_INCLUDE_SDL
 
 // uncomment this next line if you want to disable SDL (which is for music/sound)
 //#define DONT_INCLUDE_SDL
@@ -87,48 +92,18 @@
    #include <ctype.h>
    #define GO_PORTABLE
 
-   #if defined(HAVE_WIDE_NCURSES) && defined(__STDC_ISO_10646__)
+   #if defined(HAVE_WIDE_PDCURSES) && defined(__STDC_ISO_10646__)
      #define CH_USE_UNICODE
    #else
      #define CH_USE_ASCII_HACK
    #endif
 
-   #ifdef HAVE_LIBXCURSES
-      #define XCURSES
-   #endif
-   #ifdef HAVE_LIBNCURSES
-      #define NCURSES
-   #endif
-   #ifdef XCURSES
-      #define HAVE_PROTO 1
-      #define CPLUSPLUS  1
-      /* Try these PDCurses/Xcurses options later...
-      #define FAST_VIDEO
-      #define REGISTERWINDOWS
-      */
-      #include <xcurses.h> //This is the X11 Port of PDCurses
+   #include <pdcurses/curses.h>
    //undo PDCurses macros that break vector class
-      #undef erase // FIXME: Umm... Now erase() and clear() don't work in
-      #undef clear //       dumpcaps.cpp
-   #else
-      #if defined(USE_NCURSES)
-         #include <ncurses.h>
-         #define NCURSES
-      #elif defined(USE_NCURSES_W)
-         #include <ncursesw/ncurses.h>
-         #define NCURSES
-      #elif defined(NCURSES)
-         #define USE_NCURSES
-         #include <ncurses.h>
-      #else
-         #include <curses.h>
-      #endif
-      // Undo mvaddstr macro and re-implement as function to support overloading
-      //#ifdef mvaddstr
-      //   #undef mvaddstr
-      //   inline int mvaddstr(int y,int x,const char* text) { int ret=move(y,x); if(ret!=ERR) ret=addstr(text); return ret; }
-      //#endif
-   #endif
+   #undef erase
+   #undef clear
+      
+   PDCEX SDL_Window *pdc_window;
 #endif
 
 #ifndef CH_USE_CP437
@@ -196,11 +171,6 @@
 #undef STRICT_ANSI_TEMP_OFF
 #endif /* this is also the end of the hack, now the compiler is back to the mode it was in before */
 #endif
-
-#ifndef DONT_INCLUDE_SDL
-#include "SDL.h"
-#include "SDL_mixer.h"
-#endif // DONT_INCLUDE_SDL
 
 #ifndef WIN32_PRE_DOTNET
 using namespace std;

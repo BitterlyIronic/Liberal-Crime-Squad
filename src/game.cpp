@@ -252,6 +252,10 @@ int main(int argc, char* argv[])
    //start curses
    initscr();
 
+   if (pdc_window) {
+      SDL_SetWindowResizable(pdc_window, SDL_FALSE);
+   } 
+
    gamelog.initialize(GAMELOG_FILEPATH, OVERWRITE_GAMELOG, NEWLINEMODE_GAMELOG); //Initialize the gamelog (and also initialize artdir and homedir)
 
    time_t t = time(0);

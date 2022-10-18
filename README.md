@@ -12,15 +12,16 @@ This repo is a fork of [4.10.1](https://github.com/Kamal-Sadek/Liberal-Crime-Squ
 
 The changes so far:
 
-- Resizing the terminal window the game is running in is no longer considered a keypress
 - The game respects the XDG Base Directory specification
     - The default save directory is now ~/.local/share/lcs
     - If the XDG_DATA_HOME environment variable it'll be stored there instead
-- There's a `start.fish` script in the repository, giving an example of how to launch the game under Linux
-    - The script specifically uses Alacritty as the terminal, as that's what I use
 - When your Liberals are studying, it displays what topic they're actually studying.
     - Pulled from a pull request on the 4.10.1 repository
-- Updated the autoconf files so the game should compile properly against ncurses6
+- Switched from ncurses to the SDL port of [PDCurses](https://www.pdcurses.org)
+    - This means the game will run in its own window instead of running inside a terminal
+        - This window is not resizable (it just causes visual garbage if you do, so it's disabled)
+    - Source for PDCurses is included in the repo and automagically built and statically linked in using autotools
+    - I probably broke Windows compilation setting this up
 
 ## Augmentations
 
