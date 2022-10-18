@@ -5,4 +5,5 @@ Name=Liberal Crime Squad
 Comment=Pursue your Liberal Agenda!
 Categories=Game;RolePlaying;
 Exec=crimesquad
-Terminal=true
+TryExec=crimesquad
+Icon=crimesquad
