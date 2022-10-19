@@ -215,8 +215,6 @@ int doupdate(void)
     SP->cursrow = curscr->_cury;
     SP->curscol = curscr->_curx;
 
-    PDC_doupdate();
-
     return OK;
 }
 

@@ -93,6 +93,14 @@ getch
 
 #include <stdlib.h>
 
+#define _INBUFSIZ   512 /* size of terminal input buffer */
+#define NUNGETCH    256 /* max # chars to ungetch() */
+
+static int c_pindex = 0;    /* putter index */
+static int c_gindex = 1;    /* getter index */
+static int c_ungind = 0;    /* ungetch() push index */
+static int c_ungch[NUNGETCH];   /* array of ungotten chars */
+
 static int _get_box(int *y_start, int *y_end, int *x_start, int *x_end)
 {
     int start, end;
@@ -196,7 +204,7 @@ static int _paste(void)
 # define PASTE paste
 #endif
     char *paste;
-    long len, newmax;
+    long len;
     int key;
 
     key = PDC_getclipboard(&paste, &len);
@@ -207,14 +215,6 @@ static int _paste(void)
     wpaste = malloc(len * sizeof(wchar_t));
     len = PDC_mbstowcs(wpaste, paste, len);
 #endif
-    newmax = len + SP->c_ungind;
-    if (newmax > SP->c_ungmax)
-    {
-        SP->c_ungch = realloc(SP->c_ungch, newmax * sizeof(int));
-        if (!SP->c_ungch)
-            return -1;
-        SP->c_ungmax = newmax;
-    }
     while (len > 1)
         PDC_ungetch(PASTE[--len]);
     key = *PASTE;
@@ -322,6 +322,7 @@ static int _mouse_key(void)
 
 int wgetch(WINDOW *win)
 {
+    static int buffer[_INBUFSIZ];   /* character buffer */
     int key, waitcount;
 
     PDC_LOG(("wgetch() - called\n"));
@@ -356,18 +357,18 @@ int wgetch(WINDOW *win)
 
     /* if ungotten char exists, remove and return it */
 
-    if (SP->c_ungind)
-        return SP->c_ungch[--(SP->c_ungind)];
+    if (c_ungind)
+        return c_ungch[--c_ungind];
 
     /* if normal and data in buffer */
 
-    if ((!SP->raw_inp && !SP->cbreak) && (SP->c_gindex < SP->c_pindex))
-        return SP->c_buffer[SP->c_gindex++];
+    if ((!SP->raw_inp && !SP->cbreak) && (c_gindex < c_pindex))
+        return buffer[c_gindex++];
 
     /* prepare to buffer data */
 
-    SP->c_pindex = 0;
-    SP->c_gindex = 0;
+    c_pindex = 0;
+    c_gindex = 0;
 
     /* to get here, no keys are buffered. go and get one. */
 
@@ -452,17 +453,17 @@ int wgetch(WINDOW *win)
 
         if (key == '\b')
         {
-            if (SP->c_pindex > SP->c_gindex)
-                SP->c_pindex--;
+            if (c_pindex > c_gindex)
+                c_pindex--;
         }
         else
-            if (SP->c_pindex < _INBUFSIZ - 2)
-                SP->c_buffer[SP->c_pindex++] = key;
+            if (c_pindex < _INBUFSIZ - 2)
+                buffer[c_pindex++] = key;
 
         /* if we got a line */
 
         if (key == '\n' || key == '\r')
-            return SP->c_buffer[SP->c_gindex++];
+            return buffer[c_gindex++];
     }
 }
 
@@ -490,10 +491,10 @@ int PDC_ungetch(int ch)
 {
     PDC_LOG(("ungetch() - called\n"));
 
-    if (SP->c_ungind >= SP->c_ungmax)   /* pushback stack full */
+    if (c_ungind >= NUNGETCH)   /* pushback stack full */
         return ERR;
 
-    SP->c_ungch[SP->c_ungind++] = ch;
+    c_ungch[c_ungind++] = ch;
 
     return OK;
 }
@@ -502,14 +503,11 @@ int flushinp(void)
 {
     PDC_LOG(("flushinp() - called\n"));
 
-    if (!SP)
-        return ERR;
-
     PDC_flushinp();
 
-    SP->c_gindex = 1;       /* set indices to kill buffer */
-    SP->c_pindex = 0;
-    SP->c_ungind = 0;       /* clear SP->c_ungch array */
+    c_gindex = 1;           /* set indices to kill buffer */
+    c_pindex = 0;
+    c_ungind = 0;           /* clear c_ungch array */
 
     return OK;
 }

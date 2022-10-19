@@ -17,10 +17,7 @@ color
     int init_color(short color, short red, short green, short blue);
     int color_content(short color, short *red, short *green, short *blue);
 
-    int alloc_pair(int fg, int bg);
     int assume_default_colors(int f, int b);
-    int find_pair(int fg, int bg);
-    int free_pair(int pair);
     int use_default_colors(void);
 
     int PDC_set_line_color(short color);
@@ -71,13 +68,6 @@ color
    variable PDC_ORIGINAL_COLORS is set at the time start_color() is
    called, that's equivalent to calling use_default_colors().
 
-   alloc_pair(), find_pair() and free_pair() are also from ncurses.
-   free_pair() marks a pair as unused; find_pair() returns an existing
-   pair with the specified foreground and background colors, if one
-   exists. And alloc_pair() returns such a pair whether or not it was
-   previously set, overwriting the oldest initialized pair if there are
-   no free pairs.
-
    PDC_set_line_color() is used to set the color, globally, for the
    color of the lines drawn for the attributes: A_UNDERLINE, A_LEFT and
    A_RIGHT. A value of -1 (the default) indicates that the current
@@ -87,9 +77,8 @@ color
 
 ### Return Value
 
-   Most functions return OK on success and ERR on error. has_colors()
-   and can_change_colors() return TRUE or FALSE. alloc_pair() and
-   find_pair() return a pair number, or -1 on error.
+   All functions return OK on success and ERR on error, except for
+   has_colors() and can_change_colors(), which return TRUE or FALSE.
 
 ### Portability
                              X/Open  ncurses  NetBSD
@@ -100,10 +89,7 @@ color
     can_change_color            Y       Y       Y
     init_color                  Y       Y       Y
     color_content               Y       Y       Y
-    alloc_pair                  -       Y       -
     assume_default_colors       -       Y       Y
-    find_pair                   -       Y       -
-    free_pair                   -       Y       -
     use_default_colors          -       Y       Y
     PDC_set_line_color          -       -       -
 
@@ -115,9 +101,11 @@ color
 int COLORS = 0;
 int COLOR_PAIRS = PDC_COLOR_PAIRS;
 
+/* pair_set[] tracks whether a pair has been set via init_pair() */
+
+static bool pair_set[PDC_COLOR_PAIRS];
 static bool default_colors = FALSE;
 static short first_col = 0;
-static int allocnum = 0;
 
 int start_color(void)
 {
@@ -135,6 +123,8 @@ int start_color(void)
 
     PDC_init_atrtab();
 
+    memset(pair_set, 0, PDC_COLOR_PAIRS);
+
     return OK;
 }
 
@@ -147,28 +137,6 @@ static void _normalize(short *fg, short *bg)
         *bg = SP->orig_attr ? SP->orig_back : COLOR_BLACK;
 }
 
-static void _init_pair_core(short pair, short fg, short bg)
-{
-    PDC_PAIR *p = SP->atrtab + pair;
-
-    _normalize(&fg, &bg);
-
-    /* To allow the PDC_PRESERVE_SCREEN option to work, we only reset
-       curscr if this call to init_pair() alters a color pair created by
-       the user. */
-
-    if (p->set)
-    {
-        if (p->f != fg || p->b != bg)
-            curscr->_clear = TRUE;
-    }
-
-    p->f = fg;
-    p->b = bg;
-    p->count = allocnum++;
-    p->set = TRUE;
-}
-
 int init_pair(short pair, short fg, short bg)
 {
     PDC_LOG(("init_pair() - called: pair %d fg %d bg %d\n", pair, fg, bg));
@@ -177,7 +145,25 @@ int init_pair(short pair, short fg, short bg)
         fg < first_col || fg >= COLORS || bg < first_col || bg >= COLORS)
         return ERR;
 
-    _init_pair_core(pair, fg, bg);
+    _normalize(&fg, &bg);
+
+    /* To allow the PDC_PRESERVE_SCREEN option to work, we only reset
+       curscr if this call to init_pair() alters a color pair created by
+       the user. */
+
+    if (pair_set[pair])
+    {
+        short oldfg, oldbg;
+
+        PDC_pair_content(pair, &oldfg, &oldbg);
+
+        if (oldfg != fg || oldbg != bg)
+            curscr->_clear = TRUE;
+    }
+
+    PDC_init_pair(pair, fg, bg);
+
+    pair_set[pair] = TRUE;
 
     return OK;
 }
@@ -241,10 +227,7 @@ int pair_content(short pair, short *fg, short *bg)
     if (pair < 0 || pair >= COLOR_PAIRS || !fg || !bg)
         return ERR;
 
-    *fg = SP->atrtab[pair].f;
-    *bg = SP->atrtab[pair].b;
-
-    return OK;
+    return PDC_pair_content(pair, fg, bg);
 }
 
 int assume_default_colors(int f, int b)
@@ -255,7 +238,21 @@ int assume_default_colors(int f, int b)
         return ERR;
 
     if (SP->color_started)
-        _init_pair_core(0, f, b);
+    {
+        short fg, bg, oldfg, oldbg;
+
+        fg = f;
+        bg = b;
+
+        _normalize(&fg, &bg);
+
+        PDC_pair_content(0, &oldfg, &oldbg);
+
+        if (oldfg != fg || oldbg != bg)
+            curscr->_clear = TRUE;
+
+        PDC_init_pair(0, fg, bg);
+    }
 
     return OK;
 }
@@ -284,7 +281,6 @@ int PDC_set_line_color(short color)
 
 void PDC_init_atrtab(void)
 {
-    PDC_PAIR *p = SP->atrtab;
     short i, fg, bg;
 
     if (SP->color_started && !default_colors)
@@ -298,65 +294,5 @@ void PDC_init_atrtab(void)
     _normalize(&fg, &bg);
 
     for (i = 0; i < PDC_COLOR_PAIRS; i++)
-    {
-        p[i].f = fg;
-        p[i].b = bg;
-        p[i].set = FALSE;
-    }
-}
-
-int free_pair(int pair)
-{
-    if (pair < 1 || pair >= PDC_COLOR_PAIRS || !(SP->atrtab[pair].set))
-        return ERR;
-
-    SP->atrtab[pair].set = FALSE;
-    return OK;
-}
-
-int find_pair(int fg, int bg)
-{
-    int i;
-    PDC_PAIR *p = SP->atrtab;
-
-    for (i = 0; i < PDC_COLOR_PAIRS; i++)
-        if (p[i].set && p[i].f == fg && p[i].b == bg)
-            return i;
-
-    return -1;
-}
-
-static int _find_oldest()
-{
-    int i, lowind = 0, lowval = 0;
-    PDC_PAIR *p = SP->atrtab;
-
-    for (i = 1; i < PDC_COLOR_PAIRS; i++)
-    {
-        if (!p[i].set)
-            return i;
-
-        if (!lowval || (p[i].count < lowval))
-        {
-            lowind = i;
-            lowval = p[i].count;
-        }
-    }
-
-    return lowind;
-}
-
-int alloc_pair(int fg, int bg)
-{
-    int i = find_pair(fg, bg);
-
-    if (-1 == i)
-    {
-        i = _find_oldest();
-
-        if (ERR == init_pair(i, fg, bg))
-            return -1;
-    }
-
-    return i;
+        PDC_init_pair(i, fg, bg);
 }

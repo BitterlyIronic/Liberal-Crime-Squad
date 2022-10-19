@@ -18,12 +18,23 @@ AC_PROG_RANLIB
 AC_CONFIG_MACRO_DIR([.])
 AX_CXX_COMPILE_STDCXX_11([noext],[mandatory])
 
+AC_ARG_WITH([xcurses],
+   AS_HELP_STRING([--with-xcurses], [Build with XCurses instead of SDL PDCurses]))
+
 # Defines
 # TODO: Conditionally set these depending on build system.
 AC_DEFINE([UNIX],[],[Defined if on a UNIX based system])
 AC_DEFINE([Linux],[],[Defined if running on Linux])
-#AC_DEFINE([HAVE_WIDE_PDCURSES],[],[Defined if we have a wide PDCurses (we always do)])
 AC_DEFINE([PDC_WIDE],[],[Defined if we have a wide PDCurses (we always do)])
+if test "x$with_xcurses" = "xyes"; then
+   AC_DEFINE([XCURSES],[],[Defined if we are using XCurses])
+   AC_DEFINE([HAVE_WIDE_PDCURSES],[],[Defined if we want to try to use unicode within LCS (only for XCurses currently because SDL_ttf font handling doesn't like it)])
+else
+   AC_DEFINE([SDLCURSES],[],[Defined if we are using the SDL port of PDCurses])
+fi
+
+# tells PDCurses if it should build the X11 or SDL backends
+AM_CONDITIONAL(WITH_XCURSES, [test "x$with_xcurses" = "xyes"])
 
 # Checks for header files.
 AC_CHECK_HEADERS([stdlib.h string.h sys/time.h unistd.h])
@@ -34,14 +45,32 @@ if test -n "$SDL_CONFIG"; then
    LIBS="$LIBS `$SDL_CONFIG --libs`"
    CPPFLAGS="$CPPFLAGS `$SDL_CONFIG --cflags`"
 fi
-AC_CHECK_LIB([SDL2], [SDL_Init], ,
-   AC_MSG_WARN([ *** Unable to find SDL2 library (http://www.libsdl.org/)]) ; LACK_SDL2=1)
 AC_CHECK_LIB([SDL2_mixer], [Mix_OpenAudio], ,
    AC_MSG_WARN([ *** Unable to find SDL2_mixer library (http://www.libsdl.org/projects/SDL_mixer/)]) ; LACK_SDL2=1)
-AC_CHECK_LIB([SDL2_ttf], [TTF_OpenFont], ,
-   AC_MSG_WARN([ *** Unable to find SDL2_ttf library (http://www.libsdl.org/projects/SDL_ttf/)]) ; LACK_SDL2=1)
-if test "$LACK_SDL2" = 1; then
+
+if test "x$with_xcurses" = "xyes"; then
+   AC_CHECK_LIB([X11], [XOpenDisplay], ,
+      AC_MSG_ERROR([ *** Unable to find libX11]))
+   AC_CHECK_LIB([Xt], [XtVaAppInitialize], ,
+      AC_MSG_ERROR([ *** Unable to find libXt]))
+   AC_CHECK_LIB([Xmu], [XmuMakeAtom], ,
+      AC_MSG_ERROR([ *** Unable to find libXmu]))
+   AC_CHECK_LIB([Xpm], [XpmReadFileToPixmap], ,
+      AC_MSG_ERROR([ *** Unable to find libXpm]))
+   AC_CHECK_LIB([Xaw], [XawScrollbarSetThumb], ,
+      AC_MSG_ERROR([ *** Unable to find libXaw]))
+else
+   AC_CHECK_LIB([SDL2_ttf], [TTF_OpenFont], ,
+      AC_MSG_WARN([ *** Unable to find SDL2_ttf library (http://www.libsdl.org/projects/SDL_ttf/)]) ; LACK_SDL2=1)
+fi
+
+if test "$LACK_SDL2" = 1 && ! test "x$with_xcurses" = "xyes"; then
    AC_MSG_ERROR([ *** Cannot compile without SDL2!])
+fi
+
+if test "$LACK_SDL2" = 1; then
+   AC_DEFINE(DONT_INCLUDE_SDL, [], [Define to avoid including SDL2 and SDL2_mixer.])
+   AC_MSG_WARN([ *** Compiling without SDL2 or SDL2_mixer, and with DONT_INCLUDE_SDL defined.])
 fi
 
 # Checks for typedefs, structures, and compiler characteristics.
@@ -49,36 +78,10 @@ AC_HEADER_STDBOOL
 AC_C_CONST
 AC_C_INLINE
 AC_TYPE_SIZE_T
-m4_warn([obsolete],
-[Update your code to rely only on HAVE_SYS_TIME_H,
-then remove this warning and the obsolete code below it.
-All current systems provide time.h; it need not be checked for.
-Not all systems provide sys/time.h, but those that do, all allow
-you to include it and time.h simultaneously.])dnl
-AC_CHECK_HEADERS_ONCE([sys/time.h])
-# Obsolete code to be removed.
-if test $ac_cv_header_sys_time_h = yes; then
-  AC_DEFINE([TIME_WITH_SYS_TIME],[1],[Define to 1 if you can safely include both <sys/time.h>
-	     and <time.h>.  This macro is obsolete.])
-fi
-# End of obsolete code.
 
 
 # Checks for library functions.
 AC_FUNC_MALLOC
-m4_warn([obsolete],
-[your code may safely assume C89 semantics that RETSIGTYPE is void.
-Remove this warning and the `AC_CACHE_CHECK' when you adjust the code.])dnl
-AC_CACHE_CHECK([return type of signal handlers],[ac_cv_type_signal],[AC_COMPILE_IFELSE(
-[AC_LANG_PROGRAM([#include <sys/types.h>
-#include <signal.h>
-],
-		 [return *(signal (0, 0)) (0) == 1;])],
-		   [ac_cv_type_signal=int],
-		   [ac_cv_type_signal=void])])
-AC_DEFINE_UNQUOTED([RETSIGTYPE],[$ac_cv_type_signal],[Define as the return type of signal handlers
-		    (`int' or `void').])
-
 AC_FUNC_STAT
 
 

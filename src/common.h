@@ -19,13 +19,13 @@
 //#define NCURSES
 #endif
 
+// uncomment this next line if you want to disable SDL (which is for music/sound)
+//#define DONT_INCLUDE_SDL
+
 #ifndef DONT_INCLUDE_SDL
 #include "SDL.h"
 #include "SDL_mixer.h"
 #endif // DONT_INCLUDE_SDL
-
-// uncomment this next line if you want to disable SDL (which is for music/sound)
-//#define DONT_INCLUDE_SDL
 
 /* some compilers sometimes define _WIN32 but not WIN32 on Windows, but LCS usually
    just checks if WIN32's defined, so the next couple lines fix that so it works */
@@ -102,8 +102,10 @@
    //undo PDCurses macros that break vector class
    #undef erase
    #undef clear
-      
+
+   #ifdef SDLCURSES   
    PDCEX SDL_Window *pdc_window;
+   #endif
 #endif
 
 #ifndef CH_USE_CP437

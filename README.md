@@ -14,15 +14,18 @@ The changes so far:
 
 - The game respects the XDG Base Directory specification
     - The default save directory is now ~/.local/share/lcs
-    - If the XDG_DATA_HOME environment variable it'll be stored there instead
+    - If the XDG_DATA_HOME environment variable is set it'll be stored there instead
 - When your Liberals are studying, it displays what topic they're actually studying.
     - Pulled from a pull request on the 4.10.1 repository
-- Switched from ncurses to the SDL port of [PDCurses](https://www.pdcurses.org)
+- Switched from ncurses to [PDCurses](https://www.pdcurses.org)
     - This means the game will run in its own window instead of running inside a terminal
-        - This window is not resizable (it just causes visual garbage if you do, so it's disabled)
     - Source for PDCurses is included in the repo and automagically built and statically linked in using autotools
-    - I probably broke Windows compilation setting this up
-    - The code within the /src/pdcurses directory is in the public domain
+        - Bundled source is from PDCurses 3.9, with a backported fix for window focus in XCurses
+    - Builds against the SDL2 port of PDCurses by default
+        - Running `./configure --with-xcurses` after bootstrapping will build and link the X11 port of PDCurses instead
+            - XCurses is a bit snappier, but doesn't have TTF font support
+    - The code within the /src/pdcurses directory is in the public domain, with the exception of the files called out in the /src/pdcurses/x11 README file
+- Probably doesn't compile for Windows anymore, but the original repo will work fine for that anyway
 
 ## Augmentations
 

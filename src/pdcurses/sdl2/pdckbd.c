@@ -2,6 +2,26 @@
 
 #include "pdcsdl.h"
 
+/*man-start**************************************************************
+
+pdckbd
+------
+
+### Synopsis
+
+    unsigned long PDC_get_input_fd(void);
+
+### Description
+
+   PDC_get_input_fd() returns the file descriptor that PDCurses reads
+   its input from. It can be used for select().
+
+### Portability
+                             X/Open  ncurses  NetBSD
+    PDC_get_input_fd            -       -       -
+
+**man-end****************************************************************/
+
 #include <ctype.h>
 #include <string.h>
 
@@ -72,6 +92,13 @@ static struct
  {0,            0,      0,           0,            0,           0}
 };
 
+unsigned long PDC_get_input_fd(void)
+{
+    PDC_LOG(("PDC_get_input_fd() - called\n"));
+
+    return 0L;  /* test this */
+}
+
 void PDC_set_keyboard_binary(bool on)
 {
     PDC_LOG(("PDC_set_keyboard_binary() - called\n"));
@@ -81,17 +108,24 @@ void PDC_set_keyboard_binary(bool on)
 
 bool PDC_check_key(void)
 {
+    Uint32 current = SDL_GetTicks();
     int haveevent;
 
-    PDC_pump_and_peep();
-
-    /* SDL_TEXTINPUT can return multiple chars from the IME which we
-       should handle before polling for additional events. */
-
+    /**
+     * SDL_TEXTINPUT can return multiple chars from the IME
+     * which we should handle before polling for additional
+     * events.
+     */
     if (event.type == SDL_TEXTINPUT && event.text.text[0])
         haveevent = 1;
-    else
-        haveevent = SDL_PollEvent(&event);
+    else haveevent = SDL_PollEvent(&event);
+
+    /* if we have an event, or 30 ms have passed without a screen
+       update, or the timer has wrapped, update now */
+
+    if (haveevent ||
+        current < pdc_lastupdate || ((current - pdc_lastupdate) > 30))
+        PDC_update_rects();
 
     return haveevent;
 }
@@ -410,8 +444,9 @@ int PDC_get_key(void)
     case SDL_QUIT:
         exit(1);
     case SDL_WINDOWEVENT:
-        if (SDL_WINDOWEVENT_SIZE_CHANGED == event.window.event)
+        switch (event.window.event)
         {
+        case SDL_WINDOWEVENT_SIZE_CHANGED:
             pdc_screen = SDL_GetWindowSurface(pdc_window);
             pdc_sheight = pdc_screen->h - pdc_xoffset;
             pdc_swidth = pdc_screen->w - pdc_yoffset;
@@ -424,6 +459,10 @@ int PDC_get_key(void)
                 SP->key_code = TRUE;
                 return KEY_RESIZE;
             }
+            break;
+        case SDL_WINDOWEVENT_RESTORED:
+        case SDL_WINDOWEVENT_EXPOSED:
+            SDL_UpdateWindowSurface(pdc_window);
         }
         break;
     case SDL_MOUSEMOTION:

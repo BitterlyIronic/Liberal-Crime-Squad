@@ -246,15 +246,22 @@ int yourscore=-1;
 bool fixcleartype=false;
 #endif
 
+
 int main(int argc, char* argv[])
 {
    init_console(); // do this FIRST
    //start curses
+   #ifndef XCURSES
    initscr();
+   #else
+   Xinitscr(argc, argv);
+   #endif
 
+   #ifdef SDLCURSES
    if (pdc_window) {
-      SDL_SetWindowResizable(pdc_window, SDL_FALSE);
-   } 
+       SDL_SetWindowResizable(pdc_window, SDL_FALSE);
+   }
+   #endif
 
    gamelog.initialize(GAMELOG_FILEPATH, OVERWRITE_GAMELOG, NEWLINEMODE_GAMELOG); //Initialize the gamelog (and also initialize artdir and homedir)
 
