@@ -21,6 +21,9 @@ AX_CXX_COMPILE_STDCXX_11([noext],[mandatory])
 AC_ARG_WITH([xcurses],
    AS_HELP_STRING([--with-xcurses], [Build with XCurses instead of SDL PDCurses]))
 
+AC_ARG_ENABLE([resizing],
+   AS_HELP_STRING([--enable-resizing], [Allow resizing the window (LCS doesn't react to window resizing)]))
+
 # Defines
 # TODO: Conditionally set these depending on build system.
 AC_DEFINE([UNIX],[],[Defined if on a UNIX based system])
@@ -31,6 +34,10 @@ if test "x$with_xcurses" = "xyes"; then
    AC_DEFINE([HAVE_WIDE_PDCURSES],[],[Defined if we want to try to use unicode within LCS (only for XCurses currently because SDL_ttf font handling doesn't like it)])
 else
    AC_DEFINE([SDLCURSES],[],[Defined if we are using the SDL port of PDCurses])
+fi
+
+if test "x$enable_resizing" = "xyes"; then
+   AC_DEFINE([ALLOW_RESIZING], [], [Defined if the user is allowed to resize the window])
 fi
 
 # tells PDCurses if it should build the X11 or SDL backends

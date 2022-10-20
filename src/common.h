@@ -103,8 +103,19 @@
    #undef erase
    #undef clear
 
-   #ifdef SDLCURSES   
+   #if defined SDLCURSES && !defined ALLOW_RESIZING
    PDCEX SDL_Window *pdc_window;
+   #endif
+
+   #if defined XCURSES && !defined ALLOW_RESIZING
+   #include <X11/Intrinsic.h>
+   #include <X11/Shell.h>
+
+   //evil cheating to grab private values out of XCurses
+   //trying not to modify the PDCurses source other than
+   //backporting fixes
+   PDCEX Widget pdc_toplevel;
+   PDCEX int pdc_wwidth, pdc_wheight;
    #endif
 #endif
 

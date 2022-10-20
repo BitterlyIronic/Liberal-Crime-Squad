@@ -277,9 +277,17 @@ int main(int argc, char* argv[])
    }
 
    Xinitscr(args.size(), &args[0]);
+
+
+   #ifndef ALLOW_RESIZING
+   //using private values pulled out of XCurses to make the window not resizable
+   //the game doesn't support it, so it doesn't really make sense to allow it
+   XtVaSetValues(pdc_toplevel, XtNminWidth, pdc_wwidth, XtNminHeight, pdc_wheight,
+                               XtNmaxWidth, pdc_wwidth, XtNmaxHeight, pdc_wheight);
+   #endif
    #endif
 
-   #ifdef SDLCURSES
+   #if defined SDLCURSES && !defined ALLOW_RESIZING
    if (pdc_window) {
        SDL_SetWindowResizable(pdc_window, SDL_FALSE);
    }
