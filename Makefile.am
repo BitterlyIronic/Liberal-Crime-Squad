@@ -26,6 +26,7 @@ dist_art_DATA = art/abort.cmv art/anchor.cmv art/glamshow.cmv art/lacops.cmv\
  art/mapCSV_WhiteHouse2_Specials.csv art/mapCSV_WhiteHouse2_Tiles.csv\
  art/mapCSV_WhiteHouse3_Specials.csv art/mapCSV_WhiteHouse3_Tiles.csv
 
+if !DISABLED_MUSIC
 dist_midi_DATA = \
  art/midi/abort.mid art/midi/activate.mid art/midi/alarmed.mid art/midi/anchor.mid\
  art/midi/basemode.mid art/midi/carchase.mid art/midi/cartheft.mid art/midi/dating.mid\
@@ -47,7 +48,7 @@ dist_ogg_DATA = \
  art/ogg/shopping.ogg art/ogg/siege.ogg art/ogg/sitemode.ogg art/ogg/sleepers.ogg\
  art/ogg/stalinized.ogg art/ogg/stopevil.ogg art/ogg/suspicious.ogg art/ogg/titlemode.ogg\
  art/ogg/trial.ogg art/ogg/victory.ogg
-
+endif
 
 dist_app_DATA = crimesquad.desktop
 

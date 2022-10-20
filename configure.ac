@@ -60,6 +60,9 @@ AM_CONDITIONAL(WITH_XCURSES, [test "x$with_xcurses" = "xyes"])
 # disables PDCurses compilation if true
 AM_CONDITIONAL(WITH_NCURSES, [test "x$with_ncurses" = "xyes"])
 
+# disables music file installation if true
+AM_CONDITIONAL(DISABLED_MUSIC, [test "x$enable_music" = "xno"])
+
 # Checks for header files.
 AC_CHECK_HEADERS([stdlib.h string.h sys/time.h unistd.h])
 
