@@ -472,7 +472,7 @@ SDL2_mixer, you should have libogg, libvorbis, and libvorbisfile installed.
 Ogg Vorbis has better sound quality than MIDI but larger file size.
 
 
-4) If all else fails, uncomment the line that says #define DONT_INCLUDE_SDL
+4) If all else fails, uncomment the line that says #define DISABLE_MUSIC
 in common.h. This will disable SDL, SDL_mixer, and audio, and let
 you compile and build Liberal Crime Squad without any SDL dependencies.
 The only downside to this is you don't get any audio.

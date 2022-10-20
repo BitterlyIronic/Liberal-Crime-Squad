@@ -17,7 +17,7 @@ The changes so far:
     - If the XDG_DATA_HOME environment variable is set it'll be stored there instead
 - When your Liberals are studying, it displays what topic they're actually studying.
     - Pulled from a pull request on the 4.10.1 repository
-- Switched from ncurses to [PDCurses](https://www.pdcurses.org)
+- Defaults to [PDCurses](https://www.pdcurses.org) over ncurses
     - This means the game will run in its own window instead of running inside a terminal
     - Source for PDCurses is included in the repo and automagically built and statically linked in using autotools
         - Bundled source is from PDCurses 3.9, with a backported fix for window focus in XCurses
@@ -25,6 +25,10 @@ The changes so far:
         - Running `./configure --with-xcurses` after bootstrapping will build and link the X11 port of PDCurses instead
             - XCurses is a bit snappier, but doesn't have TTF font support
     - The code within the /src/pdcurses directory is in the public domain, with the exception of the files called out in the /src/pdcurses/x11 README file
+    - Running `./configure --with-ncurses` will build the ncurses version of the game against ncurses6
+        - This also skips building PDCurses entirely
+- Music can be disabled at compile time with `./configure --disable-music`
+    - This will also remove all the music options
 - Probably doesn't compile for Windows anymore, but the original repo will work fine for that anyway
 
 ## Augmentations

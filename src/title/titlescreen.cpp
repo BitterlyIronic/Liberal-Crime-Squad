@@ -586,6 +586,8 @@ void mode_title()
 
    vector<string> savefiles;
 
+   bool cont;
+
    do {
 
       if(c=='h') {
@@ -594,15 +596,26 @@ void mode_title()
          title();
       }
 
+      #ifndef DISABLE_MUSIC
       if(c=='m') music.enableIf(!music.isEnabled());
       if(music.isEnabled()) strcpy(str,"Press M to turn off the Music. Press H to view your Liberal High Score.");
       else strcpy(str,"Press M to turn on some Music. Press H to view your Liberal High Score.");
+      #else
+      strcpy(str,"Press H to view your Liberal High Score.");
+      #endif
       move(22,39-((len(str)-1)>>1));
       addstr(str);
       if(c==ESC||c=='x') end_game();
 
       c=getkey();
-   } while(c=='m'||c=='h'||c=='x'||c==ESC);
+
+      cont = c=='h' || c=='x' || c==ESC;
+
+      #ifndef DISABLE_MUSIC
+      cont = cont || c=='m';
+      #endif
+
+   } while(cont);
 
    savefiles = std::move(LCSSaveFiles());
 

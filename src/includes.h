@@ -551,29 +551,29 @@ class MusicClass
 {
 private:
    bool enabled;
-#ifndef DONT_INCLUDE_SDL
+#ifndef DISABLE_MUSIC
    bool songsinitialized;
    bool oggsupport;
    int musicmode,previous;
    Mix_Music* songs[MUSIC_OFF];
    /* helper function for initsongs() ... implemented in misc.cpp */
    void loadsong(int i,const char* filename);
-#endif // DONT_INCLUDE_SDL
+#endif // DISABLE_MUSIC
 public:
-#ifndef DONT_INCLUDE_SDL
+#ifndef DISABLE_MUSIC
    MusicClass() : enabled(true),songsinitialized(false),oggsupport(true),musicmode(MUSIC_OFF),previous(MUSIC_OFF) { }
 #else
    MusicClass() : enabled(true) { }
-#endif // DONT_INCLUDE_SDL
+#endif // DISABLE_MUSIC
    /* find out if music's enabled or disabled */
    bool isEnabled() { return enabled; }
    /* enable or disable music */
    void enableIf(bool e)
    {
       enabled=e;
-#ifndef DONT_INCLUDE_SDL
+#ifndef DISABLE_MUSIC
       Mix_VolumeMusic(enabled*(MIX_MAX_VOLUME/2)); // half volume if music enabled, muted if music disabled
-#endif // DONT_INCLUDE_SDL
+#endif // DISABLE_MUSIC
    }
    /* initialize SDL, SDL_mixer, and songs ... implemented in misc.cpp */
    void init();

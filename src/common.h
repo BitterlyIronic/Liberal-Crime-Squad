@@ -20,12 +20,7 @@
 #endif
 
 // uncomment this next line if you want to disable SDL (which is for music/sound)
-//#define DONT_INCLUDE_SDL
-
-#ifndef DONT_INCLUDE_SDL
-#include "SDL.h"
-#include "SDL_mixer.h"
-#endif // DONT_INCLUDE_SDL
+//#define DISABLE_MUSIC
 
 /* some compilers sometimes define _WIN32 but not WIN32 on Windows, but LCS usually
    just checks if WIN32's defined, so the next couple lines fix that so it works */
@@ -39,6 +34,14 @@
 #include <config.h>
 #include <langinfo.h>
 #endif
+
+#if defined SDLCURSES || !defined DISABLE_MUSIC
+#include "SDL.h"
+#endif
+
+#ifndef DISABLE_MUSIC
+#include "SDL_mixer.h"
+#endif // DISABLE_MUSIC
 
 #ifdef WIN32 // safe to do now that we did that earlier thing defining WIN32 if _WIN32 was defined
    #include <windows.h>
@@ -92,30 +95,34 @@
    #include <ctype.h>
    #define GO_PORTABLE
 
-   #if defined(HAVE_WIDE_PDCURSES) && defined(__STDC_ISO_10646__)
+   #if defined(HAVE_WIDE_CURSES) && defined(__STDC_ISO_10646__)
      #define CH_USE_UNICODE
    #else
      #define CH_USE_ASCII_HACK
    #endif
 
-   #include <pdcurses/curses.h>
-   //undo PDCurses macros that break vector class
-   #undef erase
-   #undef clear
+   #ifndef NCURSES
+      #include <pdcurses/curses.h>
+      //undo PDCurses macros that break vector class
+      #undef erase
+      #undef clear
 
-   #if defined SDLCURSES && !defined ALLOW_RESIZING
-   PDCEX SDL_Window *pdc_window;
-   #endif
+      #if defined SDLCURSES && !defined ALLOW_RESIZING
+      PDCEX SDL_Window *pdc_window;
+      #endif
 
-   #if defined XCURSES && !defined ALLOW_RESIZING
-   #include <X11/Intrinsic.h>
-   #include <X11/Shell.h>
+      #if defined XCURSES && !defined ALLOW_RESIZING
+      #include <X11/Intrinsic.h>
+      #include <X11/Shell.h>
 
-   //evil cheating to grab private values out of XCurses
-   //trying not to modify the PDCurses source other than
-   //backporting fixes
-   PDCEX Widget pdc_toplevel;
-   PDCEX int pdc_wwidth, pdc_wheight;
+      //evil cheating to grab private values out of XCurses
+      //trying not to modify the PDCurses source other than
+      //backporting fixes
+      PDCEX Widget pdc_toplevel;
+      PDCEX int pdc_wwidth, pdc_wheight;
+      #endif
+   #else
+      #include <ncurses.h>
    #endif
 #endif
 

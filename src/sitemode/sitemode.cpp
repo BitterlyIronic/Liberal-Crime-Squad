@@ -1576,8 +1576,10 @@ void mode_site()
             set_color(COLOR_WHITE,COLOR_BLACK,0);
             move(10,1);
             addstr("[ ] E - Encounter warnings");
+            #ifndef DISABLE_MUSIC
             move(11,1);
             addstr("[ ] M - Music");
+            #endif
 
             set_color(COLOR_WHITE,COLOR_BLACK,0);
             move(24,1);
@@ -1587,7 +1589,9 @@ void mode_site()
             while(true)
             {
                if(c=='e') encounterwarnings=!encounterwarnings;
+               #ifndef DISABLE_MUSIC
                if(c=='m') music.enableIf(!music.isEnabled());
+               #endif
 
                if(c=='x'||c==ENTER||c==ESC||c==SPACEBAR)break;
 
@@ -1595,10 +1599,12 @@ void mode_site()
                if(encounterwarnings)
                   addstr("X");
                else addstr(" ");
+               #ifndef DISABLE_MUSIC
                move(11,2);
                if(music.isEnabled())
                   addstr("X");
                else addstr(" ");
+               #endif
 
                c=getkey();
             }

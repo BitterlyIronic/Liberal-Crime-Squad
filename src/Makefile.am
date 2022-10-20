@@ -1,5 +1,3 @@
-SUBDIRS = pdcurses
-
 bin_PROGRAMS = crimesquad
 crimesquad_SOURCES = game.cpp lcsio.cpp cursesmovie.cpp compat.cpp\
  cursesgraphics.cpp lcsio.h cursesmovie.h compat.h cursesgraphics.h includes.h\
@@ -36,8 +34,12 @@ crimesquad_SOURCES = game.cpp lcsio.cpp cursesmovie.cpp compat.cpp\
 crimesquad_CPPFLAGS = -DINSTALL_DATA_DIR=\"$(datadir)\"
 crimesquad_CXXFLAGS = -I$(top_srcdir)/src
 
+if !WITH_NCURSES
+SUBDIRS = pdcurses
+
 noinst_LIBRARIES = libpdcurses.a
 libpdcurses_a_SOURCES = 
 
 crimesquad_DEPENDENCIES = libpdcurses.a
 crimesquad_LDADD = pdcurses/libpdcurses.a
+endif

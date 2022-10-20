@@ -412,7 +412,7 @@ bool Interval::set_interval(const string& interval)
    return true;
 }
 
-#ifndef DONT_INCLUDE_SDL
+#ifndef DISABLE_MUSIC
 /* helper function for initsongs() */
 void MusicClass::loadsong(int i,const char* filename)
 {  // the reason it prints progress on the screen is because it might be a little slow sometimes so this reassures the user progress is being made
@@ -433,12 +433,12 @@ void MusicClass::loadsong(int i,const char* filename)
    if(!songs[i]) // there was an error with Mix_LoadMUS() when called on the MIDI file
       gamelog.log(string("SDL_mixer function Mix_LoadMUS() failed to load ")+artdir+"midi/"+filename+".mid:  "+Mix_GetError()); // MIDI music failed to load
 }
-#endif // DONT_INCLUDE_SDL
+#endif // DISABLE_MUSIC
 
 /* initialize SDL, SDL_mixer, and songs */
 void MusicClass::init()
 {
-#ifndef DONT_INCLUDE_SDL
+#ifndef DISABLE_MUSIC
    if(songsinitialized) return; // only initialize once
    if(SDL_Init(SDL_INIT_AUDIO)!=0) // initialize what we need from SDL for audio
    {  // SDL failed to initialize, so log it and exit
@@ -543,13 +543,13 @@ void MusicClass::init()
    erase();
    refresh();
    songsinitialized=true;
-#endif // DONT_INCLUDE_SDL
+#endif // DISABLE_MUSIC
 }
 
 /* shut down SDL, SDL_mixer, and songs */
 void MusicClass::quit()
 {
-#ifndef DONT_INCLUDE_SDL
+#ifndef DISABLE_MUSIC
    if(!songsinitialized) return; // only shut down once
    music.play(MUSIC_OFF);
    for(int c=0;c<MUSIC_OFF;c++) if(songs[c]) Mix_FreeMusic(songs[c]);
@@ -557,13 +557,13 @@ void MusicClass::quit()
    Mix_CloseAudio();
    SDL_Quit();
    songsinitialized=false;
-#endif // DONT_INCLUDE_SDL
+#endif // DISABLE_MUSIC
 }
 
 /* play music specified by a MusicMode */
 void MusicClass::play(int _musicmode)
 {
-#ifndef DONT_INCLUDE_SDL
+#ifndef DISABLE_MUSIC
    if(!songsinitialized) init(); // if it hasn't been initialized already, do it now
 
    if(_musicmode==MUSIC_CURRENT) return; // keep playing current music if that's what's requested
@@ -588,5 +588,5 @@ void MusicClass::play(int _musicmode)
       gamelog.log(string("SDL_mixer function Mix_PlayMusic() failed:  ")+Mix_GetError()); // Music failed to play
 
    enableIf(isEnabled());
-#endif // DONT_INCLUDE_SDL
+#endif // DISABLE_MUSIC
 }

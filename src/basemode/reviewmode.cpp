@@ -179,9 +179,11 @@ void review()
 
       set_color(COLOR_WHITE,COLOR_BLACK,0);
       mvaddstr(21,0,"Press V to Inspect Liberal finances.");
+      #ifndef DISABLE_MUSIC
       if(music.isEnabled())
          mvaddstr(21,38,"Press Y to turn off the Music.");
       else mvaddstr(21,38,"Press Y to turn on some Music.");
+      #endif
       move(22,0);
       addstr("Press a Letter to select a squad.  1-7 to view Liberal groups.");
       move(23,0);
@@ -222,7 +224,9 @@ void review()
           fundreport(clearformess);
           if(clearformess) erase();
       }
+      #ifndef DISABLE_MUSIC
       if(c=='y') music.enableIf(!music.isEnabled());
+      #endif
    }
 }
 
