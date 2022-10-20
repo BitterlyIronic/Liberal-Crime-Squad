@@ -254,7 +254,29 @@ int main(int argc, char* argv[])
    #ifndef XCURSES
    initscr();
    #else
-   Xinitscr(argc, argv);
+   // low effort, hacky method to make sure the window is big enough
+   std::vector<char*> args(argv + 0, argv + argc);
+   char lines[] = "-lines";
+   char cols[] = "-cols";
+   char default_lines[] = "25";
+   char default_cols[] = "80";
+
+   // check to see if a size is being passed in
+   auto result = std::find(args.begin(), args.end(), lines);
+
+   if (result == args.end()) {
+      args.push_back(lines);
+      args.push_back(default_lines);
+   }
+
+   result = std::find(args.begin(), args.end(), cols);
+
+   if (result == args.end()) {
+      args.push_back(cols);
+      args.push_back(default_cols);
+   }
+
+   Xinitscr(args.size(), &args[0]);
    #endif
 
    #ifdef SDLCURSES
