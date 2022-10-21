@@ -24,7 +24,6 @@ The changes so far:
     - Builds against the SDL2 port of PDCurses by default
         - Running `./configure --with-xcurses` after bootstrapping will build and link the X11 port of PDCurses instead
             - XCurses is a bit snappier, but doesn't have TTF font support
-    - The code within the /src/pdcurses directory is in the public domain, with the exception of the files called out in the /src/pdcurses/x11 README file
     - Running `./configure --with-ncurses` will build the ncurses version of the game against ncurses6
         - This also skips building PDCurses entirely
 - Music can be disabled at compile time with `./configure --disable-music`
