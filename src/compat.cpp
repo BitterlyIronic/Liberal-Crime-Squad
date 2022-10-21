@@ -147,9 +147,14 @@ void alarmwait()
 
 void pause_ms(int t)
 {
+   #ifndef NCURSES
+   refresh();
+   delay_output(t);
+   #else
    alarmset(t);
    refresh();
    alarmwait();
+   #endif
 }
 
 // FNV-1a 32-bit hash function (fast and effective) -- helper function for getSeed()
