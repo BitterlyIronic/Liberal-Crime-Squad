@@ -7,9 +7,11 @@ to comply with all the licenses.
 The game Liberal Crime Squad itself is licensed under the GNU GPL version 2.0 or later.
 See http://www.gnu.org/licenses/gpl-2.0.html or http://www.gnu.org/copyleft/gpl.html for details.
 
-The PDCurses library is public domain, and therefore GPL-compatible,
+The PDCurses library (under /src/pdcurses), is public domain and therefore GPL-compatible,
 and for the purposes of this project, is relicensed under the GNU GPL version 2.0 or later.
 See http://creativecommons.org/publicdomain/zero/1.0/ for the CC0 public domain license that you can use with it.
+The ScrollBox* implementation in /src/pdcurses/x11 is under the X MIT License (see the comment at the top of scrlbox.c),
+which is GPL-compatiable. The other non-public domain files mentioned in the XCurses readme are not included here.
 
 The SDL2 and SDL2_mixer libraries are licensed under the zlib license, which is GPL-compatible,
 and for the purposes of this project, are relicensed under the GNU GPL version 2.0 or later.
