@@ -12,7 +12,7 @@ libpdcurses_a_SOURCES = pdcurses/addch.c pdcurses/addchstr.c pdcurses/addstr.c p
 libpdcurses_a_CFLAGS = -DPDC_WIDE
 
 if WITH_XCURSES
-    libpdcurses_a_CFLAGS += -DXCURSES -I/usr/include/X11
+    libpdcurses_a_CFLAGS += -DXCURSES -DHAVE_USLEEP -I/usr/include/X11
     libpdcurses_a_SOURCES += x11/pdcclip.c x11/pdcdisp.c x11/pdcgetsc.c x11/pdckbd.c x11/pdcscrn.c x11/pdcsetsc.c x11/pdcutil.c x11/sb.c x11/scrlbox.c
 else
     libpdcurses_a_SOURCES += sdl2/pdcclip.c sdl2/pdcdisp.c sdl2/pdcgetsc.c sdl2/pdckbd.c sdl2/pdcscrn.c sdl2/pdcsetsc.c sdl2/pdcutil.c
