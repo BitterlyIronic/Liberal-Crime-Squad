@@ -72,6 +72,8 @@ if test "x$with_ncurses" = "xyes"; then
    if test -n "$NCURSES_CONFIG"; then
       LIBS="$LIBS `$NCURSES_CONFIG --libs`"
       CPPFLAGS="$CPPFLAGS `$NCURSES_CONFIG --cflags`"
+   else
+      AC_MSG_ERROR([*** Unable to find ncurses])
    fi
 fi
 
@@ -81,6 +83,8 @@ if test "x$enable_music" != "xno" || (test "x$with_ncurses" != "xyes" && test "x
    if test -n "$SDL_CONFIG"; then
       LIBS="$LIBS `$SDL_CONFIG --libs`"
       CPPFLAGS="$CPPFLAGS `$SDL_CONFIG --cflags`"
+   else
+      AC_MSG_ERROR([*** Unable to find SDL2])
    fi
 fi
 
