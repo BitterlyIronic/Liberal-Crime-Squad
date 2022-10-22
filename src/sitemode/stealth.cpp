@@ -33,7 +33,7 @@ void noticecheck(int exclude,int difficulty)
 {
    if(sitealarm) return;
 
-   char sneak=0;
+   int8_t sneak=0;
 
    int topi=0;
    for(int i=0;i<6;++i) if(activesquad->squad[i]&&activesquad->squad[i]->get_skill(SKILL_STEALTH)>sneak)
@@ -175,7 +175,7 @@ void disguisecheck(int timer)
          !(levelmap[locx][locy][locz].flag & SITEBLOCK_RESTRICTED))return;
    }
 
-   char noticed=0;
+   bool noticed=false;
    vector<int> noticer;
    for(int e=0;e<ENCMAX;e++)
    {
@@ -471,7 +471,7 @@ void disguisecheck(int timer)
    }
 }
 
-char weapon_in_character(const string& wtype, const string& atype)
+int8_t weapon_in_character(const string& wtype, const string& atype)
 {
    if(atype == "ARMOR_LABCOAT" && wtype == "WEAPON_SYRINGE")
       return CREATURE_SCIENTIST_LABTECH;
@@ -540,11 +540,11 @@ char weapon_in_character(const string& wtype, const string& atype)
 }
 
 /* checks if a creature's weapon is suspicious */
-char weaponcheck(const Creature &cr, bool metaldetect)
+int8_t weaponcheck(const Creature &cr, bool metaldetect)
 {
    bool suspicious = cr.get_weapon().is_suspicious();
    bool concealed = cr.weapon_is_concealed();
-   char incharacter = weapon_in_character(cr.get_weapon().get_itemtypename(), cr.get_armor().get_itemtypename());
+   int8_t incharacter = weapon_in_character(cr.get_weapon().get_itemtypename(), cr.get_armor().get_itemtypename());
    //bool illegal = cr.get_weapon().get_legality() < law[LAW_GUNCONTROL];
 
    // If your disguise is inappropriate to the current location,
@@ -566,11 +566,11 @@ char weaponcheck(const Creature &cr, bool metaldetect)
 
 
 /* checks if a creature's uniform is appropriate to the location */
-char hasdisguise(const Creature &cr)
+int8_t hasdisguise(const Creature &cr)
 {
    short type = -1;
    if(cursite>=0)type = location[cursite]->type;
-   char uniformed=0;
+   int8_t uniformed=0;
 
    // Never uniformed in battle colors
    //if(activesquad->stance==SQUADSTANCE_BATTLECOLORS)
@@ -877,7 +877,7 @@ char hasdisguise(const Creature &cr)
 
 
 /* returns true if the entire site is not open to public */
-char disguisesite(long type)
+bool disguisesite(long type)
 {
    switch(type)
    {
@@ -890,8 +890,8 @@ char disguisesite(long type)
       case SITE_CORPORATE_HEADQUARTERS:
       case SITE_CORPORATE_HOUSE:
       case SITE_BUSINESS_CIGARBAR:
-         return 1;
+         return true;
    }
 
-   return 0;
+   return false;
 }

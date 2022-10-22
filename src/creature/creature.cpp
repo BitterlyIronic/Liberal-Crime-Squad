@@ -1076,7 +1076,7 @@ int Creature::skill_roll(int skill) const
    case SKILL_DISGUISE:
       {
          // Check for appropriate uniform
-         char uniformed = hasdisguise(*this);
+         int8_t uniformed = hasdisguise(*this);
 
          // Ununiformed disguise checks automatically fail
          if(!uniformed) { return_value = 0; break; }
