@@ -559,7 +559,7 @@ void mode_base()
          party_status=ops; } break;
       case 'r': if(len(pool)) review(); break;
       case 'w': if(forcewait||!cannotwait) {
-         char clearformess=forcewait;
+         bool clearformess=forcewait;
          if(!canseethings) nonsighttime++;
          advanceday(clearformess,canseethings);
          if(day>monthday()) passmonth(clearformess,canseethings);

@@ -859,7 +859,7 @@ void siegecheck(bool canseethings)
 
 
 /* siege - updates sieges in progress */
-void siegeturn(char clearformess)
+void siegeturn(bool clearformess)
 {
    if(disbanding)return;
 

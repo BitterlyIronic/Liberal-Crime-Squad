@@ -31,7 +31,7 @@ This file is part of Liberal Crime Squad.                                       
 #include <externs.h>
 
 /* news - major newspaper reporting on lcs and other topics */
-void majornewspaper(char &clearformess,bool canseethings)
+void majornewspaper(bool &clearformess,bool canseethings)
 {
    clearformess = true;
 

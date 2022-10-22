@@ -85,7 +85,7 @@ static void getissueeventstring(char* str)
 }
 
 /* recruiting */
-char recruitment_activity(Creature &cr,char &clearformess)
+char recruitment_activity(Creature &cr,bool &clearformess)
 {
    clearformess=1;
    int ocursite = cursite;
@@ -195,7 +195,7 @@ char recruitment_activity(Creature &cr,char &clearformess)
 }
 
 /* daily - recruit - recruit meeting */
-char completerecruitmeeting(recruitst &r,int p,char &clearformess)
+char completerecruitmeeting(recruitst &r,int p,bool &clearformess)
 {
    music.play(MUSIC_RECRUITING);
    clearformess=1;

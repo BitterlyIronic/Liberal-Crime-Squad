@@ -136,7 +136,7 @@ void show_interrogation_sidebar( Creature * cr, Creature * a )
 }
 
 /* hostage tending */
-void tendhostage(Creature *cr,char &clearformess)
+void tendhostage(Creature *cr,bool &clearformess)
 {
    music.play(MUSIC_INTERROGATION);
    vector<Creature *> temppool;

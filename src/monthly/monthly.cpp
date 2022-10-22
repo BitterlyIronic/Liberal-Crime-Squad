@@ -63,7 +63,7 @@ This file is part of Liberal Crime Squad.                                       
 #include <externs.h>
 
 /* does end of month actions */
-void passmonth(char &clearformess,bool canseethings)
+void passmonth(bool &clearformess,bool canseethings)
 {
    short oldlaw[LAWNUM];
    memmove(oldlaw,law,sizeof(short)*LAWNUM);

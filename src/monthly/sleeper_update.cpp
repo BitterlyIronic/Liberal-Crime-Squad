@@ -42,7 +42,7 @@ This file is part of Liberal Crime Squad.                                       
 ** - News Anchors and Radio Personalities remain the two most powerful
 ** sleepers.
 **********************************************************************/
-void sleepereffect(Creature &cr,char &clearformess,bool canseethings,int (&libpower)[VIEWNUM])
+void sleepereffect(Creature &cr,bool &clearformess,bool canseethings,int (&libpower)[VIEWNUM])
 {
    if(disbanding)cr.activity.type = ACTIVITY_SLEEPER_LIBERAL;
    int infiltrate = 1;
@@ -90,7 +90,7 @@ void sleepereffect(Creature &cr,char &clearformess,bool canseethings,int (&libpo
 **     PUBLIC OPINION
 **
 **********************************/
-void sleeper_influence(Creature &cr,char &clearformess,bool canseethings,int (&libpower)[VIEWNUM])
+void sleeper_influence(Creature &cr,bool &clearformess,bool canseethings,int (&libpower)[VIEWNUM])
 {
    int power=(cr.get_attribute(ATTRIBUTE_CHARISMA,true)+
               cr.get_attribute(ATTRIBUTE_HEART,true)+
@@ -324,7 +324,7 @@ void sleeper_influence(Creature &cr,char &clearformess,bool canseethings,int (&l
 **   SLEEPERS SNOOPING AROUND
 **
 **********************************/
-void sleeper_spy(Creature &cr,char &clearformess,bool canseethings,int (&libpower)[VIEWNUM])
+void sleeper_spy(Creature &cr,bool &clearformess,bool canseethings,int (&libpower)[VIEWNUM])
 {
    int homes=find_homeless_shelter(cr);
 
@@ -566,7 +566,7 @@ void sleeper_spy(Creature &cr,char &clearformess,bool canseethings,int (&libpowe
 **   SLEEPERS EMBEZZLING FUNDS
 **
 **********************************/
-void sleeper_embezzle(Creature &cr,char &clearformess,bool canseethings,int (&libpower)[VIEWNUM])
+void sleeper_embezzle(Creature &cr,bool &clearformess,bool canseethings,int (&libpower)[VIEWNUM])
 {
    if(LCSrandom(100) > 100*cr.infiltration)
    {
@@ -623,7 +623,7 @@ void sleeper_embezzle(Creature &cr,char &clearformess,bool canseethings,int (&li
 **   SLEEPERS STEALING THINGS
 **
 **********************************/
-void sleeper_steal(Creature &cr,char &clearformess,bool canseethings,int (&libpower)[VIEWNUM])
+void sleeper_steal(Creature &cr,bool &clearformess,bool canseethings,int (&libpower)[VIEWNUM])
 {
    if(LCSrandom(100) > 100*cr.infiltration)
    {
@@ -909,7 +909,7 @@ void sleeper_steal(Creature &cr,char &clearformess,bool canseethings,int (&libpo
 **   SLEEPERS CREATING SCANDALS
 **
 **********************************/
-void sleeper_scandal(Creature &cr,char &clearformess,bool canseethings,int (&libpower)[VIEWNUM])
+void sleeper_scandal(Creature &cr,bool &clearformess,bool canseethings,int (&libpower)[VIEWNUM])
 {
    // Add content here!
    return;
@@ -921,7 +921,7 @@ void sleeper_scandal(Creature &cr,char &clearformess,bool canseethings,int (&lib
 **   SLEEPERS RECRUITING
 **
 **********************************/
-void sleeper_recruit(Creature &cr,char &clearformess,bool canseethings,int (&libpower)[VIEWNUM])
+void sleeper_recruit(Creature &cr,bool &clearformess,bool canseethings,int (&libpower)[VIEWNUM])
 {
    if(subordinatesleft(cr))
    {

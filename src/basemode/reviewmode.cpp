@@ -220,7 +220,7 @@ void review()
       if(c=='u') promoteliberals();
       if(c=='v')
       {
-          char clearformess=false;
+          bool clearformess=false;
           fundreport(clearformess);
           if(clearformess) erase();
       }

@@ -1629,11 +1629,11 @@ void kidnaptransfer(Creature &cr);
 /*
  daily.cpp
 */
-void advanceday(char &clearformess,bool canseethings);
+void advanceday(bool &clearformess,bool canseethings);
 /* squad members with no chain of command lose contact */
-void dispersalcheck(char &clearformess);
+void dispersalcheck(bool &clearformess);
 /* promote a subordinate to maintain chain of command when boss is lost */
-bool promotesubordinates(Creature &cr,char &clearformess);
+bool promotesubordinates(Creature &cr,bool &clearformess);
 /* daily - manages too hot timer and when a site map should be re-seeded and renamed */
 void advancelocations();
 /* daily - returns true if the site type supports high security */
@@ -1649,21 +1649,21 @@ int monthday();
 /* adjust blog power */
 void adjustblogpower(int &power);
 /* hostage tending */
-void tendhostage(Creature *cr,char &clearformess);
+void tendhostage(Creature *cr,bool &clearformess);
 /* armor repair */
-void repairarmor(Creature &cr,char &clearformess);
+void repairarmor(Creature &cr,bool &clearformess);
 /* armor manufacture */
-void makearmor(Creature &cr,char &clearformess);
+void makearmor(Creature &cr,bool &clearformess);
 /* search for polls */
 void survey(Creature *cr);
 /* misc activation related things */
-void funds_and_trouble(char &clearformess);
+void funds_and_trouble(bool &clearformess);
 /* steal a car */
-bool stealcar(Creature &cr,char &clearformess);
+bool stealcar(Creature &cr,bool &clearformess);
 bool carselect(Creature &cr,short &cartype);
 /* get a wheelchair */
-void getwheelchair(Creature &cr,char &clearformess);
-void augment(Creature &cr,char &clearformess);
+void getwheelchair(Creature &cr,bool &clearformess);
+void augment(Creature &cr,bool &clearformess);
 
 /*
  shopsnstuff.cpp
@@ -1687,17 +1687,17 @@ void choose_buyer(short &buyer);
  date.cpp
 */
 /* daily - date - dater p gets back from vacation */
-char completevacation(datest &d,int p,char &clearformess);
+char completevacation(datest &d,int p,bool &clearformess);
 /* daily - date - dater p goes on some dates */
-char completedate(datest &d,int p,char &clearformess);
+char completedate(datest &d,int p,bool &clearformess);
 
 /*
  recruit.cpp
 */
 /* automatic finding recruits from the activity screen */
-char recruitment_activity(Creature &cr,char &clearformess);
+char recruitment_activity(Creature &cr,bool &clearformess);
 /* daily - recruit - recruit meeting*/
-char completerecruitmeeting(recruitst &d,int p,char &clearformess);
+char completerecruitmeeting(recruitst &d,int p,bool &clearformess);
 
 /*
  siege.cpp
@@ -1705,7 +1705,7 @@ char completerecruitmeeting(recruitst &d,int p,char &clearformess);
 /* siege - updates upcoming sieges */
 void siegecheck(bool canseethings);
 /* siege - updates sieges in progress */
-void siegeturn(char clearformess);
+void siegeturn(bool clearformess);
 /* siege - handles giving up */
 void giveup();
 /* siege - checks how many days of food left at the site */
@@ -1750,7 +1750,7 @@ void run_television_news_stories();
 /* news - make some filler junk */
 void generatefiller(char *story,int amount);
 /* news - major newspaper reporting on lcs and other topics */
-void majornewspaper(char &clearformess,bool canseethings);
+void majornewspaper(bool &clearformess,bool canseethings);
 
 /*******************************************************************************
 *
@@ -1763,7 +1763,7 @@ void majornewspaper(char &clearformess,bool canseethings);
  monthly.cpp
 */
 /* does end of month actions */
-void passmonth(char &clearformess,bool canseethings);
+void passmonth(bool &clearformess,bool canseethings);
 /* rename prison according to the new laws (add more buildings to this) */
 void updateworld_laws(short *law,short *oldlaw);
 
@@ -1773,24 +1773,24 @@ void updateworld_laws(short *law,short *oldlaw);
 /* monthly - reports the guardian's power to the player */
 void guardianupdate(char size,int power);
 /* monthly - lets the player choose a special edition for the guardian */
-int choosespecialedition(char &clearformess);
+int choosespecialedition(bool &clearformess);
 /* monthly - guardian - prints liberal guardian special editions */
 void printnews(short l,short newspaper);
 /* monthly - LCS finances report */
-void fundreport(char &clearformess);
+void fundreport(bool &clearformess);
 
 /*
  sleeper_update.cpp
 */
 /* monthly - sleeper behavior */
-void sleepereffect(Creature &cr,char &clearformess,bool canseethings,int (&libpower)[VIEWNUM]);
+void sleepereffect(Creature &cr,bool &clearformess,bool canseethings,int (&libpower)[VIEWNUM]);
 /* assistant functions for specific sleeper tasks */
-void sleeper_recruit(Creature &cr,char &clearformess,bool canseethings,int (&libpower)[VIEWNUM]);
-void sleeper_influence(Creature &cr,char &clearformess,bool canseethings,int (&libpower)[VIEWNUM]);
-void sleeper_spy(Creature &cr,char &clearformess,bool canseethings,int (&libpower)[VIEWNUM]);
-void sleeper_scandal(Creature &cr,char &clearformess,bool canseethings,int (&libpower)[VIEWNUM]);
-void sleeper_embezzle(Creature &cr,char &clearformess,bool canseethings,int (&libpower)[VIEWNUM]);
-void sleeper_steal(Creature &cr,char &clearformess,bool canseethings,int (&libpower)[VIEWNUM]);
+void sleeper_recruit(Creature &cr,bool &clearformess,bool canseethings,int (&libpower)[VIEWNUM]);
+void sleeper_influence(Creature &cr,bool &clearformess,bool canseethings,int (&libpower)[VIEWNUM]);
+void sleeper_spy(Creature &cr,bool &clearformess,bool canseethings,int (&libpower)[VIEWNUM]);
+void sleeper_scandal(Creature &cr,bool &clearformess,bool canseethings,int (&libpower)[VIEWNUM]);
+void sleeper_embezzle(Creature &cr,bool &clearformess,bool canseethings,int (&libpower)[VIEWNUM]);
+void sleeper_steal(Creature &cr,bool &clearformess,bool canseethings,int (&libpower)[VIEWNUM]);
 
 /*
  justice.cpp
@@ -1824,13 +1824,13 @@ void promoteVP();
 /* politics -- appoints a figure to an executive office, based on the President's alignment */
 void fillCabinetPost(int position);
 /* politics - causes the people to vote (presidential, congressional, propositions) */
-void elections(char clearformess,bool canseethings);
+void elections(bool clearformess,bool canseethings);
 void elections_senate(int senmod,bool canseethings);
 void elections_house(bool canseethings);
 /* politics - causes the supreme court to hand down decisions */
-void supremecourt(char clearformess,bool canseethings);
+void supremecourt(bool clearformess,bool canseethings);
 /* politics - causes congress to act on legislation */
-void congress(char clearformess,bool canseethings);
+void congress(bool clearformess,bool canseethings);
 // letter of amnesty to the LCS from the President (you win)
 void amnesty();
 /* politics - checks if the game is won */

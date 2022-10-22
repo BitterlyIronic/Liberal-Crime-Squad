@@ -62,18 +62,18 @@ This file is part of Liberal Crime Squad.                                       
 
 #include <externs.h>
 
-void doActivitySolicitDonations(vector<Creature *> &solicit, char &clearformess);
-void doActivitySellTshirts(vector<Creature *> &tshirts, char &clearformess);
-void doActivitySellArt(vector<Creature *> &art, char &clearformess);
-void doActivitySellMusic(vector<Creature *> &music, char &clearformess);
-void doActivitySellBrownies(vector<Creature *> &brownies, char &clearformess);
-void doActivityHacking(vector<Creature *> &hack, char &clearformess);
-void doActivityGraffiti(vector<Creature *> &graffiti, char &clearformess);
-void doActivityProstitution(vector<Creature *> &prostitutes, char &clearformess);
-void doActivityLearn(vector<Creature *> &students, char &clearformess);
-void doActivityTrouble(vector<Creature *> &trouble, char &clearformess);
-void doActivityTeach(vector<Creature *> &teachers, char &clearformess);
-void doActivityBury(vector<Creature *> &bury, char &clearformess);
+void doActivitySolicitDonations(vector<Creature *> &solicit, bool &clearformess);
+void doActivitySellTshirts(vector<Creature *> &tshirts, bool &clearformess);
+void doActivitySellArt(vector<Creature *> &art, bool &clearformess);
+void doActivitySellMusic(vector<Creature *> &music, bool &clearformess);
+void doActivitySellBrownies(vector<Creature *> &brownies, bool &clearformess);
+void doActivityHacking(vector<Creature *> &hack, bool &clearformess);
+void doActivityGraffiti(vector<Creature *> &graffiti, bool &clearformess);
+void doActivityProstitution(vector<Creature *> &prostitutes, bool &clearformess);
+void doActivityLearn(vector<Creature *> &students, bool &clearformess);
+void doActivityTrouble(vector<Creature *> &trouble, bool &clearformess);
+void doActivityTeach(vector<Creature *> &teachers, bool &clearformess);
+void doActivityBury(vector<Creature *> &bury, bool &clearformess);
 
 
 void adjustblogpower(int &power)
@@ -190,7 +190,7 @@ void adjustblogpower(int &power)
 
 
 /* armor repair */
-void repairarmor(Creature &cr,char &clearformess)
+void repairarmor(Creature &cr,bool &clearformess)
 {
    Armor *armor=NULL;
    Item *pile=NULL;
@@ -378,7 +378,7 @@ void repairarmor(Creature &cr,char &clearformess)
 
 
 /* armor manufacture */
-void makearmor(Creature &cr,char &clearformess)
+void makearmor(Creature &cr,bool &clearformess)
 {
    int at=cr.activity.arg;
 
@@ -890,7 +890,7 @@ int checkforarrest(Creature & liberal,const char* string,int clearformess)
 
 /* misc activation related things */
 // *JDSRETURN*
-void funds_and_trouble(char &clearformess)
+void funds_and_trouble(bool &clearformess)
 {  //ACTIVITIES FOR INDIVIDUALS
    vector<Creature *> trouble,hack,bury,solicit,tshirts,art,music,graffiti,brownies,prostitutes,teachers,students;
 
@@ -1009,7 +1009,7 @@ void funds_and_trouble(char &clearformess)
   	doActivityBury(bury, clearformess);
 }
 
-void doActivitySolicitDonations(vector<Creature *> &solicit, char &clearformess)
+void doActivitySolicitDonations(vector<Creature *> &solicit, bool &clearformess)
 {  //SOLICITORS
    long total_income=0;
    for(int s=0;s<len(solicit);s++)
@@ -1036,7 +1036,7 @@ void doActivitySolicitDonations(vector<Creature *> &solicit, char &clearformess)
    ledger.add_funds(total_income,INCOME_DONATIONS);
 }
 
-void doActivitySellTshirts(vector<Creature *> &tshirts, char &clearformess)
+void doActivitySellTshirts(vector<Creature *> &tshirts, bool &clearformess)
 {
    for(int s=0;s<len(tshirts);s++)
    {
@@ -1063,7 +1063,7 @@ void doActivitySellTshirts(vector<Creature *> &tshirts, char &clearformess)
    }
 }
 
-void doActivitySellArt(vector<Creature *> &art, char &clearformess)
+void doActivitySellArt(vector<Creature *> &art, bool &clearformess)
 {
 	for(int s=0;s<len(art);s++)
    {
@@ -1088,7 +1088,7 @@ void doActivitySellArt(vector<Creature *> &art, char &clearformess)
    }
 }
 
-void doActivitySellMusic(vector<Creature *> &music, char &clearformess)
+void doActivitySellMusic(vector<Creature *> &music, bool &clearformess)
 {
    for(int s=0;s<len(music);s++)
    {
@@ -1117,7 +1117,7 @@ void doActivitySellMusic(vector<Creature *> &music, char &clearformess)
    }
 }
 
-void doActivitySellBrownies(vector<Creature *> &brownies, char &clearformess)
+void doActivitySellBrownies(vector<Creature *> &brownies, bool &clearformess)
 {
    for(int s=0;s<len(brownies);s++)
    {
@@ -1163,7 +1163,7 @@ void doActivitySellBrownies(vector<Creature *> &brownies, char &clearformess)
 
 }
 
-void doActivityHacking(vector<Creature *> &hack, char &clearformess)
+void doActivityHacking(vector<Creature *> &hack, bool &clearformess)
 {
    if(len(hack))
    {
@@ -1441,7 +1441,7 @@ void doActivityHacking(vector<Creature *> &hack, char &clearformess)
 
 }
 
-void doActivityGraffiti(vector<Creature *> &graffiti, char &clearformess)
+void doActivityGraffiti(vector<Creature *> &graffiti, bool &clearformess)
 {
 	int s;
 
@@ -1617,7 +1617,7 @@ void doActivityGraffiti(vector<Creature *> &graffiti, char &clearformess)
    }
 }
 
-void doActivityProstitution(vector<Creature *> &prostitutes, char &clearformess)
+void doActivityProstitution(vector<Creature *> &prostitutes, bool &clearformess)
 {
    for(int p=len(prostitutes)-1;p>=0;p--)
    {
@@ -1700,7 +1700,7 @@ void doActivityProstitution(vector<Creature *> &prostitutes, char &clearformess)
    }
 }
 
-void doActivityLearn(vector<Creature *> &students, char &clearformess)
+void doActivityLearn(vector<Creature *> &students, bool &clearformess)
 {
    for(int s=len(students)-1;s>=0;s--)
    {
@@ -1789,7 +1789,7 @@ void doActivityLearn(vector<Creature *> &students, char &clearformess)
    }
 }
 
-void doActivityTrouble(vector<Creature *> &trouble, char &clearformess)
+void doActivityTrouble(vector<Creature *> &trouble, bool &clearformess)
 {
    if(len(trouble))
    {
@@ -2228,7 +2228,7 @@ void doActivityTrouble(vector<Creature *> &trouble, char &clearformess)
    }
 }
 
-void doActivityTeach(vector<Creature *> &teachers, char &clearformess)
+void doActivityTeach(vector<Creature *> &teachers, bool &clearformess)
 {
    for(int t=0;t<len(teachers);t++)
    {
@@ -2367,7 +2367,7 @@ void doActivityTeach(vector<Creature *> &teachers, char &clearformess)
    }
 }
 
-void doActivityBury(vector<Creature *> &bury, char &clearformess)
+void doActivityBury(vector<Creature *> &bury, bool &clearformess)
 {
    if(len(bury))
    {
@@ -2415,7 +2415,7 @@ void doActivityBury(vector<Creature *> &bury, char &clearformess)
 }
 
 /* steal a car */
-bool stealcar(Creature &cr,char &clearformess)
+bool stealcar(Creature &cr,bool &clearformess)
 {
    music.play(MUSIC_CARTHEFT);
    clearformess=1;
@@ -3102,7 +3102,7 @@ bool carselect(Creature &cr,short &cartype)
 }
 
 /* get a wheelchair */
-void getwheelchair(Creature &cr,char &clearformess)
+void getwheelchair(Creature &cr,bool &clearformess)
 {
    if(clearformess) erase();
    else makedelimiter();

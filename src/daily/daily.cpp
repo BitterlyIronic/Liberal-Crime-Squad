@@ -28,7 +28,7 @@ This file is part of Liberal Crime Squad.                                       
 
 #include <externs.h>
 
-void advanceday(char &clearformess,bool canseethings)
+void advanceday(bool &clearformess,bool canseethings)
 {
    int p;
    showcarprefs=0;
@@ -1087,7 +1087,7 @@ enum DispersalTypes
 };
 
 /* squad members with no chain of command lose contact */
-void dispersalcheck(char &clearformess)
+void dispersalcheck(bool &clearformess)
 {
    int p = 0;
    //NUKE DISPERSED SQUAD MEMBERS WHOSE MASTERS ARE NOT AVAILABLE
@@ -1320,7 +1320,7 @@ void dispersalcheck(char &clearformess)
 
 
 /* promote a subordinate to maintain chain of command when boss is lost */
-bool promotesubordinates(Creature &cr, char &clearformess)
+bool promotesubordinates(Creature &cr, bool &clearformess)
 {
    int p;
 

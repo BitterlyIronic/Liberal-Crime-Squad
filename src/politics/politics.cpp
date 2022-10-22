@@ -131,7 +131,7 @@ void fillCabinetPost(int position)
 }
 
 /* politics - causes the people to vote (presidential, congressional, propositions) */
-void elections(char clearformess,bool canseethings)
+void elections(bool clearformess,bool canseethings)
 {
    int l,p,c;
 
@@ -1014,7 +1014,7 @@ void elections_house(bool canseethings)
 }
 
 /* politics - causes the supreme court to hand down decisions */
-void supremecourt(char clearformess,bool canseethings)
+void supremecourt(bool clearformess,bool canseethings)
 {
    int c;
    if(canseethings)
@@ -1391,7 +1391,7 @@ char determine_politician_vote(char alignment,int law)
 
 
 /* politics - causes congress to act on legislation */
-void congress(char clearformess,bool canseethings)
+void congress(bool clearformess,bool canseethings)
 {
    int l, c;
    if(canseethings)

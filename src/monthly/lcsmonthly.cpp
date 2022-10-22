@@ -91,7 +91,7 @@ void guardianupdate(char size, int power)
 
 
 /* monthly - lets the player choose a special edition for the guardian */
-int choosespecialedition(char &clearformess)
+int choosespecialedition(bool &clearformess)
 {
    //Temporary, maybe put special edition definition into an xml file. -XML
 	static const string document_types[] =
@@ -691,7 +691,7 @@ void printnews(short li,short newspaper)
 
 
 /* monthly - LCS finances report */
-void fundreport(char &clearformess)
+void fundreport(bool &clearformess)
 {
    if(disbanding) return;
    music.play(MUSIC_FINANCES);
