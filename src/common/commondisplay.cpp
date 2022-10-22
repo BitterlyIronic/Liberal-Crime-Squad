@@ -362,12 +362,12 @@ void printparty()
             if(party[p]->prisoner!=NULL)addstr("+H");
 
             int skill=0;
-            char bright=0;
+            bool bright=false;
             for(int sk=0;sk<SKILLNUM;sk++)
             {
                skill+=(int)party[p]->get_skill(sk);
                if(party[p]->get_skill_ip(sk)>=100+(10*party[p]->get_skill(sk))&&
-                  party[p]->get_skill(sk)<party[p]->skill_cap(sk,true))bright=1;
+                  party[p]->get_skill(sk)<party[p]->skill_cap(sk,true))bright=true;
             }
 
             set_color(COLOR_WHITE,COLOR_BLACK,bright);
@@ -698,7 +698,7 @@ void printcreatureinfo(Creature *cr, uint8_t knowledge)
    if(v!=-1&&showcarprefs!=-1)
    {
       strcpy(str,vehicle[v]->shortname());
-      char d;
+      bool d;
       if(showcarprefs==1)d=cr->pref_is_driver;
       else d=cr->is_driver;
       if(d)strcat(str,"-D");
@@ -770,11 +770,11 @@ void printcreatureinfo(Creature *cr, uint8_t knowledge)
    memset(used,0,sizeof(char)*SKILLNUM);
 
    int snum=5;
-   char printed=1;
+   bool printed=true;
 
    while(snum>0&&printed)
    {
-      printed=0;
+      printed=false;
 
       int max=0;
       long maxs=-1;
@@ -790,7 +790,7 @@ void printcreatureinfo(Creature *cr, uint8_t knowledge)
       if(maxs!=-1)
       {
          used[maxs]=1;
-         printed=1;
+         printed=true;
 
          // Maxed skills are cyan
          if(cr->skill_cap(maxs,true)!=0 && cr->get_skill(maxs)>=cr->skill_cap(maxs,true))set_color(COLOR_CYAN,COLOR_BLACK,1);
@@ -1099,7 +1099,7 @@ void printliberalstats(Creature &cr)
    memset(used,0,sizeof(char)*SKILLNUM);
 
    int skills_max=16;
-   char printed=1;
+   bool printed=true;
 
    move(5,28);
    addstr("SKILL");
@@ -1107,7 +1107,7 @@ void printliberalstats(Creature &cr)
    addstr("NOW   MAX");
    for(int skills_shown=0;skills_shown<skills_max&&printed;skills_shown++)
    {
-      printed=0;
+      printed=false;
 
       int max=0;
       long maxs=-1;
@@ -1123,7 +1123,7 @@ void printliberalstats(Creature &cr)
       if(maxs!=-1)
       {
          used[maxs]=1;
-         printed=1;
+         printed=true;
 
          // Maxed skills are cyan
          if(cr.skill_cap(maxs,true)!=0 && cr.get_skill(maxs)>=cr.skill_cap(maxs,true))set_color(COLOR_CYAN,COLOR_BLACK,1);
@@ -1181,7 +1181,7 @@ void printliberalstats(Creature &cr)
    if(v!=-1&&showcarprefs!=-1)
    {
       addstr(vehicle[v]->shortname());
-      char d;
+      bool d;
       if(showcarprefs==1)d=cr.pref_is_driver;
       else d=cr.is_driver;
       if(d)addstr("-D");

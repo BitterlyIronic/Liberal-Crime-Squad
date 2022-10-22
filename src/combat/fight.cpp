@@ -103,18 +103,18 @@ void youattack()
       // Else, we skipped a "super enemy" because it we're using a persuasion-based attack but it's the only enemy left so we have to pick it
       else target=pickrandom(super_enemies);
 
-      char mistake=0;
+      bool mistake=false;
       // Changed from 1% chance to being based on weapon skill
       if(len(non_enemies)&&activesquad->squad[p]->get_weapon_skill()<8&&
          !LCSrandom(10+10*activesquad->squad[p]->get_weapon_skill()))
       {
          target=pickrandom(non_enemies);
-         mistake=1;
+         mistake=true;
       }
 
       bool actual;
       short beforeblood=encounter[target].blood;
-      if(encounter[target].align==1) mistake=1;
+      if(encounter[target].align==1) mistake=true;
       attack(*activesquad->squad[p],encounter[target],mistake,actual);
 
       if(actual)
@@ -183,10 +183,10 @@ void youattack()
 
          if(pool[p]->get_weapon().get_attack(true,false,false))
          {
-            char conf=0;
+            bool conf=false;
             if(pool[p]->get_weapon().get_ammoamount()>0) conf=1;
             if(pool[p]->get_weapon().get_attack(true,false,false)->uses_ammo)
-               if(pool[p]->can_reload()) conf=1;
+               if(pool[p]->can_reload()) conf=true;
 
             if(conf)
             {
@@ -205,12 +205,12 @@ void youattack()
 
                int target=pickrandom(goodtarg);
 
-               char mistake=0;
+               bool mistake=false;
 
                if(len(badtarg)&&!LCSrandom(10))
                {
                   target=pickrandom(badtarg);
-                  mistake=1;
+                  mistake=true;
                }
 
                bool actual;
@@ -300,7 +300,7 @@ void enemyattack()
          // (c) Conservative, and lost more than 55% blood
          // (d) There's a fire, they are not firefighters, and they fail a random check
          // Encountered creatures will never flee if they are tanks, animals, or so hurt they can't move
-         char fire=0;
+         int8_t fire=0;
          if(mode==GAMEMODE_SITE)
          {
             if(levelmap[locx][locy][locz].flag & SITEBLOCK_FIRE_START ||
@@ -391,7 +391,7 @@ void enemyattack()
 
       int target=pickrandom(goodtarg);
 
-      char canmistake=1;
+      bool canmistake=1;
 
       int encnum=0;
       for(e2=0;e2<ENCMAX;e2++) if(encounter[e2].exists) encnum++;
@@ -403,7 +403,7 @@ void enemyattack()
           encounter[e].type==CREATURE_POLITICIAN||
           encounter[e].type==CREATURE_RADIOPERSONALITY||
           encounter[e].type==CREATURE_NEWSANCHOR||
-          encounter[e].type==CREATURE_MILITARYOFFICER)&&encnum<ENCMAX) canmistake=0;
+          encounter[e].type==CREATURE_MILITARYOFFICER)&&encnum<ENCMAX) canmistake=false;
 
       bool actual;
       if(canmistake)
@@ -1133,7 +1133,7 @@ void attack(Creature &a,Creature &t,bool mistake,bool &actual,bool force_melee)
                (w==BODYPART_BODY && target->wound[BODYPART_BODY] & WOUND_NASTYOFF))
                bloodblast(&target->get_armor());
 
-            char alreadydead=!target->alive;
+            bool alreadydead=!target->alive;
 
             if(!alreadydead)
             {
@@ -1223,26 +1223,26 @@ void attack(Creature &a,Creature &t,bool mistake,bool &actual,bool force_melee)
             if(!(target->wound[w] & (WOUND_CLEANOFF|WOUND_NASTYOFF))&&
                 !target->animalgloss)
             {
-               char heavydam=0,breakdam=0,pokedam=0;
+               bool heavydam=false,breakdam=false,pokedam=false;
                if(damamount>=12) //JDS -- 2x damage needed
                {
-                  if(damtype & WOUND_SHOT) heavydam=1;
-                  if(damtype & WOUND_BURNED) heavydam=1;
-                  if(damtype & WOUND_TORN) heavydam=1;
-                  if(damtype & WOUND_CUT) heavydam=1;
+                  if(damtype & WOUND_SHOT) heavydam=true;
+                  if(damtype & WOUND_BURNED) heavydam=true;
+                  if(damtype & WOUND_TORN) heavydam=true;
+                  if(damtype & WOUND_CUT) heavydam=true;
                }
 
                if(damamount>=10) //JDS -- 2x damage needed
                {
-                  if(damtype & WOUND_SHOT) pokedam=1;
-                  if(damtype & WOUND_TORN) pokedam=1;
-                  if(damtype & WOUND_CUT) pokedam=1;
+                  if(damtype & WOUND_SHOT) pokedam=true;
+                  if(damtype & WOUND_TORN) pokedam=true;
+                  if(damtype & WOUND_CUT) pokedam=true;
                }
 
-               if((damtype & WOUND_BRUISED)&&damamount>=50) breakdam=1;
-               if((damtype & WOUND_SHOT)&&damamount>=50) breakdam=1;
-               if((damtype & WOUND_TORN)&&damamount>=50) breakdam=1;
-               if((damtype & WOUND_CUT)&&damamount>=50) breakdam=1;
+               if((damtype & WOUND_BRUISED)&&damamount>=50) breakdam=true;
+               if((damtype & WOUND_SHOT)&&damamount>=50) breakdam=true;
+               if((damtype & WOUND_TORN)&&damamount>=50) breakdam=true;
+               if((damtype & WOUND_CUT)&&damamount>=50) breakdam=true;
 
                if(w==BODYPART_HEAD)
                {
@@ -2772,12 +2772,12 @@ void autopromote(int loc)
 
    if(partysize==libnum) return;
 
-   char conf;
+   bool conf;
    for(int p=0;p<6;p++)
    {
-      conf=0;
-      if(activesquad->squad[p]==NULL) conf=1;
-      else if(!activesquad->squad[p]->alive) conf=1;
+      conf=false;
+      if(activesquad->squad[p]==NULL) conf=true;
+      else if(!activesquad->squad[p]->alive) conf=true;
 
       if(conf)
       {

@@ -296,7 +296,7 @@ void mode_base()
       siegest *siege=NULL;
       if(loc) siege=&loc->siege;
 
-      char sieged=0,underattack=0;
+      bool sieged=false,underattack=false;
       if(siege) sieged=siege->siege;
       if(sieged)
       {
@@ -307,7 +307,7 @@ void mode_base()
       else if(!forcewait) music.play(MUSIC_BASEMODE);
       else music.play(MUSIC_DISBANDED);
 
-      char haveflag=0;
+      bool haveflag=false;
       if(loc) haveflag=loc->haveflag;
 
       // Count people at each location
@@ -319,7 +319,7 @@ void mode_base()
          num_present[pool[p]->location]++;
       }
 
-      char cannotwait=0;
+      bool cannotwait=false;
       for(l=0;l<len(location);l++)
       {
          if(!location[l]->siege.siege) continue;
@@ -327,7 +327,7 @@ void mode_base()
          if(location[l]->siege.underattack)
          {
             // Allow siege if no liberals present
-            if(num_present[l])cannotwait=1;
+            if(num_present[l])cannotwait=true;
             break;
          }
       }

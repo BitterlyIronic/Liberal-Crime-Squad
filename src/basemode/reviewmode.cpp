@@ -345,13 +345,13 @@ void review_mode(short mode)
          mvaddchar(y,0,y+'A'-2);addstr(" - ");
          addstr(temppool[p]->name);
 
-         char bright=0;
+         bool bright=false;
          int skill=0;
          for(int sk=0;sk<SKILLNUM;sk++)
          {
             skill+=(int)temppool[p]->get_skill(sk);
             if(temppool[p]->get_skill_ip(sk)>=100+(10*temppool[p]->get_skill(sk))&&
-               temppool[p]->get_skill(sk)<temppool[p]->skill_cap(sk,true))bright=1;
+               temppool[p]->get_skill(sk)<temppool[p]->skill_cap(sk,true))bright=true;
          }
 
          set_color(COLOR_WHITE,COLOR_BLACK,bright);
@@ -372,7 +372,7 @@ void review_mode(short mode)
          {
          case REVIEWMODE_LIBERALS:
             {
-               char usepers=1;
+               bool usepers=true;
                if(temppool[p]->squadid!=-1)
                {
                   int sq=getsquad(temppool[p]->squadid);
@@ -382,7 +382,7 @@ void review_mode(short mode)
                      {
                         set_color(COLOR_GREEN,COLOR_BLACK,1);
                         addstr("SQUAD");
-                        usepers=0;
+                        usepers=false;
                      }
                   }
                }
@@ -837,13 +837,13 @@ void assemblesquad(squadst *cursquad)
    int culloc=-1,p;
    if(cursquad!=NULL) culloc=cursquad->squad[0]->location;
 
-   char newsquad=0;
+   bool newsquad=false;
    if(cursquad==NULL)
    {
       cursquad=new squadst;
       cursquad->id=cursquadid;
       cursquadid++;
-      newsquad=1;
+      newsquad=true;
    }
 
    vector<Creature *> temppool;
@@ -902,13 +902,13 @@ void assemblesquad(squadst *cursquad)
          mvaddchar(y,0,y+'A'-2);addstr(" - ");
          addstr(temppool[p]->name);
 
-         char bright=0;
+         bool bright=false;
          int skill=0;
          for(int sk=0;sk<SKILLNUM;sk++)
          {
             skill+=(int)temppool[p]->get_skill(sk);
             if(temppool[p]->get_skill_ip(sk)>=100+(10*temppool[p]->get_skill(sk))&&
-               temppool[p]->get_skill(sk)<temppool[p]->skill_cap(sk,true)) bright=1;
+               temppool[p]->get_skill(sk)<temppool[p]->skill_cap(sk,true)) bright=true;
          }
 
          set_color(COLOR_WHITE,COLOR_BLACK,bright);
@@ -976,7 +976,7 @@ void assemblesquad(squadst *cursquad)
          int p=page*19+c-'a';
          if(p<len(temppool))
          {
-            char conf=1;
+            bool conf=true;
             if(cursquad->squad[0]!=NULL)
             {
                if(cursquad->squad[0]->location!=temppool[p]->location)
@@ -991,7 +991,7 @@ void assemblesquad(squadst *cursquad)
 
                   getkey();
 
-                  conf=0;
+                  conf=false;
                }
             }
             if(!temppool[p]->canwalk()&&
@@ -1007,7 +1007,7 @@ void assemblesquad(squadst *cursquad)
 
                getkey();
 
-               conf=0;
+               conf=false;
             }
             if(conf)
             {

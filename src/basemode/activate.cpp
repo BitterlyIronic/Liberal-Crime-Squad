@@ -111,13 +111,13 @@ void activate()
          addchar(y+'A'-2);addstr(" - ");
          addstr(temppool[p]->name);
 
-         char bright=0;
+         bool bright=false;
          int skill=0;
          for(int sk=0;sk<SKILLNUM;sk++)
          {
             skill+=temppool[p]->get_skill(sk);
             if(temppool[p]->get_skill_ip(sk)>=100+(10*temppool[p]->get_skill(sk))&&
-               temppool[p]->get_skill(sk)<temppool[p]->skill_cap(sk,true))bright=1;
+               temppool[p]->get_skill(sk)<temppool[p]->skill_cap(sk,true))bright=true;
          }
 
          set_color(COLOR_WHITE,COLOR_BLACK,bright);
@@ -268,7 +268,7 @@ void listclasses(Creature *cr)
    }
 }
 
-void updateclasschoice(Creature *cr, char choice)
+void updateclasschoice(Creature *cr, int8_t choice)
 {
    if(choice=='6')
    {
@@ -324,11 +324,11 @@ void updateclasschoice(Creature *cr, char choice)
 void activate(Creature *cr)
 {
    int hostagecount=0,state=0,oldstate=0,choice=0;
-   char havedead=0;
+   bool havedead=false;
    for(int p=0;p<len(pool);p++)
    {
       if(pool[p]->alive&&pool[p]->align!=1&&pool[p]->location==cr->location) hostagecount++;
-      if(!pool[p]->alive) havedead=1;
+      if(!pool[p]->alive) havedead=true;
    }
 
    while(true)
@@ -470,7 +470,7 @@ void activate(Creature *cr)
       siegest *siege=NULL;
       if(selectedsiege!=-1) siege=&location[selectedsiege]->siege;
       if(activesquad) if(activesquad->squad[0]->location!=-1) siege=&location[activesquad->squad[0]->location]->siege;
-      char sieged=0;
+      bool sieged=false;
       if(siege) sieged=siege->siege;
       /*char underattack=0;
       if(siege&&sieged) underattack=siege->underattack;*/
@@ -1320,13 +1320,13 @@ void select_tendhostage(Creature *cr)
          addchar(y+'A'-2);addstr(" - ");
          addstr(temppool[p]->name);
 
-         char bright=0;
+         bool bright=false;
          int skill=0;
          for(int sk=0;sk<SKILLNUM;sk++)
          {
             skill+=temppool[p]->get_skill(sk);
             if(temppool[p]->get_skill_ip(sk)>=100+(10*temppool[p]->get_skill(sk))&&
-               temppool[p]->get_skill(sk)<temppool[p]->skill_cap(sk,true))bright=1;
+               temppool[p]->get_skill(sk)<temppool[p]->skill_cap(sk,true))bright=true;
          }
 
          set_color(COLOR_WHITE,COLOR_BLACK,bright);
