@@ -29,7 +29,7 @@ This file is part of Liberal Crime Squad.                                       
 #include <externs.h>
 
 /* generates a new random encounter */
-void prepareencounter(short type,char sec)
+void prepareencounter(short type,int8_t sec)
 {
    int encslot=0;
 
@@ -1223,7 +1223,7 @@ void prepareencounter(short type,char sec)
 
 
 /* generates a new siege encounter */
-char addsiegeencounter(char type)
+bool addsiegeencounter(int8_t type)
 {
    int num;
    int freeslots=0;
@@ -1237,7 +1237,7 @@ char addsiegeencounter(char type)
       case SIEGEFLAG_UNIT:
       case SIEGEFLAG_UNIT_DAMAGED:
       {
-         if(freeslots<6)return 0;
+         if(freeslots<6)return false;
 
          num=LCSrandom(3)+4;
 
@@ -1338,7 +1338,7 @@ char addsiegeencounter(char type)
       }
       case SIEGEFLAG_HEAVYUNIT:
       {
-         if(freeslots<1)return 0;
+         if(freeslots<1)return false;
 
          num=1;
 
@@ -1355,7 +1355,7 @@ char addsiegeencounter(char type)
       }
    }
 
-   return 1;
+   return true;
 }
 
 

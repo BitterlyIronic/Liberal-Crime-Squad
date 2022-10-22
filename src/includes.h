@@ -1442,9 +1442,9 @@ void knowmap(int locx,int locy,int locz);
  newencounter.cpp
 */
 /* generates a new random encounter */
-void prepareencounter(short type,char sec);
+void prepareencounter(short type,int8_t sec);
 /* generates a new siege encounter */
-char addsiegeencounter(char type);
+bool addsiegeencounter(int8_t type);
 /* rolls up a random creature type according to the passed weighting array */
 int getrandomcreaturetype(int cr[CREATURENUM]);
 
