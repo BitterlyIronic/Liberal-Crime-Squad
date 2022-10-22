@@ -29,7 +29,7 @@ This file is part of Liberal Crime Squad.                                       
 #include <externs.h>
 
 /* common - test for possible game over */
-char endcheck(char cause)
+bool endcheck(int8_t cause)
 {
    bool dead=true;
    for(int p=0;p<len(pool)&&dead;p++)
@@ -327,7 +327,7 @@ void basesquad(squadst *st,long loc)
 }
 
 /* common - shifts public opinion on an issue */
-void change_public_opinion(int v,int power,char affect,char cap)
+void change_public_opinion(int v,int power,int8_t affect,int8_t cap)
 {
    // First note this in the liberal influence -- mostly for the
    // sake of the nice visual intelligence report entry

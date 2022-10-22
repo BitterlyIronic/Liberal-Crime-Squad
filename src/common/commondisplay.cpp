@@ -453,7 +453,7 @@ void printparty()
             }
             mvaddstr(p+2,46,party[p]->get_armor().get_shortname());
 
-            printhealthstat(*party[p],p+2,61,TRUE);
+            printhealthstat(*party[p],p+2,61,true);
 
             set_color(COLOR_WHITE,COLOR_BLACK,0);
             move(p+2,70);
@@ -826,7 +826,7 @@ void printcreatureinfo(Creature *cr, uint8_t knowledge)
    for(int w=0;w<BODYPARTNUM;w++)
       if(cr->wound[w]!=0)woundsum++;
 
-   printhealthstat(*cr,1,49,FALSE);
+   printhealthstat(*cr,1,49,false);
 
    if(woundsum>0)
    {
@@ -1470,7 +1470,7 @@ void printwoundstat(Creature &cr,int y,int x)
 }
 
 /* prints a character's health description (One Leg, Liberal, NearDETH...) */
-void printhealthstat(Creature &g,int y,int x,char smll)
+void printhealthstat(Creature &g,int y,int x,bool smll)
 {
    short woundsum=0;
    bool bleeding=false;

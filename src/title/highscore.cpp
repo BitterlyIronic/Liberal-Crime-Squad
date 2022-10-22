@@ -220,7 +220,7 @@ void viewhighscores(int musicoverride)
 /* loads the high scores file */
 void loadhighscores()
 {
-   for(int s=0;s<SCORENUM;s++)score[s].valid=0;
+   for(int s=0;s<SCORENUM;s++)score[s].valid=false;
 
    //LOAD FILE
    int loadversion;
@@ -251,7 +251,7 @@ void loadhighscores()
 }
 
 /* saves a new high score */
-void savehighscore(char endtype)
+void savehighscore(int8_t endtype)
 {
    loadhighscores();
 
@@ -283,7 +283,7 @@ void savehighscore(char endtype)
          (endtype!=END_WON&&score[s].endtype!=END_WON&&
          ledger.total_expense+ledger.total_income>score[s].stat_spent+score[s].stat_funds)||
 
-         score[s].valid==0)
+         !score[s].valid)
       {
          for(int s2=SCORENUM-1;s2>=s+1;s2--)
          {
@@ -301,7 +301,7 @@ void savehighscore(char endtype)
          score[s].stat_spent=ledger.total_expense;
          score[s].stat_buys=stat_buys;
          score[s].stat_burns=stat_burns;
-         score[s].valid=1;
+         score[s].valid=true;
          score[s].endtype=endtype;
 
          yourscore=s;

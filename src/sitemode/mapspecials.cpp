@@ -345,7 +345,7 @@ void special_lab_cosmetics_cagedanimals()
 
       if(c=='y')
       {
-         char actual;
+         bool actual;
 
          if(unlock(UNLOCK_CAGE,actual))
          {
@@ -577,7 +577,7 @@ void special_lab_genetic_cagedanimals()
 
       if(c=='y')
       {
-         char actual;
+         bool actual;
 
          if(unlock(UNLOCK_CAGE_HARD,actual))
          {
@@ -659,7 +659,7 @@ void special_policestation_lockup()
 
       if(c=='y')
       {
-         char actual;
+         bool actual;
 
          if(unlock(UNLOCK_CELL,actual))
          {
@@ -724,7 +724,7 @@ void special_courthouse_lockup()
 
       if(c=='y')
       {
-         char actual;
+         bool actual;
 
          if(unlock(UNLOCK_CELL,actual))
          {
@@ -1052,7 +1052,7 @@ void special_intel_supercomputer()
 
       if(c=='y')
       {
-         char actual;
+         bool actual;
 
          if(hack(HACK_SUPERCOMPUTER,actual))
          {
@@ -1263,7 +1263,7 @@ void special_house_photos()
 
       if(c=='y')
       {
-         char actual;
+         bool actual;
 
          if(unlock(UNLOCK_SAFE,actual))
          {
@@ -1660,7 +1660,7 @@ void special_corporate_files()
 
       if(c=='y')
       {
-         char actual;
+         bool actual;
 
          if(unlock(UNLOCK_SAFE,actual))
          {
@@ -2154,7 +2154,7 @@ void special_bank_vault()
 
       if(c=='y')
       {
-         char actual;
+         bool actual;
 
          clearmessagearea();
          set_color(COLOR_WHITE,COLOR_BLACK,1);

@@ -29,7 +29,7 @@ This file is part of Liberal Crime Squad.                                       
 #include <externs.h>
 
 /* unlock attempt */
-char unlock(short type,char &actual)
+bool unlock(short type,bool &actual)
 {
    int p;
    int difficulty=0;
@@ -145,8 +145,8 @@ char unlock(short type,char &actual)
 
          getkey();
 
-         actual=1;
-         return 1;
+         actual=true;
+         return true;
       }
       else
       {
@@ -186,8 +186,8 @@ char unlock(short type,char &actual)
 
          getkey();
 
-         actual=1;
-         return 0;
+         actual=true;
+         return false;
       }
    }
    else
@@ -201,13 +201,13 @@ char unlock(short type,char &actual)
       getkey();
    }
 
-   actual=0;
-   return 0;
+   actual=false;
+   return false;
 }
 
 
 /* bash attempt */
-char bash(short type,char &actual)
+bool bash(short type,bool &actual)
 {
    int difficulty=0,p=0;
    bool crowable=false;
@@ -332,8 +332,8 @@ char bash(short type,char &actual)
          getkey();
       }
 
-      actual=1;
-      return 1;
+      actual=true;
+      return true;
    }
    else
    {
@@ -358,17 +358,17 @@ char bash(short type,char &actual)
       else if(sitealarmtimer>10) sitealarmtimer-=10;
       else sitealarmtimer=0;
 
-      actual=1;
-      return 0;
+      actual=true;
+      return false;
    }
 
-   actual=0;
-   return 0;
+   actual=false;
+   return false;
 }
 
 
 /* computer hack attempt */
-char hack(short type,char &actual)
+bool hack(short type,bool &actual)
 {
    int difficulty=0;
    int p;
@@ -426,8 +426,8 @@ char hack(short type,char &actual)
 
          getkey();
 
-         actual=1;
-         return 1;
+         actual=true;
+         return true;
       }
       else
       {
@@ -446,8 +446,8 @@ char hack(short type,char &actual)
 
          getkey();
 
-         actual=1;
-         return 0;
+         actual=true;
+         return false;
       }
    }
    else
@@ -469,14 +469,14 @@ char hack(short type,char &actual)
       getkey();
    }
 
-   actual=0;
-   return 0;
+   actual=false;
+   return false;
 }
 
 
 
 /* run a radio broadcast */
-char radio_broadcast()
+bool radio_broadcast()
 {
    sitealarm=1;
 
@@ -500,7 +500,7 @@ char radio_broadcast()
       gamelog.newline();
 
       getkey();
-      return 0;
+      return false;
    }
 
    criminalizeparty(LAWFLAG_DISTURBANCE);
@@ -734,13 +734,13 @@ char radio_broadcast()
       getkey();
    }
 
-   return 1;
+   return true;
 }
 
 
 
 /* run a tv broadcast */
-char news_broadcast()
+bool news_broadcast()
 {
    sitealarm=1;
    int p;
@@ -766,7 +766,7 @@ char news_broadcast()
 
       getkey();
 
-      return 0;
+      return false;
    }
 
    criminalizeparty(LAWFLAG_DISTURBANCE);
@@ -1004,7 +1004,7 @@ char news_broadcast()
       getkey();
    }
 
-   return 1;
+   return true;
 }
 
 

@@ -318,8 +318,8 @@ public:
    
    char name[CREATURE_NAMELEN];
    char propername[CREATURE_NAMELEN];
-   char gender_conservative;
-   char gender_liberal;
+   int8_t gender_conservative;
+   int8_t gender_liberal;
    int squadid;//REMEMBER, THIS IS ID NUMBER, NOT ARRAY INDEX
    int age;
    int birthday_month;

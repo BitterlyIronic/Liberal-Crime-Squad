@@ -58,7 +58,7 @@ void show_interrogation_sidebar( Creature * cr, Creature * a )
    move(y+=2,40);
    set_color(COLOR_WHITE,COLOR_BLACK,0);
    addstr("Health: ");
-   printhealthstat(*cr,y,48,0);
+   printhealthstat(*cr,y,48,false);
    set_color(COLOR_WHITE,COLOR_BLACK,0);
    move(++y,40);
    addstr("Heart: ");
@@ -78,7 +78,7 @@ void show_interrogation_sidebar( Creature * cr, Creature * a )
    move(y+=2,40);
    set_color(COLOR_WHITE,COLOR_BLACK,0);
    addstr("Health: ");
-   printhealthstat(*a,y,48,0);
+   printhealthstat(*a,y,48,false);
    set_color(COLOR_WHITE,COLOR_BLACK,0);
    move(++y,40);
    addstr("Psychology Skill: ");

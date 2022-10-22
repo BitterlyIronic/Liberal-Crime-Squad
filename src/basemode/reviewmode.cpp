@@ -359,7 +359,7 @@ void review_mode(short mode)
          move(y,25);
          addstr(skill);
 
-         printhealthstat(*temppool[p],y,33,TRUE);
+         printhealthstat(*temppool[p],y,33,true);
 
          if(mode==REVIEWMODE_JUSTICE)set_color(COLOR_YELLOW,COLOR_BLACK,1);
          else set_color(COLOR_WHITE,COLOR_BLACK,0);
@@ -916,7 +916,7 @@ void assemblesquad(squadst *cursquad)
          move(y,25);
          addstr(skill);
 
-         printhealthstat(*temppool[p],y,33,FALSE);
+         printhealthstat(*temppool[p],y,33,false);
 
          if(temppool[p]->squadid==cursquad->id)
          {

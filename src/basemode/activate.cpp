@@ -125,7 +125,7 @@ void activate()
          move(y,25);
          addstr(skill);
 
-         printhealthstat(*temppool[p],y,33,TRUE);
+         printhealthstat(*temppool[p],y,33,true);
 
          if(mode==REVIEWMODE_JUSTICE)set_color(COLOR_YELLOW,COLOR_BLACK,1);
          else set_color(COLOR_WHITE,COLOR_BLACK,0);
@@ -1334,7 +1334,7 @@ void select_tendhostage(Creature *cr)
          move(y,25);
          addstr(skill);
 
-         printhealthstat(*temppool[p],y,33,TRUE);
+         printhealthstat(*temppool[p],y,33,true);
 
          if(mode==REVIEWMODE_JUSTICE)set_color(COLOR_YELLOW,COLOR_BLACK,1);
          else set_color(COLOR_WHITE,COLOR_BLACK,0);
@@ -1681,7 +1681,7 @@ void select_augmentation(Creature *cr) //TODO: Finish and general cleanup
             addstr(temppool[p]->name);
             mvaddstr(y,49,temppool[p]->get_attribute(ATTRIBUTE_HEART,true));
             mvaddstr(y,62,temppool[p]->age);
-            printhealthstat(*temppool[p],y,31,TRUE);
+            printhealthstat(*temppool[p],y,31,true);
          }
 
          set_color(COLOR_WHITE,COLOR_BLACK,0);
@@ -2160,7 +2160,7 @@ long select_troublefundinglevel(Creature *cr)
 
 
 /* base - activate - select a topic to write about */
-char select_view(Creature *cr,int &v)
+bool select_view(Creature *cr,int &v)
 {
    int page=0;
 
@@ -2232,13 +2232,13 @@ char select_view(Creature *cr,int &v)
          if(p<VIEWNUM-3)
          {
             v=p;
-            return 1;
+            return true;
          }
       }
 
       if(c=='x'||c==ENTER||c==ESC||c==SPACEBAR) break;
    }
 
-   return 0;
+   return false;
 }
 

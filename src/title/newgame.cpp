@@ -315,7 +315,7 @@ void makecharacter()
    char first[3][80];
    char last[80];
    bool male = LCSrandom(2); // whether or not starting gender is male
-   char gender = newcr->gender_liberal = newcr->gender_conservative = (male ? GENDER_MALE : GENDER_FEMALE);
+   int8_t gender = newcr->gender_liberal = newcr->gender_conservative = (male ? GENDER_MALE : GENDER_FEMALE);
    do {
       firstname(first[0], GENDER_NEUTRAL);
       firstname(first[1], GENDER_MALE);

@@ -359,7 +359,7 @@ Item* create_item(const std::string& inputXml)
 }
 
 /* loads the game from save.dat */
-char load(const string& filename)
+bool load(const string& filename)
 {
    //LOAD FILE
    int loadversion;
@@ -381,7 +381,7 @@ char load(const string& filename)
 
             reset(savefile_name);
 
-            return 0;
+            return false;
          }
 
          fread(seed,sizeof(unsigned long),RNG_SIZE,h);
@@ -825,11 +825,11 @@ char load(const string& filename)
             }
          }
 
-         return 1;
+         return true;
       }
 
    gamelog.log("Could not load");
-   return 0;
+   return false;
 }
 
 /* deletes save.dat (used on endgame and for invalid save version) */

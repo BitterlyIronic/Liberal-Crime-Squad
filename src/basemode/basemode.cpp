@@ -222,12 +222,12 @@ enum CantSeeReason
 
 void mode_base()
 {
-   char forcewait,canseethings;
+   bool forcewait,canseethings;
    int nonsighttime=0,oldforcemonth=month,l=0;
 
    while(true)
    {
-      forcewait=1,canseethings=0,cantseereason=CANTSEE_OTHER;
+      forcewait=true,canseethings=false,cantseereason=CANTSEE_OTHER;
       if(disbanding)
       {
          cantseereason=CANTSEE_DISBANDING;
@@ -245,8 +245,8 @@ void mode_base()
             {
                if(!location[pool[p]->location]->part_of_justice_system())
                {
-                  canseethings=1;
-                  if(pool[p]->clinic==0) { forcewait=0; break; }
+                  canseethings=true;
+                  if(pool[p]->clinic==0) { forcewait=false; break; }
                }
             }
             else

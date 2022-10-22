@@ -455,7 +455,7 @@ struct chaseseqst
 {
    long location;
    vector<Vehicle *> friendcar,enemycar;
-   char canpullover;
+   bool canpullover;
    void clean() { delete_and_clear(enemycar); friendcar.clear(); }
 };
 
@@ -477,7 +477,7 @@ struct squadst
    int id;
    vector<Item *> loot;
 
-   char stance; // Squad's site action stance: high profile, low profile, etc.
+   int8_t stance; // Squad's site action stance: high profile, low profile, etc.
 
    squadst()
    {
@@ -773,12 +773,12 @@ enum NewsStories
 struct newsstoryst
 {
    short type,view;
-   char claimed;
+   int8_t claimed;
    short politics_level,violence_level;
    Creature *cr;
    vector<int> crime;
    long loc,priority,page,guardianpage;
-   char positive;
+   int8_t positive;
    short siegetype;
    newsstoryst() : claimed(1),politics_level(0),violence_level(0),cr(NULL),loc(-1) { }
 };
@@ -789,7 +789,9 @@ struct newsstoryst
 
 struct highscorest
 {
-   char valid,endtype,slogan[SLOGAN_LEN];
+   bool valid;
+   int8_t endtype;
+   char slogan[SLOGAN_LEN];
    int month,year,stat_recruits,stat_kidnappings,stat_dead,stat_kills,stat_funds,stat_spent,stat_buys,stat_burns;
 };
 
@@ -984,7 +986,7 @@ void printliberalcrimes(Creature &cr);
 /* draws a horizontal line across the screen */
 void makedelimiter(int y=8,int x=0);
 /* prints a character's general health description (One Leg, Liberal, NearDETH...) */
-void printhealthstat(Creature &g,int y,int x,char smll);
+void printhealthstat(Creature &g,int y,int x,bool smll);
 /* prints a character's health description for each bodypart (Head, Body...) */
 void printwoundstat(Creature &cr,int y,int x);
 /* prints amount of money the player has, with optional formatting */
@@ -1032,7 +1034,7 @@ int mvaddstr_fl(int y,int x,Log &log,const char * format,...);
  commonactions.cpp
 */
 /* common - test for possible game over */
-char endcheck(char cause=-1);
+bool endcheck(int8_t cause=-1);
 /* common - tests if the person is a wanted criminal */
 bool iscriminal(Creature &cr);
 /* common - sends somebody to the hospital */
@@ -1058,7 +1060,7 @@ void locatesquad(squadst *st,long loc);
 /* common - assigns a new base to all members of a squad */
 void basesquad(squadst *st,long loc);
 /* common - shifts public opinion on an issue */
-void change_public_opinion(int v,int power,char affect=1,char cap=100);
+void change_public_opinion(int v,int power,int8_t affect=1,int8_t cap=100);
 /* returns the amount of heat associated with a given crime */
 int lawflagheat(int lawflag);
 /* Determines the number of subordinates a creature may command */
@@ -1193,10 +1195,8 @@ void moveloot(vector<Item *> &dest,vector<Item *> &source);
 void equipmentbaseassign();
 /* combines multiple items of the same type into stacks */
 void consolidateloot(vector<Item *> &loot);
-/* compares two items, used in sorting gear */
-char itemcompare(Item *a,Item *b);
 /* check if the squad has a certain weapon */
-char squadhasitem(squadst &sq,int type,int subtype);
+bool squadhasitem(squadst &sq,int type,int subtype);
 
 /*
  stringconversion.cpp
@@ -1233,17 +1233,17 @@ void add_age(Creature& person);
 /* rolls up a creature's stats and equipment */
 void makecreature(Creature &cr,short type);
 /* fills a string with a proper name */
-void generate_name(char *str, char gender = GENDER_NEUTRAL);
+void generate_name(char *str, int8_t gender = GENDER_NEUTRAL);
 /* get a first and last name for the same person */
-void generate_name(char *first, char *last, char gender = GENDER_NEUTRAL);
+void generate_name(char *first, char *last, int8_t gender = GENDER_NEUTRAL);
 /* get a first, middle, and last name for the same person */
-void generate_long_name(char *first, char *middle, char *last, char gender = GENDER_NEUTRAL);
+void generate_long_name(char *first, char *middle, char *last, int8_t gender = GENDER_NEUTRAL);
 /* gets a random first name */
-void firstname(char *str, char gender = GENDER_NEUTRAL);
+void firstname(char *str, int8_t gender = GENDER_NEUTRAL);
 /* gets a random last name */
 void lastname(char *str, bool archconservative=false);
 /* ensures that the creature's work location is appropriate to its type */
-bool verifyworklocation(Creature &cr, char test_location=-1, int8_t test_type=-1);
+bool verifyworklocation(Creature &cr, int8_t test_location=-1, int8_t test_type=-1);
 /* turns a creature into a conservative */
 void conservatise(Creature &cr);
 /* turns a creature into a liberal */
@@ -1310,7 +1310,7 @@ void viewhighscores(int musicoverride=MUSIC_OFF);
 /* loads the high scores file */
 void loadhighscores();
 /* saves a new high score */
-void savehighscore(char endtype);
+void savehighscore(int8_t endtype);
 
 /*
  newgame.cpp
@@ -1326,7 +1326,7 @@ void makecharacter();
 /* saves the game to save.dat */
 void savegame(const string& filename);
 /* loads the game from save.dat */
-char load(const string& filename);
+bool load(const string& filename);
 /* deletes save.dat (used on endgame and for invalid save version) */
 void reset(const string& filename);
 /* check if file exists */
@@ -1399,7 +1399,7 @@ int armor_makedifficulty(ArmorType& type,Creature *cr); //Replace with Armor cla
 /* base - activate - trouble */
 long select_troublefundinglevel(Creature *cr);
 /* base - activate - select a topic to write about */
-char select_view(Creature *cr,int &v);
+bool select_view(Creature *cr,int &v);
 
 /*
  reviewmode.cpp
@@ -1467,15 +1467,15 @@ void clearmaparea(bool lower=true,bool upper=true);
  miscactions.cpp
 */
 /* unlock attempt */
-char unlock(short type,char &actual);
+bool unlock(short type,bool &actual);
 /* bash attempt */
-char bash(short type,char &actual);
+bool bash(short type,bool &actual);
 /* computer hack attempt */
-char hack(short type,char &actual);
+bool hack(short type,bool &actual);
 /* run a radio broadcast */
-char radio_broadcast();
+bool radio_broadcast();
 /* run a tv broadcast */
-char news_broadcast();
+bool news_broadcast();
 /* rescues people held at the activeparty's current location */
 void partyrescue(short special);
 /* everybody reload! */
@@ -1629,7 +1629,7 @@ void kidnaptransfer(Creature &cr);
 /*
  daily.cpp
 */
-void advanceday(char &clearformess,char canseethings);
+void advanceday(char &clearformess,bool canseethings);
 /* squad members with no chain of command lose contact */
 void dispersalcheck(char &clearformess);
 /* promote a subordinate to maintain chain of command when boss is lost */
@@ -1703,7 +1703,7 @@ char completerecruitmeeting(recruitst &d,int p,char &clearformess);
  siege.cpp
 */
 /* siege - updates upcoming sieges */
-void siegecheck(char canseethings);
+void siegecheck(bool canseethings);
 /* siege - updates sieges in progress */
 void siegeturn(char clearformess);
 /* siege - handles giving up */
@@ -1742,7 +1742,7 @@ void displaycenterednewsfont(const std::string& str,int y);
 void displaycenteredsmallnews(const std::string& str,int y);
 void displaynewspicture(int p,int y);
 /* news - constructs non-LCS related event stories */
-void constructeventstory(char *story,short view,char positive);
+void constructeventstory(char *story,short view,int8_t positive);
 /* news - draws the specified block of text to the screen */
 void displaynewsstory(char *story,short *storyx_s,short *storyx_e,int y);
 /* news - shows animated news stories */
@@ -1750,7 +1750,7 @@ void run_television_news_stories();
 /* news - make some filler junk */
 void generatefiller(char *story,int amount);
 /* news - major newspaper reporting on lcs and other topics */
-void majornewspaper(char &clearformess,char canseethings);
+void majornewspaper(char &clearformess,bool canseethings);
 
 /*******************************************************************************
 *
@@ -1763,7 +1763,7 @@ void majornewspaper(char &clearformess,char canseethings);
  monthly.cpp
 */
 /* does end of month actions */
-void passmonth(char &clearformess,char canseethings);
+void passmonth(char &clearformess,bool canseethings);
 /* rename prison according to the new laws (add more buildings to this) */
 void updateworld_laws(short *law,short *oldlaw);
 
@@ -1783,14 +1783,14 @@ void fundreport(char &clearformess);
  sleeper_update.cpp
 */
 /* monthly - sleeper behavior */
-void sleepereffect(Creature &cr,char &clearformess,char canseethings,int (&libpower)[VIEWNUM]);
+void sleepereffect(Creature &cr,char &clearformess,bool canseethings,int (&libpower)[VIEWNUM]);
 /* assistant functions for specific sleeper tasks */
-void sleeper_recruit(Creature &cr,char &clearformess,char canseethings,int (&libpower)[VIEWNUM]);
-void sleeper_influence(Creature &cr,char &clearformess,char canseethings,int (&libpower)[VIEWNUM]);
-void sleeper_spy(Creature &cr,char &clearformess,char canseethings,int (&libpower)[VIEWNUM]);
-void sleeper_scandal(Creature &cr,char &clearformess,char canseethings,int (&libpower)[VIEWNUM]);
-void sleeper_embezzle(Creature &cr,char &clearformess,char canseethings,int (&libpower)[VIEWNUM]);
-void sleeper_steal(Creature &cr,char &clearformess,char canseethings,int (&libpower)[VIEWNUM]);
+void sleeper_recruit(Creature &cr,char &clearformess,bool canseethings,int (&libpower)[VIEWNUM]);
+void sleeper_influence(Creature &cr,char &clearformess,bool canseethings,int (&libpower)[VIEWNUM]);
+void sleeper_spy(Creature &cr,char &clearformess,bool canseethings,int (&libpower)[VIEWNUM]);
+void sleeper_scandal(Creature &cr,char &clearformess,bool canseethings,int (&libpower)[VIEWNUM]);
+void sleeper_embezzle(Creature &cr,char &clearformess,bool canseethings,int (&libpower)[VIEWNUM]);
+void sleeper_steal(Creature &cr,char &clearformess,bool canseethings,int (&libpower)[VIEWNUM]);
 
 /*
  justice.cpp
@@ -1824,13 +1824,13 @@ void promoteVP();
 /* politics -- appoints a figure to an executive office, based on the President's alignment */
 void fillCabinetPost(int position);
 /* politics - causes the people to vote (presidential, congressional, propositions) */
-void elections(char clearformess,char canseethings);
-void elections_senate(int senmod,char canseethings);
-void elections_house(char canseethings);
+void elections(char clearformess,bool canseethings);
+void elections_senate(int senmod,bool canseethings);
+void elections_house(bool canseethings);
 /* politics - causes the supreme court to hand down decisions */
-void supremecourt(char clearformess,char canseethings);
+void supremecourt(char clearformess,bool canseethings);
 /* politics - causes congress to act on legislation */
-void congress(char clearformess,char canseethings);
+void congress(char clearformess,bool canseethings);
 // letter of amnesty to the LCS from the President (you win)
 void amnesty();
 /* politics - checks if the game is won */
@@ -1845,15 +1845,15 @@ bool stalinview(short view,bool islaw);
  endgame.cpp
 */
 /* endgame - attempts to pass a constitutional amendment to help win the game */
-void tossjustices(char canseethings);
+void tossjustices(bool canseethings);
 /* endgame - attempts to pass a constitutional amendment to help win the game */
-void amendment_termlimits(char canseethings);
+void amendment_termlimits(bool canseethings);
 /* endgame - attempts to pass a constitutional amendment to lose the game */
-void reaganify(char canseethings);
+void reaganify(bool canseethings);
 /* endgame - attempts to pass a constitutional amendment to lose the game */
-void stalinize(char canseethings);
+void stalinize(bool canseethings);
 /* endgame - checks if a constitutional amendment is ratified */
-char ratify(int level,int view,int lawview,char congress,char canseethings);
+char ratify(int level,int view,int lawview,char congress,bool canseethings);
 /* endgame - header for announcing constitutional amendments */
 void amendmentheading();
 

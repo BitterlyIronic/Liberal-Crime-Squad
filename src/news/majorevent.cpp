@@ -35,7 +35,7 @@
 #include <externs.h>
 
 /* news - constructs non-LCS related event stories */
-void constructeventstory(char *story,short view,char positive)
+void constructeventstory(char *story,short view,int8_t positive)
 {
    strcpy(story,"");
 

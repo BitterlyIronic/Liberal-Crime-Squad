@@ -93,7 +93,7 @@ void resolvesafehouses()
 
 
 /* siege - updates upcoming sieges */
-void siegecheck(char canseethings)
+void siegecheck(bool canseethings)
 {
    if(disbanding)return;
 

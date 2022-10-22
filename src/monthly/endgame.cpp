@@ -33,7 +33,7 @@ This file is part of Liberal Crime Squad.                                       
 */
 
 /* endgame - attempts to pass a constitutional amendment to help win the game */
-void tossjustices(char canseethings)
+void tossjustices(bool canseethings)
 {
    int j;
    if(canseethings)
@@ -123,7 +123,7 @@ void tossjustices(char canseethings)
 }
 
 /* endgame - attempts to pass a constitutional amendment to help win the game */
-void amendment_termlimits(char canseethings)
+void amendment_termlimits(bool canseethings)
 {
    if(termlimits)return; // Durr~! Don't pass this amendment if it's already passed!
    if(canseethings)
@@ -190,7 +190,7 @@ void amendment_termlimits(char canseethings)
 }
 
 /* endgame - attempts to pass a constitutional amendment to lose the game */
-void reaganify(char canseethings)
+void reaganify(bool canseethings)
 {
    if(canseethings)
    {
@@ -399,7 +399,7 @@ void reaganify(char canseethings)
 
 
 /* endgame - attempts to pass a constitutional amendment to lose the game */
-void stalinize(char canseethings)
+void stalinize(bool canseethings)
 {
    if(canseethings)
    {
@@ -607,7 +607,7 @@ void stalinize(char canseethings)
 
 
 /* endgame - checks if a constitutional amendment is ratified */
-char ratify(int level,int lawview,int view,char congress,char canseethings)
+char ratify(int level,int lawview,int view,char congress,bool canseethings)
 {
    if(canseethings)
    {

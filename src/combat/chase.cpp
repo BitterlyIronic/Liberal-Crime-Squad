@@ -1181,7 +1181,7 @@ void makechasers(long sitetype,long sitecrime)
    string cartype; //Temporary (transitionally) solution. -XML
    long pnum;
 
-   chaseseq.canpullover=0;
+   chaseseq.canpullover=false;
    // 50% of CCS harassing your teams once they reach the
    // "attacks" stage (but not for activities, which are
    // law enforcement response specific)
@@ -1245,14 +1245,14 @@ void makechasers(long sitetype,long sitecrime)
                makecreature(encounter[encslot++],CREATURE_GANGMEMBER);
             break;
          default:
-            chaseseq.canpullover=1;
+            chaseseq.canpullover=true;
             cartype="POLICECAR"; //Police property? Temporary solution. -XML
             pnum=LCSrandom(sitecrime/5 + 1)+1;
             if(pnum>6)pnum=6;
             for(n=0;n<pnum;n++)
             {
                if(law[LAW_DEATHPENALTY]==-2&&
-                  law[LAW_POLICEBEHAVIOR]==-2){makecreature(encounter[encslot++],CREATURE_DEATHSQUAD);chaseseq.canpullover=0;}
+                  law[LAW_POLICEBEHAVIOR]==-2){makecreature(encounter[encslot++],CREATURE_DEATHSQUAD);chaseseq.canpullover=false;}
                else if(law[LAW_POLICEBEHAVIOR]<=-1)makecreature(encounter[encslot++],CREATURE_GANGUNIT);
                else makecreature(encounter[encslot++],CREATURE_COP);
             }

@@ -660,19 +660,19 @@ void consolidateloot(vector<Item *> &loot)
 
 
 /* check if the squad has a certain weapon */
-char squadhasitem(squadst &sq, const string& type)
+bool squadhasitem(squadst &sq, const string& type)
 {
    if(getweapontype(type)==-1) return 0;
 
    for(int p=0;p<6;p++) if(sq.squad[p])
-      if(sq.squad[p]->get_weapon().get_itemtypename()==type) return 1;
+      if(sq.squad[p]->get_weapon().get_itemtypename()==type) return true;
 
    for(int l=0;l<len(sq.loot);l++)
    {
       if(sq.loot[l]->get_itemtypename()!=type) continue;
-      if(sq.loot[l]->is_weapon()&&sq.loot[l]->get_itemtypename()==type) return 1;
+      if(sq.loot[l]->is_weapon()&&sq.loot[l]->get_itemtypename()==type) return true;
    }
 
-   return 0;
+   return false;
 }
 

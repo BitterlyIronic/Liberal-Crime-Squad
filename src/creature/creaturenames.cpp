@@ -107,7 +107,7 @@ void Creature::namecreature()
 
 
 /* fills a string with a proper name */
-void generate_name(char *str, char gender)
+void generate_name(char *str, int8_t gender)
 {
    char first[80];
    char last[80];
@@ -121,7 +121,7 @@ void generate_name(char *str, char gender)
 
 
 /* get a first and last name for the same person */
-void generate_name(char *first, char *last, char gender)
+void generate_name(char *first, char *last, int8_t gender)
 {
    do {
       firstname(first, gender);
@@ -132,7 +132,7 @@ void generate_name(char *first, char *last, char gender)
 
 
 /* get a first, middle, and last name for the same person */
-void generate_long_name(char *first, char *middle, char *last, char gender)
+void generate_long_name(char *first, char *middle, char *last, int8_t gender)
 {
    // pick either male or female so we can have 75% chance of first and middle names having matching genders
    if(gender == GENDER_NEUTRAL)
@@ -150,7 +150,7 @@ void generate_long_name(char *first, char *middle, char *last, char gender)
 
 
 /* gets a random first name */
-void firstname(char *str, char gender)
+void firstname(char *str, int8_t gender)
 {
    static const char *male_first_names[] =
    {

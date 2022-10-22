@@ -28,7 +28,7 @@ This file is part of Liberal Crime Squad.                                       
 
 #include <externs.h>
 
-void advanceday(char &clearformess,char canseethings)
+void advanceday(char &clearformess,bool canseethings)
 {
    int p;
    showcarprefs=0;

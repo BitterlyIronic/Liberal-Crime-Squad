@@ -2676,7 +2676,7 @@ void open_door(bool restricted)
 
          if(c=='y')
          {
-            char actual; // 1 if an actual attempt was made, 0 otherwise
+            bool actual; // 1 if an actual attempt was made, 0 otherwise
 
             // If the unlock was successful
             if(unlock(UNLOCK_DOOR,actual))
@@ -2737,7 +2737,7 @@ void open_door(bool restricted)
 
          if(c=='y')
          {
-            char actual;
+            bool actual;
 
             if(bash(BASH_DOOR,actual))
             {
