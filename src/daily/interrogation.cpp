@@ -229,7 +229,7 @@ void tendhostage(Creature *cr,bool &clearformess)
 
    set_color(COLOR_WHITE,COLOR_BLACK,0);
 
-   char turned=0;
+   bool turned=false;
 
    int y=3;
 
@@ -1186,7 +1186,7 @@ void tendhostage(Creature *cr,bool &clearformess)
                   }
                   gamelog.newline();
 
-                  if(rapport[a->id]>5) turned=1;
+                  if(rapport[a->id]>5) turned=true;
                }
             }
 
@@ -1292,9 +1292,9 @@ void tendhostage(Creature *cr,bool &clearformess)
 
             //Join LCS??
             //1) They were liberalized
-            if(cr->get_attribute(ATTRIBUTE_HEART,true)>cr->get_attribute(ATTRIBUTE_WISDOM,true)+4) turned=1;
+            if(cr->get_attribute(ATTRIBUTE_HEART,true)>cr->get_attribute(ATTRIBUTE_WISDOM,true)+4) turned=true;
             //2) They were befriended
-            if(rapport[a->id]>4) turned=1;
+            if(rapport[a->id]>4) turned=true;
 
             move(y++,0);
             addstr(cr->name, gamelog);
@@ -1475,7 +1475,7 @@ void tendhostage(Creature *cr,bool &clearformess)
       delete[] _attack;
    }
    #ifdef AUTOENLIGHTEN
-   turned=1;// Lucky!
+   turned=true;// Lucky!
    #endif
 
    if(turned&&cr->alive)

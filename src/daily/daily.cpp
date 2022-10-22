@@ -1155,13 +1155,13 @@ void dispersalcheck(bool &clearformess)
          }
       } while(promotion);
 
-      char changed;
+      bool changed;
 
       do // while(changed)
       {
-         changed=0;
+         changed=false;
 
-         char inprison;
+         bool inprison;
 
          // Go through the entire pool to locate people at dispersal_status = BOSSSAFE,
          // so we can verify that their subordinates can reach them.
@@ -1172,9 +1172,9 @@ void dispersalcheck(bool &clearformess)
                location[pool[p]->location]->type==SITE_GOVERNMENT_PRISON&&
              !(pool[p]->flag & CREATUREFLAG_SLEEPER))
             {
-               inprison=1;
+               inprison=true;
             }
-            else inprison=0;
+            else inprison=false;
 
             // If your boss is in hiding
             if(dispersal_status[p]==DISPERSAL_BOSSINHIDING)
@@ -1185,7 +1185,7 @@ void dispersalcheck(bool &clearformess)
                   if(pool[p2]->hireid==pool[p]->id && pool[p2]->alive)
                   {
                      dispersal_status[p2]=DISPERSAL_BOSSINHIDING; // Mark them as unreachable
-                     changed=1; // Need another iteration
+                     changed=true; // Need another iteration
                   }
                }
             }
@@ -1213,7 +1213,7 @@ void dispersalcheck(bool &clearformess)
                   {
                      if(inprison) dispersal_status[p2]=DISPERSAL_BOSSINPRISON;
                      else dispersal_status[p2]=DISPERSAL_BOSSSAFE;
-                     changed=1; // Need another iteration
+                     changed=true; // Need another iteration
                   }
                }
             }
@@ -1235,7 +1235,7 @@ void dispersalcheck(bool &clearformess)
                      // couple of weeks
                      if(pool[p2]->hiding==-1&&!pool[p]->hiding)
                         pool[p2]->hiding=LCSrandom(10)+3;
-                     changed=1; // Take note that another iteration is needed.
+                     changed=true; // Take note that another iteration is needed.
                   }
                }
                // Now that we've dealt with this person's subordinates, mark

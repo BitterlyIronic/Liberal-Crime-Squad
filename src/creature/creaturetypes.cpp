@@ -1177,9 +1177,9 @@ bool verifyworklocation(Creature &cr, int8_t test_location, int8_t test_type)
    }
    // Quick exit if only checking if a certain type works
    if(test_type!=-1) return okaysite[(int)test_location];
-   char swap=0;
-   if(cr.worklocation==-1) swap=1;
-   else if(!okaysite[(int)location[(int)cr.worklocation]->type]) swap=1;
+   bool swap=false;
+   if(cr.worklocation==-1) swap=true;
+   else if(!okaysite[(int)location[(int)cr.worklocation]->type]) swap=true;
    if(swap)
    {
       //int city = location[cr.location]->city;

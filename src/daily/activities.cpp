@@ -402,7 +402,7 @@ void makearmor(Creature &cr,bool &clearformess)
    }
    else
    {
-      char foundcloth=0;
+      bool foundcloth=false;
 
       if(cr.squadid!=-1)
       {
@@ -414,7 +414,7 @@ void makearmor(Creature &cr,bool &clearformess)
                if(squad[sq]->loot[l]->get_number()==1)
                   delete_and_remove(squad[sq]->loot,l);
                else squad[sq]->loot[l]->decrease_number(1);
-               foundcloth=1;
+               foundcloth=true;
                break;
             }
       }
@@ -425,7 +425,7 @@ void makearmor(Creature &cr,bool &clearformess)
             if(location[cr.location]->loot[l]->get_number()==1)
                delete_and_remove(location[cr.location]->loot,l);
             else location[cr.location]->loot[l]->decrease_number(1);
-            foundcloth=1;
+            foundcloth=true;
             break;
          }
 
@@ -1627,7 +1627,7 @@ void doActivityProstitution(vector<Creature *> &prostitutes, bool &clearformess)
       //char num[20];
 
       long fundgain=0;
-      char caught=0;
+      bool caught=false;
 
       // Skill determies how much money you get
       int performance = prostitutes[p]->skill_roll(SKILL_SEDUCTION);
@@ -1665,7 +1665,7 @@ void doActivityProstitution(vector<Creature *> &prostitutes, bool &clearformess)
 
             getkey();
 
-            caught=1;
+            caught=true;
 
             removesquadinfo(*prostitutes[p]);
             prostitutes[p]->carid=-1;
@@ -1794,7 +1794,7 @@ void doActivityTrouble(vector<Creature *> &trouble, bool &clearformess)
    if(len(trouble))
    {
       long juiceval=0;
-      char done=0;
+      bool done=false;
       short crime=0;
 
       if(clearformess) erase();
@@ -1830,7 +1830,7 @@ void doActivityTrouble(vector<Creature *> &trouble, bool &clearformess)
                change_public_opinion(VIEW_LIBERALCRIMESQUADPOS,mod>>1,0,70);
                public_interest[VIEW_ANIMALRESEARCH]+=mod;
                background_liberal_influence[VIEW_ANIMALRESEARCH]+=mod;
-               done=1;
+               done=true;
                break;
             case 1:
             {
@@ -1843,7 +1843,7 @@ void doActivityTrouble(vector<Creature *> &trouble, bool &clearformess)
                   background_liberal_influence[VIEW_GAY]+=mod;
                   juiceval=2;
                   crime=LAWFLAG_DISTURBANCE;
-                  done=1;
+                  done=true;
                }
                break;
             }
@@ -1857,7 +1857,7 @@ void doActivityTrouble(vector<Creature *> &trouble, bool &clearformess)
                   public_interest[VIEW_WOMEN]+=mod;
                   background_liberal_influence[VIEW_WOMEN]+=mod;
                   juiceval=1;
-                  done=1;
+                  done=true;
                }
                break;
             }
@@ -1872,7 +1872,7 @@ void doActivityTrouble(vector<Creature *> &trouble, bool &clearformess)
                   background_liberal_influence[VIEW_POLICEBEHAVIOR]+=mod;
                   juiceval=2;
                   crime=LAWFLAG_DISTURBANCE;
-                  done=1;
+                  done=true;
                }
                break;
             }
@@ -1888,7 +1888,7 @@ void doActivityTrouble(vector<Creature *> &trouble, bool &clearformess)
                   background_liberal_influence[VIEW_NUCLEARPOWER]+=mod;
                   juiceval=2;
                   crime=LAWFLAG_DISTURBANCE;
-                  done=1;
+                  done=true;
                }
                break;
             }
@@ -1903,7 +1903,7 @@ void doActivityTrouble(vector<Creature *> &trouble, bool &clearformess)
                   background_liberal_influence[VIEW_POLLUTION]+=mod;
                   juiceval=2;
                   crime=LAWFLAG_DISTURBANCE;
-                  done=1;
+                  done=true;
                }
                break;
             }
@@ -1917,7 +1917,7 @@ void doActivityTrouble(vector<Creature *> &trouble, bool &clearformess)
                   public_interest[VIEW_DEATHPENALTY]+=mod;
                   background_liberal_influence[VIEW_DEATHPENALTY]+=mod;
                   juiceval=1;
-                  done=1;
+                  done=true;
                }
                break;
             }
@@ -1929,7 +1929,7 @@ void doActivityTrouble(vector<Creature *> &trouble, bool &clearformess)
                public_interest[VIEW_TORTURE]+=mod;
                background_liberal_influence[VIEW_TORTURE]+=mod;
                juiceval=1;
-               done=1;
+               done=true;
                break;
             }
             case 8:
@@ -1945,7 +1945,7 @@ void doActivityTrouble(vector<Creature *> &trouble, bool &clearformess)
                   crime=LAWFLAG_BURNFLAG;
                }
                else juiceval=1;
-               done=1;
+               done=true;
                break;
             }
             case 9:
@@ -1956,7 +1956,7 @@ void doActivityTrouble(vector<Creature *> &trouble, bool &clearformess)
                public_interest[VIEW_SWEATSHOPS]+=mod;
                background_liberal_influence[VIEW_SWEATSHOPS]+=mod;
                juiceval+=1;
-               done=1;
+               done=true;
                break;
             }
          }
@@ -2502,7 +2502,7 @@ bool stealcar(Creature &cr,bool &clearformess)
       //SECURITY?
       bool alarmon=false,sensealarm=LCSrandom(100)<v->sensealarmchance(),
            touchalarm=LCSrandom(100)<v->touchalarmchance();
-      char windowdamage=0;
+      int8_t windowdamage=0;
 
       for(bool entered=false;!entered;)
       {
@@ -2703,9 +2703,10 @@ bool stealcar(Creature &cr,bool &clearformess)
       }
 
       //START CAR
-      char keys_in_car=LCSrandom(5)>0,key_search_total=0;
+      bool keys_in_car=LCSrandom(5)>0;
+      int8_t key_search_total=0;
       int key_location=LCSrandom(5),nervous_counter=0;
-      //char ignition_progress=0;
+      //int8_t ignition_progress=0;
 
       for(bool started=false;!started;)
       {
