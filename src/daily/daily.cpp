@@ -1495,7 +1495,7 @@ void advancelocations()
 
 
 /* daily - returns true if the site type supports high security */
-char securityable(int type)
+int8_t securityable(int type)
 {
    switch(type)
    {

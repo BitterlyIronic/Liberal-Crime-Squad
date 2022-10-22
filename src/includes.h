@@ -1637,7 +1637,7 @@ bool promotesubordinates(Creature &cr,bool &clearformess);
 /* daily - manages too hot timer and when a site map should be re-seeded and renamed */
 void advancelocations();
 /* daily - returns true if the site type supports high security */
-char securityable(int type);
+int8_t securityable(int type);
 /* daily - seeds and names a site (will re-seed and rename if used after start) */
 void initlocation(Location &loc);
 /* daily - returns the number of days in the current month */
@@ -1687,17 +1687,17 @@ void choose_buyer(short &buyer);
  date.cpp
 */
 /* daily - date - dater p gets back from vacation */
-char completevacation(datest &d,int p,bool &clearformess);
+bool completevacation(datest &d,int p,bool &clearformess);
 /* daily - date - dater p goes on some dates */
-char completedate(datest &d,int p,bool &clearformess);
+bool completedate(datest &d,int p,bool &clearformess);
 
 /*
  recruit.cpp
 */
 /* automatic finding recruits from the activity screen */
-char recruitment_activity(Creature &cr,bool &clearformess);
+bool recruitment_activity(Creature &cr,bool &clearformess);
 /* daily - recruit - recruit meeting*/
-char completerecruitmeeting(recruitst &d,int p,bool &clearformess);
+bool completerecruitmeeting(recruitst &d,int p,bool &clearformess);
 
 /*
  siege.cpp

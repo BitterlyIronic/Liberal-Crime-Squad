@@ -372,7 +372,7 @@ static int dateresult(int aroll,int troll,datest &d,int e,int p,int y)
 }
 
 /* daily - date - dater p gets back from vacation */
-char completevacation(datest &d,int p,bool &clearformess)
+bool completevacation(datest &d,int p,bool &clearformess)
 {
    music.play(MUSIC_DATING);
    int e=0;
@@ -433,17 +433,17 @@ char completevacation(datest &d,int p,bool &clearformess)
    switch(dateresult(aroll,troll,d,e,p,2))
    {
    default:
-   case DATERESULT_MEETTOMORROW:return 0;
-   case DATERESULT_BREAKUP:     return 1;
-   case DATERESULT_JOINED:      return 1;
-   case DATERESULT_ARRESTED:    return 1;
+   case DATERESULT_MEETTOMORROW:return false;
+   case DATERESULT_BREAKUP:     return true;
+   case DATERESULT_JOINED:      return true;
+   case DATERESULT_ARRESTED:    return true;
    }
 }
 
 
 
 /* daily - date - dater p goes on some dates */
-char completedate(datest &d,int p,bool &clearformess)
+bool completedate(datest &d,int p,bool &clearformess)
 {
    music.play(MUSIC_DATING);
    int e;
@@ -550,7 +550,7 @@ char completedate(datest &d,int p,bool &clearformess)
 
       getkey();
 
-      return 1;
+      return true;
    }
 
    for(e=len(d.date)-1;e>=0;e--)
@@ -636,7 +636,7 @@ char completedate(datest &d,int p,bool &clearformess)
             troll+=troll*(d.date[e]->juice/150);
          else troll+=troll*(d.date[e]->juice/200);
 
-         char test=0;
+         bool test=0;
 		   aroll += thingsincommon * 3;
          if(c=='a'&&ledger.get_funds()>=100&&!pool[p]->clinic)
          {
@@ -673,7 +673,7 @@ char completedate(datest &d,int p,bool &clearformess)
             }
 
             int y=17;
-            if(dateresult(aroll,troll,d,e,p,y)==DATERESULT_ARRESTED) return 1;
+            if(dateresult(aroll,troll,d,e,p,y)==DATERESULT_ARRESTED) return true;
             break;
          }
 
@@ -693,7 +693,7 @@ char completedate(datest &d,int p,bool &clearformess)
                max((d.date[e]->get_skill(SKILL_RELIGION)-pool[p]->get_skill(SKILL_RELIGION))*4,0));
             pool[p]->train(SKILL_BUSINESS,
                max((d.date[e]->get_skill(SKILL_BUSINESS)-pool[p]->get_skill(SKILL_BUSINESS))*4,0));
-            return 0;
+            return false;
          }
          if(c=='d')
          {
@@ -868,7 +868,7 @@ char completedate(datest &d,int p,bool &clearformess)
                   getkey();
 
                   delete_and_remove(d.date,e);
-                  return 1;
+                  return true;
                }
             }
          }
@@ -878,7 +878,7 @@ char completedate(datest &d,int p,bool &clearformess)
    if(len(d.date))
    {
       d.timeleft=0;
-      return 0;
+      return false;
    }
-   else return 1;
+   else return true;
 }
