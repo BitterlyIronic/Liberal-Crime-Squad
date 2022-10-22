@@ -18,9 +18,9 @@ int record[256];
 int main(int nargs, char *args[])
 {
 unsigned long picnum,dimx,dimy;
-unsigned char bigletters[27][5][7][4];
-unsigned char newstops[5][80][5][4];
-unsigned char newspic[20][78][18][4];
+uint8_t bigletters[27][5][7][4];
+uint8_t newstops[5][80][5][4];
+uint8_t newspic[20][78][18][4];
 int p, x, y;
 
 	DWORD numbytes;
@@ -58,7 +58,7 @@ int p, x, y;
 				{
 				for( y=0;y<dimy;y++)
 					{
-					ReadFile(h,&bigletters[p][x][y][0],sizeof(unsigned char)*4,&numbytes,NULL);
+					ReadFile(h,&bigletters[p][x][y][0],sizeof(uint8_t)*4,&numbytes,NULL);
 					record[bigletters[p][x][y][0]]++;
 				    addch(translateGraphicsChar(bigletters[p][x][y][0]));
 					}
@@ -87,7 +87,7 @@ int p, x, y;
 				{
 				for(int y=0;y<dimy;y++)
 					{
-					ReadFile(h,&newstops[p][x][y][0],sizeof(unsigned char)*4,&numbytes,NULL);
+					ReadFile(h,&newstops[p][x][y][0],sizeof(uint8_t)*4,&numbytes,NULL);
 					record[newstops[p][x][y][0]]++;
 					}
 				}
@@ -108,7 +108,7 @@ int p, x, y;
 				{
 				for(int y=0;y<dimy;y++)
 					{
-					ReadFile(h,&newspic[p][x][y][0],sizeof(unsigned char)*4,&numbytes,NULL);
+					ReadFile(h,&newspic[p][x][y][0],sizeof(uint8_t)*4,&numbytes,NULL);
 					record[newspic[p][x][y][0]]++;
 					}
 				}

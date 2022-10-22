@@ -72,9 +72,9 @@ Log gamelog; //The gamelog.
 Log xmllog; // Log for xml errors or bad values.
 
 CursesMoviest movie;
-unsigned char bigletters[27][5][7][4];
-unsigned char newstops[6][80][5][4];
-unsigned char newspic[20][78][18][4];
+uint8_t bigletters[27][5][7][4];
+uint8_t newstops[6][80][5][4];
+uint8_t newspic[20][78][18][4];
 
 MusicClass music;
 
@@ -103,7 +103,7 @@ vector<Item *> groundloot;
 vector<Location *> location;
 
 vector<Vehicle *> vehicle;
-signed char showcarprefs=1;
+int8_t showcarprefs=1;
 
 int oldMapMode=0; // -1 if we're using the old map generation functions.
 
@@ -167,7 +167,7 @@ short senate[SENATENUM];
 short court[COURTNUM];
 char courtname[COURTNUM][POLITICIAN_NAMELEN];
 
-signed char exec[EXECNUM];
+int8_t exec[EXECNUM];
 short execterm=1;
 char execname[EXECNUM][POLITICIAN_NAMELEN];
 short presparty=CONSERVATIVE_PARTY;

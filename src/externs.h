@@ -9,9 +9,9 @@ extern char homedir[MAX_PATH_SIZE];
 extern char artdir[MAX_PATH_SIZE];
 
 extern CursesMoviest movie;
-extern unsigned char bigletters[27][5][7][4];
-extern unsigned char newstops[6][80][5][4];
-extern unsigned char newspic[20][78][18][4];
+extern uint8_t bigletters[27][5][7][4];
+extern uint8_t newstops[6][80][5][4];
+extern uint8_t newspic[20][78][18][4];
 
 extern MusicClass music;
 
@@ -27,7 +27,7 @@ extern short senate[SENATENUM];
 extern short court[COURTNUM];
 extern char courtname[COURTNUM][POLITICIAN_NAMELEN];
 
-extern signed char exec[EXECNUM];
+extern int8_t exec[EXECNUM];
 extern short execterm;
 extern char execname[EXECNUM][POLITICIAN_NAMELEN];
 extern short presparty;
@@ -162,7 +162,7 @@ extern vector<AugmentType *> augmenttype;
 
 extern vector<VehicleType *> vehicletype;
 extern vector<Vehicle *> vehicle;
-extern signed char showcarprefs;
+extern int8_t showcarprefs;
 
 extern siteblockst levelmap[MAPX][MAPY][MAPZ];
 extern Creature encounter[ENCMAX];

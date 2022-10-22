@@ -65,7 +65,7 @@ the bottom of includes.h in the top src folder.
 // Sets the text color to the thematic color for the given alignment
 // extended_range forces colors to be set on a 5 point scale instead
 // of just basic liberal-moderate-conservative
-void set_alignment_color(signed char alignment, bool extended_range)
+void set_alignment_color(int8_t alignment, bool extended_range)
 {
    switch(alignment)
    {
@@ -635,7 +635,7 @@ void printlocation(long loc)
 
 
 /* character info at top of screen */
-void printcreatureinfo(Creature *cr, unsigned char knowledge)
+void printcreatureinfo(Creature *cr, uint8_t knowledge)
 {
    char str[200];
 

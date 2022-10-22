@@ -325,7 +325,7 @@ public:
    int birthday_month;
    int birthday_day;
    bool exists;
-   signed char align;
+   int8_t align;
    bool alive;
    void die();
    short type;
@@ -391,7 +391,7 @@ public:
    short juice;
    short income;
 
-   unsigned char wound[BODYPARTNUM];
+   uint8_t wound[BODYPARTNUM];
    short blood;
    char special[SPECIALWOUNDNUM];
 

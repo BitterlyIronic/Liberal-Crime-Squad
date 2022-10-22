@@ -3204,7 +3204,7 @@ bool CMarkup::DetectUTF8( const char* pText, int nTextLen, int* pnNonASCII/*=NUL
 	const char* pTextEnd = pText + nTextLen;
 	while ( *pText && pText != pTextEnd )
 	{
-		if ( (unsigned char)(*pText) & 0x80 )
+		if ( (uint8_t)(*pText) & 0x80 )
 		{
 			if ( pnNonASCII )
 				++(*pnNonASCII);
@@ -3228,7 +3228,7 @@ int CMarkup::DecodeCharUTF8( const char*& pszUTF8, const char* pszUTF8End/*=NULL
 {
 	// Return Unicode code point and increment pszUTF8 past 1-4 bytes
 	// pszUTF8End can be NULL if pszUTF8 is null terminated
-	int nUChar = (unsigned char)*pszUTF8;
+	int nUChar = (uint8_t)*pszUTF8;
 	++pszUTF8;
 	if ( nUChar & 0x80 )
 	{

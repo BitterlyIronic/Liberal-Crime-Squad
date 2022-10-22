@@ -45,7 +45,7 @@ enum Pages
 };
 
 /* base - liberal agenda */
-bool liberalagenda(signed char won)
+bool liberalagenda(int8_t won)
 {
    int page=0, y;
 
@@ -90,7 +90,7 @@ bool liberalagenda(signed char won)
          move(3,0);
          addstr("ผ                 ศออออออออออฯออออออออออฯอออออออออออออออออออออออออออออออออออออออ");
 
-         signed char align=exec[EXEC_PRESIDENT];
+         int8_t align=exec[EXEC_PRESIDENT];
          set_alignment_color(align,true);
          move(5,0);
          if(won==-1) addstr("King: ");

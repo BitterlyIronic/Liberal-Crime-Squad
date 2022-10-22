@@ -21,7 +21,7 @@ public:
 class executivebranch
 {
 public:
-   signed char alignment[EXECNUM];
+   int8_t alignment[EXECNUM];
    string name[EXECNUM];
    bool secondterm;
    bool party; // should make organization ID?
@@ -30,19 +30,19 @@ public:
 class house
 {
 public:
-   signed char alignment[HOUSENUM];
+   int8_t alignment[HOUSENUM];
 };
 
 class senate
 {
 public:
-   signed char alignment[SENATENUM];
+   int8_t alignment[SENATENUM];
 };
 
 class supremecourt
 {
 public:
-   signed char alignment[COURTNUM];
+   int8_t alignment[COURTNUM];
    string name[COURTNUM];
 };
 
@@ -280,9 +280,9 @@ struct globals
    class sitemode    SiteMode;
 
    CursesMoviest movie;
-   unsigned char bigletters[27][5][7][4];
-   unsigned char newstops[6][80][5][4];
-   unsigned char newspic[20][78][18][4];
+   uint8_t bigletters[27][5][7][4];
+   uint8_t newstops[6][80][5][4];
+   uint8_t newspic[20][78][18][4];
 
    char disbanding;
    int disbandtime;

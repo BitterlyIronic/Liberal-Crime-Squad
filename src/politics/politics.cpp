@@ -167,7 +167,7 @@ void elections(char clearformess,char canseethings)
       }
 
       char candidate[3][POLITICIAN_NAMELEN];
-      signed char candidate_align[3];
+      int8_t candidate_align[3];
       int votes[3]={0,0,0};
 
       //Primaries
@@ -745,7 +745,7 @@ void elections_senate(int senmod,char canseethings)
    if(canseethings)
    {
       move(21,0);
-      signed char winner;
+      int8_t winner;
       if(change[5]>0&&change[5]>change[0]+change[1]&&change[5]>change[3]+change[4]) // Stalinist increased and Stalinist gain is more than C or L side gain/loss
          winner=ALIGN_STALINIST;
       else if(change[0]+change[1]>change[3]+change[4]) // C side gain/loss is more than L side gain/loss
@@ -967,7 +967,7 @@ void elections_house(char canseethings)
    if(canseethings)
    {
       move(21,0);
-      signed char winner;
+      int8_t winner;
       if(change[5]>0&&change[5]>change[0]+change[1]&&change[5]>change[3]+change[4]) // Stalinist increased and Stalinist gain is more than C or L side gain/loss
          winner=ALIGN_STALINIST;
       else if(change[0]+change[1]>change[3]+change[4]) // C side gain/loss is more than L side gain/loss
@@ -1359,7 +1359,7 @@ enum BillStatus
 //More extreme politicians are less likely to deviate from their views. Moderates always consult public opinion.
 char determine_politician_vote(char alignment,int law)
 {
-   signed char vote=alignment;
+   int8_t vote=alignment;
    int mood=publicmood(law);
    if(vote==ALIGN_STALINIST)
    {

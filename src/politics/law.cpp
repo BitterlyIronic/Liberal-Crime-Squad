@@ -41,13 +41,13 @@ void law::addlawtext(bool gameover)
 }
 
 // Set law's alignment
-void law::changealignment(signed char align)
+void law::changealignment(int8_t align)
 {
    alignment = align;
 }
 
 // Set law's text for an alignment
-void law::setlawtext(signed char align,string text)
+void law::setlawtext(int8_t align,string text)
 {
    if(align==-3) // Defeat
       defeat_lawtext = text;

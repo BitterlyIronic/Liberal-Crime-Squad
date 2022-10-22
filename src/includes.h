@@ -692,10 +692,10 @@ struct recruitst
    long recruiter_id;
    Creature* recruit;
    short timeleft;
-   signed char level,eagerness1,task;
+   int8_t level,eagerness1,task;
    recruitst();
    ~recruitst();
-   signed char eagerness();
+   int8_t eagerness();
 };
 
 enum Crimes
@@ -962,7 +962,7 @@ void end_game(int err=EXIT_SUCCESS);
 // Sets the text color to the thematic color for the given alignment
 // extended_range forces colors to be set on a 5 point scale instead
 // of just basic liberal-moderate-conservative
-void set_alignment_color(signed char alignment,bool extended_range=false);
+void set_alignment_color(int8_t alignment,bool extended_range=false);
 /* Sets the text color per activity type */
 void set_activity_color(long activity_type);
 /* location and squad header */
@@ -972,7 +972,7 @@ void printparty();
 /* location info at top of screen */
 void printlocation(long loc);
 /* character info at top of screen */
-void printcreatureinfo(Creature *cr,unsigned char knowledge=255);
+void printcreatureinfo(Creature *cr,uint8_t knowledge=255);
 /* full character sheet (with surrounding interface) */
 void fullstatus(int p);
 /* full screen character sheet, just skills */
@@ -1144,7 +1144,7 @@ std::string cityname(); /* random city name */
 void enter_name(int y,int x,char *name,int len,const char *defname=NULL);
 std::string getlawflag(int type);
 std::string getmonth(int month,bool shortname=false);
-std::string getalign(signed char alignment,bool capitalize=false);
+std::string getalign(int8_t alignment,bool capitalize=false);
 
 /*
  translateid.cpp
@@ -1243,7 +1243,7 @@ void firstname(char *str, char gender = GENDER_NEUTRAL);
 /* gets a random last name */
 void lastname(char *str, bool archconservative=false);
 /* ensures that the creature's work location is appropriate to its type */
-bool verifyworklocation(Creature &cr, char test_location=-1, signed char test_type=-1);
+bool verifyworklocation(Creature &cr, char test_location=-1, int8_t test_type=-1);
 /* turns a creature into a conservative */
 void conservatise(Creature &cr);
 /* turns a creature into a liberal */
@@ -1365,7 +1365,7 @@ void setvehicles();
  liberalagenda.cpp
 */
 /* base - liberal agenda */
-bool liberalagenda(signed char won);
+bool liberalagenda(int8_t won);
 /* base - liberal agenda - disband */
 bool confirmdisband();
 

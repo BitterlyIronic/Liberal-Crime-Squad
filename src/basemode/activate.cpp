@@ -1854,7 +1854,7 @@ void select_augmentation(Creature *cr) //TODO: Finish and general cleanup
             if(skills < difficulty &&
                LCSrandom((double)100 * difficulty / skills) < 100)
             {
-               unsigned char* wound = nullptr;
+               uint8_t* wound = nullptr;
 
                switch(selected_aug->get_type())
                {
@@ -1904,7 +1904,7 @@ void select_augmentation(Creature *cr) //TODO: Finish and general cleanup
 
             else //It was successful... but not without some injuries
             {
-               unsigned char* wound = nullptr;
+               uint8_t* wound = nullptr;
 
                switch(selected_aug->get_type())
                {

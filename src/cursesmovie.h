@@ -46,7 +46,7 @@ struct CursesMovie_framest
 
 struct CursesMoviest
 {
-   unsigned char picture[PICMAX][80][25][4];
+   uint8_t picture[PICMAX][80][25][4];
    int picnum,dimx,dimy;
    filelistst songlist,soundlist;
    vector<CursesMovie_framest *> frame;

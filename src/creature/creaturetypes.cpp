@@ -681,7 +681,7 @@ void makecreature(Creature &cr,short type)
 }
 
 /* ensures that the creature's work location is appropriate to its type */
-bool verifyworklocation(Creature &cr, char test_location, signed char test_type)
+bool verifyworklocation(Creature &cr, char test_location, int8_t test_type)
 {
    int okaysite[SITENUM];
    memset(okaysite,0,SITENUM*sizeof(int));

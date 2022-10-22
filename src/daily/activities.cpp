@@ -2568,7 +2568,7 @@ bool stealcar(Creature &cr,char &clearformess)
             }
          }
 
-         signed char method=-1;
+         int8_t method=-1;
          while(method==-1)
          {
             int c=getkey();
@@ -2750,7 +2750,7 @@ bool stealcar(Creature &cr,char &clearformess)
          else {addstr("Enter - The Viper has finally deterred ");addstr(cr.name);addstr(".");}
          y++;
 
-         signed char method=-1;
+         int8_t method=-1;
          while(method==-1)
          {
             int c=getkey();

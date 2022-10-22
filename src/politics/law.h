@@ -28,14 +28,14 @@ private:
    std::string lawtext[5];      // Describes the law for each alignment
    std::string defeat_lawtext;  // Describes the law when the game is lost
 
-   signed char alignment;
+   int8_t alignment;
 public:
    law();        // Default constructor
 
    void addlawtext(bool gameover=false); // Adds the lawtext to the screen
-   void changealignment(signed char align);
+   void changealignment(int8_t align);
 
-   void setlawtext(signed char align,std::string text);
+   void setlawtext(int8_t align,std::string text);
 };
 
 #endif //LAW_H_INCLUDED

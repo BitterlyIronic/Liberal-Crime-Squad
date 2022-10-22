@@ -80,7 +80,7 @@ bool show_disbanding_screen(int& oldforcemonth)
    mvaddstr(0,0,getmonth(month)+" ");
    addstr(year);
 
-   signed char align=exec[EXEC_PRESIDENT];
+   int8_t align=exec[EXEC_PRESIDENT];
    set_alignment_color(align,true);
    mvaddstr(1,0,"President: ");
    addstr(execname[EXEC_PRESIDENT]);addstr(", ");

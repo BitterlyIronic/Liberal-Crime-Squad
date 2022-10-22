@@ -834,7 +834,7 @@ std::string getmonth(int month, bool shortname)
    }
 }
 
-std::string getalign(signed char alignment,bool capitalize)
+std::string getalign(int8_t alignment,bool capitalize)
 {
    switch(alignment)
    {

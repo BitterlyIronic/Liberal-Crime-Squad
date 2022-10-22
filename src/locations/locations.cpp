@@ -82,7 +82,7 @@ void Location::init()
  *  0: first part of place name is long, and if there's a city at the end it's short
  *  1: first part of the name is short unless the place itself is a city in which case it's long, and if there's a city at the end it's short
  *  2: entire name is short, no matter what */
-string Location::getname(signed char shortname_, bool include_city)
+string Location::getname(int8_t shortname_, bool include_city)
 {
    string str;
    if(!multipleCityMode) include_city=false;

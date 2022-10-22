@@ -265,7 +265,7 @@ public:
    class criminal_record*  CriminalRecord;
 
    enum creature_type      Type;
-   signed char             Align;
+   int8_t             Align;
    enum species            Species;
    enum gender             Gender;
    enum gender             BirthGender;

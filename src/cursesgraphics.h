@@ -1927,9 +1927,9 @@ extern int gchar[];
 
 #ifndef CH_USE_CP437
 /* Translate CP437 extended characters into the code page used by the console */
-inline int translateGraphicsChar(unsigned char c) { return gchar[c]; }
+inline int translateGraphicsChar(uint8_t c) { return gchar[c]; }
 #else // CH_USE_CP437
-inline int translateGraphicsChar(unsigned char c) { return c; }
+inline int translateGraphicsChar(uint8_t c) { return c; }
 #endif // CH_USE_CP437
 
 #ifdef NCURSES

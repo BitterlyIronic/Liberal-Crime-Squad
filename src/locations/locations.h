@@ -242,7 +242,7 @@ public:
    int heat_protection;
    int compound_walls;
    int compound_stores;
-   signed char front_business;
+   int8_t front_business;
    char front_name[LOCATION_NAMELEN];
    char front_shortname[LOCATION_SHORTNAMELEN];
    bool haveflag;
@@ -270,7 +270,7 @@ public:
    bool is_lcs_safehouse() { return renting>=0; }
    bool is_ccs_safehouse() { return renting==RENTING_CCS; }
    bool is_city() { return type==city; }
-   string getname(signed char shortname_=false, bool include_city=false);
+   string getname(int8_t shortname_=false, bool include_city=false);
    void rename(const char* name_, const char* shortname_);
    string city_description();
    void getloot(vector<Item *>& loot);

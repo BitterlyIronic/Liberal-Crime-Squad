@@ -125,7 +125,7 @@
 #if defined(MARKUP_MBCS) // MBCS/double byte
 #define MCD_ENC MCD_T("")
 #if defined(MARKUP_WINCONV)
-#define MCD_CLEN(p) (int)_mbclen((const unsigned char*)p)
+#define MCD_CLEN(p) (int)_mbclen((const uint8_t*)p)
 #else // not WINCONV
 #define MCD_CLEN(p) (int)mblen(p,MB_CUR_MAX)
 #endif // not WINCONV

@@ -7,7 +7,7 @@ creature::creature(int UniqueID) : ID(UniqueID)
 {
    //enum creature_type      Type;
    Type  = CREATURE_BUM;
-   //signed char             Align;
+   //int8_t             Align;
    Align = ALIGN_LIBERAL;
    //enum species            Species;
    Species = SPECIES_HUMAN;
