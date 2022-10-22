@@ -25,12 +25,33 @@ The changes so far:
         - Bundled source is from PDCurses 3.9, with a backported fix for window focus in XCurses
     - Builds against the SDL2 port of PDCurses by default
         - Running `./configure --with-xcurses` after bootstrapping will build and link the X11 port of PDCurses instead
-            - XCurses is a bit snappier, but doesn't have TTF font support
-    - Running `./configure --with-ncurses` will build the ncurses version of the game against ncurses6
-        - This also skips building PDCurses entirely
+        - Running `./configure --with-ncurses` will build the ncurses version of the game against ncurses6
+            - This also skips building PDCurses entirely
 - Music can be disabled at compile time with `./configure --disable-music`
-    - This will also remove all the music options
+    - This will also remove all the in-game music options
 - Probably doesn't compile for Windows anymore, but the original repo will work fine for that anyway
+
+## The Backends
+
+There are three backends that this fork can be compiled with:
+- SDL2
+    - Pretty pain-free to work with
+        - Supports basically any font by setting the `PDC_FONT` environment variable to the font file's path
+        - Runs just as well under X11 and Wayland
+            - Setting the `SDL_VIDEODRIVER` environment variable to `wayland` will let the game run as a native Wayland program
+    - Builds without Unicode text support (e.g. block drawing characters for borders, etc)
+        - SDL2_ttf doesn't support fallback fonts so you'd need to use a font with all the characters the game uses included
+        - Even with a font that has those characters they frequently don't line up properly
+        - You can modify `configure.ac` to turn it on if that doesn't bother you.
+- XCurses
+    - More fiddly font selection
+        - You have to use X11 fonts and X11 font names (which don't seem to work well under XWayland)
+    - Supports fallback fonts, so unicode drawing characters are enabled
+        - This is the main reason you'd use this over SDL2
+- ncurses
+    - Runs in the terminal like the good old LCS you're used to
+    - Has Unicode drawing characters enabled, so make sure you have a terminal emulator that can handle that
+
 
 ## Augmentations
 
