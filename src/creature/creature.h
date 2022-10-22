@@ -325,7 +325,7 @@ public:
    int birthday_month;
    int birthday_day;
    bool exists;
-   char align;
+   signed char align;
    bool alive;
    void die();
    short type;

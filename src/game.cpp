@@ -103,7 +103,7 @@ vector<Item *> groundloot;
 vector<Location *> location;
 
 vector<Vehicle *> vehicle;
-char showcarprefs=1;
+signed char showcarprefs=1;
 
 int oldMapMode=0; // -1 if we're using the old map generation functions.
 

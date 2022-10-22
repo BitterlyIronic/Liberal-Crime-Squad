@@ -692,10 +692,10 @@ struct recruitst
    long recruiter_id;
    Creature* recruit;
    short timeleft;
-   char level,eagerness1,task;
+   signed char level,eagerness1,task;
    recruitst();
    ~recruitst();
-   char eagerness();
+   signed char eagerness();
 };
 
 enum Crimes
@@ -1243,7 +1243,7 @@ void firstname(char *str, char gender = GENDER_NEUTRAL);
 /* gets a random last name */
 void lastname(char *str, bool archconservative=false);
 /* ensures that the creature's work location is appropriate to its type */
-bool verifyworklocation(Creature &cr, char test_location=-1, char test_type=-1);
+bool verifyworklocation(Creature &cr, char test_location=-1, signed char test_type=-1);
 /* turns a creature into a conservative */
 void conservatise(Creature &cr);
 /* turns a creature into a liberal */

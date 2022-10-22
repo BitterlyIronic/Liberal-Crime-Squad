@@ -42,9 +42,9 @@ recruitst::~recruitst()
    delete recruit;
 }
 
-char recruitst::eagerness()
+signed char recruitst::eagerness()
 {
-   char eagerness_temp=eagerness1;
+   signed char eagerness_temp=eagerness1;
    //Moderates are decidedly less interested
    if(recruit->align==0) eagerness_temp-=2;
    //Conservatives are extremely uninterested

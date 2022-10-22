@@ -166,7 +166,8 @@ void elections(char clearformess,char canseethings)
          else addstr("After a long primary campaign, the people have rallied around two leaders...");
       }
 
-      char candidate[3][POLITICIAN_NAMELEN+1];
+      char candidate[3][POLITICIAN_NAMELEN];
+      signed char candidate_align[3];
       int votes[3]={0,0,0};
 
       //Primaries
@@ -190,26 +191,26 @@ void elections(char clearformess,char canseethings)
       }
 
       // determine conservative winner
-      if(consvotes[0]>consvotes[1]&&consvotes[0]>consvotes[2]) candidate[CONSERVATIVE_PARTY][0]=ALIGN_ARCHCONSERVATIVE;
-      else if(consvotes[1]>consvotes[2]) candidate[CONSERVATIVE_PARTY][0]=ALIGN_CONSERVATIVE;
-      else candidate[CONSERVATIVE_PARTY][0]=ALIGN_MODERATE;
+      if(consvotes[0]>consvotes[1]&&consvotes[0]>consvotes[2]) candidate_align[CONSERVATIVE_PARTY]=ALIGN_ARCHCONSERVATIVE;
+      else if(consvotes[1]>consvotes[2]) candidate_align[CONSERVATIVE_PARTY]=ALIGN_CONSERVATIVE;
+      else candidate_align[CONSERVATIVE_PARTY]=ALIGN_MODERATE;
 
       // determine liberal winner
-      if(libvotes[0]>libvotes[1]&&libvotes[0]>libvotes[2]) candidate[LIBERAL_PARTY][0]=ALIGN_MODERATE;
-      else if(libvotes[1]>libvotes[2]) candidate[LIBERAL_PARTY][0]=ALIGN_LIBERAL;
-      else candidate[LIBERAL_PARTY][0]=ALIGN_ELITELIBERAL;
+      if(libvotes[0]>libvotes[1]&&libvotes[0]>libvotes[2]) candidate_align[LIBERAL_PARTY]=ALIGN_MODERATE;
+      else if(libvotes[1]>libvotes[2]) candidate_align[LIBERAL_PARTY]=ALIGN_LIBERAL;
+      else candidate_align[LIBERAL_PARTY]=ALIGN_ELITELIBERAL;
 
       // Stalinist winner is always Stalinist
-      candidate[STALINIST_PARTY][0]=ALIGN_STALINIST;
+      candidate_align[STALINIST_PARTY]=ALIGN_STALINIST;
       // approval within own party of Stalinist pres and VP is 100%, since all Stalinist party members have the same political views
       if(presparty==STALINIST_PARTY) approvepres=100,approveveep=100;
 
       // name the candidates
-      if(candidate[CONSERVATIVE_PARTY][0]==-2) generate_name(candidate[CONSERVATIVE_PARTY]+1,GENDER_WHITEMALEPATRIARCH);
-      else if(candidate[CONSERVATIVE_PARTY][0]==-1) generate_name(candidate[CONSERVATIVE_PARTY]+1,GENDER_MALE);
-      else generate_name(candidate[CONSERVATIVE_PARTY]+1);
-      generate_name(candidate[LIBERAL_PARTY]+1);
-      generate_name(candidate[STALINIST_PARTY]+1);
+      if(candidate_align[CONSERVATIVE_PARTY]==-2) generate_name(candidate[CONSERVATIVE_PARTY],GENDER_WHITEMALEPATRIARCH);
+      else if(candidate_align[CONSERVATIVE_PARTY]==-1) generate_name(candidate[CONSERVATIVE_PARTY],GENDER_MALE);
+      else generate_name(candidate[CONSERVATIVE_PARTY]);
+      generate_name(candidate[LIBERAL_PARTY]);
+      generate_name(candidate[STALINIST_PARTY]);
 
       // Special Incumbency Rules: If the incumbent president or vice president
       // has approval of over 50% in their party, they win their primary
@@ -220,8 +221,8 @@ void elections(char clearformess,char canseethings)
       // someone else).
       if(execterm==1) // President running for re-election
       {
-         if(approvepres>=50) candidate[presparty][0]=exec[EXEC_PRESIDENT];
-         if(candidate[presparty][0]==exec[EXEC_PRESIDENT]) strcpy(candidate[presparty]+1,execname[EXEC_PRESIDENT]);
+         if(approvepres>=50) candidate_align[presparty]=exec[EXEC_PRESIDENT];
+         if(candidate_align[presparty]==exec[EXEC_PRESIDENT]) strcpy(candidate[presparty],execname[EXEC_PRESIDENT]);
          else execterm=2; // Boom! Incumbent president was defeated in their
       }                   // own party. New candidate works with a clean slate.
       else if(approveveep>=50 &&                                              // Vice-President running for President
@@ -230,8 +231,8 @@ void elections(char clearformess,char canseethings)
       {
          if(approvepres>=50)
          {
-            candidate[presparty][0]=exec[EXEC_VP];
-            strcpy(candidate[presparty]+1,execname[EXEC_VP]);
+            candidate_align[presparty]=exec[EXEC_VP];
+            strcpy(candidate[presparty],execname[EXEC_VP]);
          }
       }
 
@@ -241,13 +242,13 @@ void elections(char clearformess,char canseethings)
          for(c=0;c<2+stalinmode;c++)
          {
             // Pick color by political orientation
-            set_alignment_color(candidate[c][0],true);
+            set_alignment_color(candidate_align[c],true);
 
             move(8-((c+1)%3)*2,0);
             // Choose title -- president or vice president special titles, otherwise
             // pick based on historically likely titles (eg, governor most likely...)
             if(c==presparty&&execterm==1) addstr("President ");
-            else if(c==presparty&&!strcmp(candidate[c]+1,execname[EXEC_VP])) addstr("Vice President ");
+            else if(c==presparty&&!strcmp(candidate[c],execname[EXEC_VP])) addstr("Vice President ");
             else if(LCSrandom(2)) addstr("Governor ");
             else if(LCSrandom(2)) addstr("Senator ");
             else if(LCSrandom(2)) addstr("Ret. General ");
@@ -255,8 +256,8 @@ void elections(char clearformess,char canseethings)
             else if(LCSrandom(2)) addstr("Mr. ");
             else addstr("Mrs. ");
 
-            addstr(candidate[c]+1);
-            addstr(", "+getalign(candidate[c][0],false));
+            addstr(candidate[c]);
+            addstr(", "+getalign(candidate_align[c],false));
          }
 
          if(!disbanding)
@@ -298,12 +299,12 @@ void elections(char clearformess,char canseethings)
             // If they are to the left or equal to the liberal candidate,
             // and they disagree with the other candidate(s), cast a
             // vote for the liberal candidate.
-            else if(vote>=candidate[LIBERAL_PARTY][0]&&vote!=candidate[CONSERVATIVE_PARTY][0])
+            else if(vote>=candidate_align[LIBERAL_PARTY]&&vote!=candidate_align[CONSERVATIVE_PARTY])
                votes[LIBERAL_PARTY]++;
             // If they are to the right or equal to the conservative candidate,
             // and they disagree with the other candidate(s), cast a vote
             // for the conservative candidate.
-            else if(vote<=candidate[CONSERVATIVE_PARTY][0]&&vote!=candidate[LIBERAL_PARTY][0])
+            else if(vote<=candidate_align[CONSERVATIVE_PARTY]&&vote!=candidate_align[LIBERAL_PARTY])
                votes[CONSERVATIVE_PARTY]++;
             // If they disagree with all the candidates, vote randomly.
             else votes[LCSrandom(2+stalinmode)]++;
@@ -352,8 +353,8 @@ void elections(char clearformess,char canseethings)
       if(winner==presparty&&execterm==1) execterm=2;
       else
       {
-         presparty=winner, execterm=1, exec[EXEC_PRESIDENT]=candidate[winner][0];
-         strcpy(execname[EXEC_PRESIDENT],candidate[winner]+1);
+         presparty=winner, execterm=1, exec[EXEC_PRESIDENT]=candidate_align[winner];
+         strcpy(execname[EXEC_PRESIDENT],candidate[winner]);
          for(int e=EXEC_PRESIDENT+1;e<EXECNUM;e++) fillCabinetPost(e);
       }
    }
@@ -1358,7 +1359,7 @@ enum BillStatus
 //More extreme politicians are less likely to deviate from their views. Moderates always consult public opinion.
 char determine_politician_vote(char alignment,int law)
 {
-   char vote=alignment;
+   signed char vote=alignment;
    int mood=publicmood(law);
    if(vote==ALIGN_STALINIST)
    {

@@ -242,7 +242,7 @@ public:
    int heat_protection;
    int compound_walls;
    int compound_stores;
-   char front_business;
+   signed char front_business;
    char front_name[LOCATION_NAMELEN];
    char front_shortname[LOCATION_SHORTNAMELEN];
    bool haveflag;

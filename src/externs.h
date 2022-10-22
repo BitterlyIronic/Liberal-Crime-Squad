@@ -162,7 +162,7 @@ extern vector<AugmentType *> augmenttype;
 
 extern vector<VehicleType *> vehicletype;
 extern vector<Vehicle *> vehicle;
-extern char showcarprefs;
+extern signed char showcarprefs;
 
 extern siteblockst levelmap[MAPX][MAPY][MAPZ];
 extern Creature encounter[ENCMAX];
