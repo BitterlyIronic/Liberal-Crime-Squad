@@ -142,7 +142,7 @@ void youattack()
 
       if(!encounter[target].alive)
       {
-         delenc(target,1);
+         delenc(target,true);
          if(!mistake)
          {
             for(int p=0;p<6;p++)
@@ -230,7 +230,7 @@ void youattack()
                   else criminalize(*pool[p],LAWFLAG_ARMEDASSAULT);
                }
 
-               if(!encounter[target].alive) delenc(target,1);
+               if(!encounter[target].alive) delenc(target,true);
             }
          }
       }
@@ -343,7 +343,7 @@ void enemyattack()
 
                   gamelog.newline();
 
-                  delenc(e,0);
+                  delenc(e,false);
                   e--;
 
                   printparty();
@@ -451,16 +451,16 @@ void enemyattack()
          {
             target=pickrandom(badtarg);
             if(encounter[target].flag & CREATUREFLAG_CONVERTED)
-               attack(encounter[e],encounter[target],0,actual);
-            else attack(encounter[e],encounter[target],1,actual);
-            if(!encounter[target].alive) delenc(target,1);
+               attack(encounter[e],encounter[target],false,actual);
+            else attack(encounter[e],encounter[target],true,actual);
+            if(!encounter[target].alive) delenc(target,true);
             continue;
          }
       }
 
       if(encounter[e].enemy())
-         attack(encounter[e],*activesquad->squad[target],0,actual);
-      else attack(encounter[e],encounter[target],0,actual);
+         attack(encounter[e],*activesquad->squad[target],false,actual);
+      else attack(encounter[e],encounter[target],false,actual);
    }
 }
 
@@ -2310,10 +2310,10 @@ void bloodblast(Armor* armor)
 
 
 /* kills the specified creature from the encounter, dropping loot */
-void delenc(short e,char loot)
+void delenc(short e,bool loot)
 {
    //MAKE GROUND LOOT
-   if(mode!=GAMEMODE_SITE) loot=0;
+   if(mode!=GAMEMODE_SITE) loot=false;
    if(loot) makeloot(encounter[e],groundloot);
 
    //BURY IT

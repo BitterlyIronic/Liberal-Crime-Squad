@@ -183,7 +183,7 @@ char recruitment_activity(Creature &cr,char &clearformess)
                makedelimiter();
 
                talk(cr, c);
-               if(encounter[c].id == id) delenc(c, 0);
+               if(encounter[c].id == id) delenc(c, false);
                recruitCount--;
                if(recruitCount <= 0) break;
             }

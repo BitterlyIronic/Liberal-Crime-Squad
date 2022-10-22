@@ -860,7 +860,7 @@ void evasiverun()
             gamelog.newline(); //Another new line.
          }
 
-         delenc(e--,0);
+         delenc(e--,false);
 
          printchaseencounter();
 
@@ -992,7 +992,7 @@ void evasiverun()
             // Death squads don't mess around, and don't fall behind when executing your people
             // Tanks don't stop either.
             if(encounter[0].type!=CREATURE_DEATHSQUAD&&
-               encounter[0].type!=CREATURE_TANK)delenc(0,0);
+               encounter[0].type!=CREATURE_TANK)delenc(0,false);
 
             printparty();
             printchaseencounter();
@@ -1686,7 +1686,7 @@ void crashenemycar(int v)
       if(encounter[p].carid==chaseseq.enemycar[v]->id())
       {
          victimsum++;
-         delenc(p,0);
+         delenc(p,false);
       }
    }
 

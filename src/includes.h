@@ -1570,7 +1570,7 @@ void armordamage(Armor &armor,int bp,int damamount);
 /* blood explosions */
 void bloodblast(Armor* armor);
 /* kills the specified creature from the encounter, dropping loot */
-void delenc(short e,char loot);
+void delenc(short e,bool loot);
 /* generates the loot dropped by a creature when it dies */
 void makeloot(Creature &cr,vector<Item *> &loot);
 /* abandoned liberal is captured by conservatives */

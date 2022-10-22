@@ -109,7 +109,7 @@ void creatureadvance()
    for(e=ENCMAX-1;e>=0;e--)
    {
       if(!encounter[e].exists) continue;
-      if(!encounter[e].alive) delenc(e,1);
+      if(!encounter[e].alive) delenc(e,true);
    }
 
    if(mode==GAMEMODE_SITE)

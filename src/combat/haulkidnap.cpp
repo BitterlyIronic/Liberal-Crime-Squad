@@ -125,11 +125,11 @@ void kidnapattempt()
          } while(t<0);
       }
 
-      bool amateur=0;
+      bool amateur=false;
 
       if(kidnap(*activesquad->squad[kidnapper],encounter[t],amateur))
       {
-         delenc(t,0);
+         delenc(t,false);
 
          int time=20+LCSrandom(10);
          if(time<1) time=1;

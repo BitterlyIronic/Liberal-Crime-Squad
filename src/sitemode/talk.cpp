@@ -1140,7 +1140,7 @@ bool doYouComeHereOften(Creature &a, Creature &tk)
 
       newd->date.push_back(newcr);
 
-      delenc(&tk-encounter,0);
+      delenc(&tk-encounter,false);
    }
    else
    {
@@ -1570,7 +1570,7 @@ bool talkAboutIssues(Creature &a, Creature &tk)
 
       recruit.push_back(newrst);
 
-      delenc(&tk-encounter,0);
+      delenc(&tk-encounter,false);
       return true;
    }
    else
@@ -1798,7 +1798,7 @@ bool talkInCombat(Creature &a, Creature &tk)
                case 4:addstr(" has a family!", gamelog);break;
                case 5:addstr(" is too young to die!", gamelog);break;
                }
-               delenc(e,0);
+               delenc(e,false);
                addjuice(a,2,200); // Instant juice!
 
                getkey();
@@ -1936,7 +1936,7 @@ bool talkInCombat(Creature &a, Creature &tk)
                   encounter[i].alive&&
                   encounter[i].align<=-1)
                {
-                  delenc(i,0);
+                  delenc(i,false);
                }
             }
 
@@ -2054,7 +2054,7 @@ bool talkInCombat(Creature &a, Creature &tk)
 
                   for(int i=ENCMAX;i>=0;i--)
                      if(encounter[i].exists && encounter[i].enemy() && encounter[i].alive)
-                        delenc(i,0);
+                        delenc(i,false);
 
                   getkey();
                }
@@ -2130,7 +2130,7 @@ bool talkInCombat(Creature &a, Creature &tk)
 
                   for(int i=ENCMAX;i>=0;i--)
                      if(encounter[i].exists&&encounter[i].enemy()&&encounter[i].alive)
-                        delenc(i,0);
+                        delenc(i,false);
                   clearmessagearea();
                   set_color(COLOR_WHITE,COLOR_BLACK,1);
                   move(16,1);
@@ -2323,7 +2323,7 @@ bool talkInCombat(Creature &a, Creature &tk)
 
          for(int e=ENCMAX-1;e>=0;e--)
             if(encounter[e].exists&&encounter[e].alive&&encounter[e].enemy())
-               delenc(e,0);
+               delenc(e,false);
       }
       gamelog.newline();
    }
