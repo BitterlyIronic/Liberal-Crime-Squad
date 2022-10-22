@@ -1717,7 +1717,7 @@ void sally_forth();
 /* siege - prepares for entering site mode to fight the siege */
 void escape_engage();
 /* siege - what happens when you escaped the siege */
-void escapesiege(char won);
+void escapesiege(bool won);
 /* siege - flavor text when you fought off the raid */
 void conquertext();
 /* siege - flavor text when you crush a CCS safe house */

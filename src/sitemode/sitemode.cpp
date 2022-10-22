@@ -1814,7 +1814,7 @@ void mode_site()
                   if(location[cursite]->siege.siege)
                   {
                      //Special handling for escaping siege
-                     escapesiege(0);
+                     escapesiege(false);
                   }
                   else
                   {
@@ -2246,7 +2246,7 @@ void mode_site()
                   getkey();
 
                   conquertext();
-                  escapesiege(1);
+                  escapesiege(true);
 
                   //RESET MODE
                   mode=GAMEMODE_BASE;

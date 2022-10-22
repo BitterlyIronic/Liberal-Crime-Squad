@@ -964,7 +964,7 @@ void siegeturn(bool clearformess)
             else location[l]->compound_stores=0;
 
             //ATTACK!
-            char attack=0;
+            bool attack=false;
 
             for(int p=0;p<len(pool);p++)
             {
@@ -989,7 +989,7 @@ void siegeturn(bool clearformess)
                }
             }
 
-            if(!LCSrandom(12))attack=1;
+            if(!LCSrandom(12))attack=true;
 
             if(attack)
             {
@@ -1006,13 +1006,13 @@ void siegeturn(bool clearformess)
             }
             else
             {
-               char no_bad=1;
+               bool no_bad=true;
 
                //CUT LIGHTS
                if(!location[l]->siege.lights_off &&
                   !(location[l]->compound_walls & COMPOUND_GENERATOR) && !LCSrandom(10))
                {
-                  no_bad=0;
+                  no_bad=false;
 
                   if(clearformess) erase();
                   else makedelimiter();
@@ -1029,7 +1029,7 @@ void siegeturn(bool clearformess)
                //SNIPER
                if(!(location[l]->compound_walls & COMPOUND_BASIC) && !LCSrandom(5))
                {
-                  no_bad=0;
+                  no_bad=false;
 
                   vector<int> pol;
                   for(int p=0;p<len(pool);p++) if(pool[p]->alive&&pool[p]->location==l) pol.push_back(p);
@@ -1068,7 +1068,7 @@ void siegeturn(bool clearformess)
 
                if(location[l]->siege.escalationstate>=3 && !LCSrandom(3))
                {
-                  no_bad=0;
+                  no_bad=false;
 
                   //AIR STRIKE!
                   bool hit=true;
@@ -1229,7 +1229,7 @@ void siegeturn(bool clearformess)
                if((location[l]->compound_walls & COMPOUND_TANKTRAPS) &&
                   location[l]->siege.escalationstate>=3 && !LCSrandom(15))
                {
-                  no_bad=0;
+                  no_bad=false;
 
                   //ENGINEERS
                   if(clearformess) erase();
@@ -1717,7 +1717,7 @@ int numbereating(int loc)
 }
 
 // Siege -- Mass combat outside safehouse
-char sally_forth_aux(int loc)
+int8_t sally_forth_aux(int loc)
 {
    int p;
    reloadparty();
@@ -2015,7 +2015,7 @@ void sally_forth()
    ns->siegetype=location[loc]->siege.siegetype;
    newsstory.push_back(ns);
    sitestory = ns;
-   char result = sally_forth_aux(loc);
+   int8_t result = sally_forth_aux(loc);
    if(result==2) ns->type=NEWSSTORY_SQUAD_BROKESIEGE;
    // If you fail, make sure the safehouse isn't under siege anymore by
    // forcing you to "give up".
@@ -2149,7 +2149,7 @@ void escape_engage()
 }
 
 /* siege - what happens when you escaped the siege */
-void escapesiege(char won)
+void escapesiege(bool won)
 {
    //TEXT IF DIDN'T WIN
    if(!won)
