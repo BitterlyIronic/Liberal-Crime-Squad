@@ -311,7 +311,7 @@ bool chasesequence()
             case CARCHASE_OBSTACLE_FRUITSTAND:
                if(c=='d')
                {
-                  if(obstacledrive(obstacle,0))
+                  if(obstacledrive(obstacle,false))
                   {
                      partysize=squadsize(activesquad),partyalive=squadalive(activesquad);
                      if(partyalive>0) return footchase();
@@ -321,7 +321,7 @@ bool chasesequence()
                }
                if(c=='f')
                {
-                  if(obstacledrive(obstacle,1))
+                  if(obstacledrive(obstacle,true))
                   {
                      partysize=squadsize(activesquad),partyalive=squadalive(activesquad);
                      if(partyalive>0) return footchase();
@@ -1302,16 +1302,16 @@ void makechasers(long sitetype,long sitecrime)
 
 
 
-bool obstacledrive(short obstacle,char choice)
+bool obstacledrive(short obstacle,bool choice)
 {
    switch(obstacle)
    {
       case CARCHASE_OBSTACLE_CROSSTRAFFIC:
-         if(choice==0)
+         if(!choice)
          {
-            if(dodgedrive()) return 1;
+            if(dodgedrive()) return true;
          }
-         else if(choice==1)
+         else
          {
             clearmessagearea();
             set_color(COLOR_YELLOW,COLOR_BLACK,1);
@@ -1336,11 +1336,11 @@ bool obstacledrive(short obstacle,char choice)
          }
          break;
       case CARCHASE_OBSTACLE_TRUCKPULLSOUT:
-         if(choice==0)
+         if(!choice)
          {
-            if(dodgedrive()) return 1;
+            if(dodgedrive()) return true;
          }
-         else if(choice==1)
+         else
          {
             clearmessagearea();
             set_color(COLOR_YELLOW,COLOR_BLACK,1);
@@ -1365,11 +1365,11 @@ bool obstacledrive(short obstacle,char choice)
          }
          break;
       case CARCHASE_OBSTACLE_FRUITSTAND:
-         if(choice==0)
+         if(!choice)
          {
-            if(dodgedrive()) return 1;
+            if(dodgedrive()) return true;
          }
-         else if(choice==1)
+         else
          {
             clearmessagearea();
             set_color(COLOR_YELLOW,COLOR_BLACK,1);
@@ -1393,11 +1393,11 @@ bool obstacledrive(short obstacle,char choice)
          }
          break;
       case CARCHASE_OBSTACLE_CHILD:
-         if(choice==0)
+         if(!choice)
          {
-            if(dodgedrive()) return 1;
+            if(dodgedrive()) return true;
          }
-         else if(choice==1)
+         else
          {
             clearmessagearea();
             set_color(COLOR_YELLOW,COLOR_BLACK,1);
@@ -1431,7 +1431,7 @@ bool obstacledrive(short obstacle,char choice)
          }
          break;
    }
-   return 0;
+   return false;
 }
 
 bool dodgedrive()

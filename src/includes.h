@@ -1594,7 +1594,7 @@ Vehicle* getChaseVehicle(const Creature &c);
 Creature* getChaseDriver(const Creature &c);
 bool drivingupdate(short &obstacle);
 void makechasers(long sitetype,long sitecrime);
-bool obstacledrive(short obstacle,char choice);
+bool obstacledrive(short obstacle,bool choice);
 bool dodgedrive();
 void crashfriendlycar(int v);
 void crashenemycar(int v);
