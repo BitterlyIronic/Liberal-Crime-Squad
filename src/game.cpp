@@ -119,9 +119,9 @@ vector<squadst *> squad;
 squadst *activesquad=NULL;
 long cursquadid=0;
 
-char disbanding=0;
+bool disbanding=false;
 int disbandtime=0;
-char cantseereason;
+int8_t cantseereason;
 
 short activesortingchoice[SORTINGCHOICENUM];
 
@@ -138,7 +138,7 @@ int police_heat=0;
 unsigned long attorneyseed[RNG_SIZE];
 int selectedsiege=-1;
 char lcityname[CITY_NAMELEN];
-char newscherrybusted=0;
+int8_t newscherrybusted=0;
 
 int month=1;
 
@@ -205,7 +205,7 @@ bool mapshowing=false;
 
 bool encounterwarnings=false;
 
-char foughtthisround=0;
+bool foughtthisround=false;
 
 short interface_pgup='[';
 short interface_pgdn=']';
@@ -226,9 +226,9 @@ bool notermlimit;           //These determine if ELAs can take place --kviiri
 bool nocourtpurge;
 bool stalinmode;
 
-char endgamestate=ENDGAME_NONE;
-char ccsexposure=CCSEXPOSURE_NONE;
-char ccs_kills=0;
+int8_t endgamestate=ENDGAME_NONE;
+int8_t ccsexposure=CCSEXPOSURE_NONE;
+int8_t ccs_kills=0;
 int ccs_siege_kills=0;
 int ccs_boss_kills=0;
 

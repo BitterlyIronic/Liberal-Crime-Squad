@@ -479,7 +479,7 @@ bool footchase()
 
       // check if we fought the previous loop; if so, add a blank gamelog line
       if(foughtthisround)gamelog.newline();
-      foughtthisround=0;
+      foughtthisround=false;
 
       int c=getkey();
 

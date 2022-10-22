@@ -622,7 +622,7 @@ char heyIWantToRentARoom(Creature &a, Creature &tk)
          int roll       = a.skill_roll(SKILL_PERSUASION);
          int difficulty = DIFFICULTY_FORMIDABLE;
 
-         if(newscherrybusted == false)
+         if(newscherrybusted == 0)
             difficulty += 6;
          if(armed_liberal == NULL)
             difficulty += 6;

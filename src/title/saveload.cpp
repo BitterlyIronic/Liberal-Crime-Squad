@@ -88,9 +88,9 @@ void savegame(const string& filename)
       fwrite(&stat_buys,sizeof(int),1,h);
       fwrite(&stat_burns,sizeof(int),1,h);
 
-      fwrite(&endgamestate,sizeof(char),1,h);
-      fwrite(&ccsexposure,sizeof(char),1,h);
-      fwrite(&ccs_kills,sizeof(char),1,h);
+      fwrite(&endgamestate,sizeof(int8_t),1,h);
+      fwrite(&ccsexposure,sizeof(int8_t),1,h);
+      fwrite(&ccs_kills,sizeof(int8_t),1,h);
 
       fwrite(&Vehicle::curcarid,sizeof(long),1,h);
       fwrite(&curcreatureid,sizeof(long),1,h);
@@ -104,7 +104,7 @@ void savegame(const string& filename)
       fwrite(attorneyseed,sizeof(unsigned long),RNG_SIZE,h);
       //fwrite(&selectedsiege,sizeof(long),1,h);
       fwrite(lcityname,sizeof(char),CITY_NAMELEN,h);
-      fwrite(&newscherrybusted,sizeof(char),1,h);
+      fwrite(&newscherrybusted,sizeof(int8_t),1,h);
 
       fwrite(slogan,sizeof(char),SLOGAN_LEN,h);
       fwrite(&ledger,sizeof(class Ledger),1,h);
@@ -412,9 +412,9 @@ char load(const string& filename)
          fread(&stat_buys,sizeof(int),1,h);
          fread(&stat_burns,sizeof(int),1,h);
 
-         fread(&endgamestate,sizeof(char),1,h);
-         fread(&ccsexposure,sizeof(char),1,h);
-         fread(&ccs_kills,sizeof(char),1,h);
+         fread(&endgamestate,sizeof(int8_t),1,h);
+         fread(&ccsexposure,sizeof(int8_t),1,h);
+         fread(&ccs_kills,sizeof(int8_t),1,h);
 
          fread(&Vehicle::curcarid,sizeof(long),1,h);
          fread(&curcreatureid,sizeof(long),1,h);
@@ -428,7 +428,7 @@ char load(const string& filename)
          fread(attorneyseed,sizeof(unsigned long),RNG_SIZE,h);
          //fread(&selectedsiege,sizeof(long),1,h);
          fread(lcityname,sizeof(char),CITY_NAMELEN,h);
-         fread(&newscherrybusted,sizeof(char),1,h);
+         fread(&newscherrybusted,sizeof(int8_t),1,h);
 
          fread(slogan,sizeof(char),SLOGAN_LEN,h);
          fread(&ledger,sizeof(class Ledger),1,h);

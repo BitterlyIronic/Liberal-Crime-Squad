@@ -67,7 +67,7 @@ extern bool mapshowing;
 
 extern bool encounterwarnings;
 
-extern char foughtthisround;
+extern bool foughtthisround;
 
 extern short interface_pgup;
 extern short interface_pgdn;
@@ -85,16 +85,16 @@ extern short attitude[VIEWNUM];
 extern short public_interest[VIEWNUM];
 extern short background_liberal_influence[VIEWNUM];
 
-extern char endgamestate;
-extern char ccsexposure;
+extern int8_t endgamestate;
+extern int8_t ccsexposure;
 
-extern char ccs_kills;
+extern int8_t ccs_kills;
 extern int ccs_siege_kills;
 extern int ccs_boss_kills;
 
 extern class Ledger ledger;
 
-extern char loaded;
+extern bool loaded;
 
 extern short mode;
 extern short wincondition;
@@ -113,7 +113,7 @@ extern int police_heat;
 extern unsigned long attorneyseed[RNG_SIZE];
 extern int selectedsiege;
 extern char lcityname[CITY_NAMELEN];
-extern char newscherrybusted;
+extern int8_t newscherrybusted;
 
 extern int month;
 extern int year;
@@ -147,9 +147,9 @@ extern vector<squadst *> squad;
 extern squadst *activesquad;
 extern long cursquadid;
 
-extern char disbanding;
+extern bool disbanding;
 extern int disbandtime;
-extern char cantseereason;
+extern int8_t cantseereason;
 
 extern short activesortingchoice[SORTINGCHOICENUM];
 

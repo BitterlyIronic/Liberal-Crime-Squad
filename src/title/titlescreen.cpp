@@ -619,7 +619,7 @@ void mode_title()
 
    savefiles = std::move(LCSSaveFiles());
 
-   char loaded = savefiles.size() > 0;
+   bool loaded = savefiles.size() > 0;
    bool to_delete = false;
 
    if(!loaded)

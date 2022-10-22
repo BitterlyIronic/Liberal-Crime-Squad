@@ -169,7 +169,7 @@ public:
 class gamestate
 {
 public:
-   char EndGameState;
+   int8_t EndGameState;
    int CurrentCarID;
    char ShowCarPrefs;
    int CurrentCreatureID;
@@ -258,9 +258,9 @@ struct globals
       ustat_buys=0;
       ustat_burns=0;
 
-      loaded=0;
+      loaded=false;
 
-      disbanding=0;
+      disbanding=false;
       disbandtime=0;
 
       interface_pgup='[';
@@ -284,11 +284,11 @@ struct globals
    uint8_t newstops[6][80][5][4];
    uint8_t newspic[20][78][18][4];
 
-   char disbanding;
+   bool disbanding;
    int disbandtime;
-   char cantseereason;
+   int8_t cantseereason;
 
-   char loaded;
+   bool loaded;
 
    unsigned long ustat_recruits;
    unsigned long ustat_kidnappings;

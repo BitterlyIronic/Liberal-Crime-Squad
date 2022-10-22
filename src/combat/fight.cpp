@@ -33,7 +33,7 @@ bool goodguyattack = false;
 /* attack handling for each side as a whole */
 void youattack()
 {
-   foughtthisround=1;
+   foughtthisround=true;
 
    short wasalarm=sitealarm;
 
@@ -266,7 +266,7 @@ void enemyattack()
    };
 
 
-   foughtthisround=1;
+   foughtthisround=true;
 
    goodguyattack = false;
 

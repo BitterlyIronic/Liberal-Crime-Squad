@@ -66,17 +66,17 @@ void filelistst::open_disksave(FILE *h)
 
 void filelistst::smartappend(filelistst &list2)
 {
-   char conf;
+   bool conf;
 
    for(int l2=0;l2<len(list2.list);l2++)
    {
       if(!list2.list[l2]) continue;
 
-      conf=1;
+      conf=true;
 
       for(int l=0;l<len(list);l++)
          if(!strcmp(list2.list[l2],list[l]))
-         {  conf=0; break; }
+         {  conf=false; break; }
 
       if(conf&&len(list2.list[l2])>0)
       {
