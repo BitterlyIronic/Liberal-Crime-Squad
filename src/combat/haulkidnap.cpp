@@ -41,13 +41,13 @@ void kidnapattempt()
    party_status=-1;
 
    int available=0;
-   char availslot[6]={0,0,0,0,0,0};
+   bool availslot[6]={false,false,false,false,false,false};
    for(int p=0;p<6;p++)
       if(activesquad->squad[p]!=NULL)
          if(activesquad->squad[p]->alive&&activesquad->squad[p]->prisoner==NULL)
          {
             available++;
-            availslot[p]=1;
+            availslot[p]=true;
          }
 
    if(!available)
@@ -183,11 +183,11 @@ void releasehostage()
    party_status=-1;
 
    int available=0;
-   char availslot[6]={0,0,0,0,0,0};
+   bool availslot[6]={false,false,false,false,false,false};
    for(int p=0;p<6;p++)
       if(activesquad->squad[p]!=NULL)
          if(activesquad->squad[p]->alive&&activesquad->squad[p]->prisoner!=NULL&&activesquad->squad[p]->prisoner->align!=ALIGN_LIBERAL)
-            available++,availslot[p]=1;
+            available++,availslot[p]=true;
 
    if(!available)
    {
@@ -333,7 +333,7 @@ bool kidnap(Creature &a,Creature &t,bool &amateur)
 
 
 /* hostage freed due to host unable to haul */
-void freehostage(Creature &cr,char situation)
+void freehostage(Creature &cr,int8_t situation)
 {
    if(cr.prisoner==NULL)return;
 
@@ -412,7 +412,7 @@ void freehostage(Creature &cr,char situation)
 
 
 /* haul dead/paralyzed */
-void squadgrab_immobile(char dead)
+void squadgrab_immobile(bool dead)
 {
    int p,hostslots=0; //DRAGGING PEOPLE OUT IF POSSIBLE
    for(p=0;p<6;p++)

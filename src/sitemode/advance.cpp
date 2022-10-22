@@ -100,10 +100,10 @@ void creatureadvance()
    if(mode!=GAMEMODE_CHASECAR)
    {
       //TAKE THE INJURED WITH YOU
-      squadgrab_immobile(0);
+      squadgrab_immobile(false);
 
       //TAKE THE DEAD WITH YOU
-      squadgrab_immobile(1);
+      squadgrab_immobile(true);
    }
 
    for(e=ENCMAX-1;e>=0;e--)
