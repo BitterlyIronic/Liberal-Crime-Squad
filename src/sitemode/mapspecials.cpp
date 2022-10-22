@@ -361,7 +361,7 @@ void special_lab_cosmetics_cagedanimals()
 
          if(actual)
          {
-            alienationcheck(0);
+            alienationcheck(false);
             noticecheck(-1);
             levelmap[locx][locy][locz].special=-1;
          }
@@ -547,7 +547,7 @@ void special_nuclear_onoff()
             juiceparty(15,500);
          }
          sitealarm=1;
-         alienationcheck(1);
+         alienationcheck(true);
          levelmap[locx][locy][locz].special=-1;
          sitecrime+=5;
          criminalizeparty(LAWFLAG_TERRORISM);
@@ -617,11 +617,11 @@ void special_lab_genetic_cagedanimals()
                getkey();
 
                sitealarm=1;
-               alienationcheck(1);
+               alienationcheck(true);
             }
             else
             {
-               alienationcheck(0);
+               alienationcheck(false);
             }
          }
          else if(actual)
@@ -691,7 +691,7 @@ void special_policestation_lockup()
 
          if(actual)
          {
-            alienationcheck(1);
+            alienationcheck(true);
             noticecheck(-1,DIFFICULTY_HARD);
             levelmap[locx][locy][locz].special=-1;
             sitecrime+=2;
@@ -756,7 +756,7 @@ void special_courthouse_lockup()
 
          if(actual)
          {
-            alienationcheck(1);
+            alienationcheck(true);
             noticecheck(-1,DIFFICULTY_HARD);
             levelmap[locx][locy][locz].special=-1;
             sitecrime+=3;
@@ -878,7 +878,7 @@ void special_courthouse_jury()
 
                getkey();
 
-               alienationcheck(0);
+               alienationcheck(false);
                noticecheck(-1);
 
                //INSTANT JUICE BONUS
@@ -1003,7 +1003,7 @@ void special_prison_control(short prison_control_type)
 
          partyrescue(prison_control_type);
 
-         alienationcheck(1);
+         alienationcheck(true);
          noticecheck(-1);
          levelmap[locx][locy][locz].special=-1;
          sitecrime+=30;
@@ -1093,7 +1093,7 @@ void special_intel_supercomputer()
             if(time<1)time=1;
             if(sitealarmtimer>time||sitealarmtimer==-1)sitealarmtimer=time;
 
-            alienationcheck(1);
+            alienationcheck(true);
             noticecheck(-1,DIFFICULTY_HARD);
             levelmap[locx][locy][locz].special=-1;
             sitecrime+=3;
@@ -1127,7 +1127,7 @@ void special_graffiti()
    if(time<1)time=1;
    if(sitealarmtimer>time||sitealarmtimer==-1)sitealarmtimer=time;
 
-   alienationcheck(0);
+   alienationcheck(false);
    noticecheck(-1,DIFFICULTY_HARD);
    levelmap[locx][locy][locz].flag|=SITEBLOCK_GRAFFITI;
    levelmap[locx][locy][locz].flag&=~(SITEBLOCK_GRAFFITI_CCS|SITEBLOCK_GRAFFITI_OTHER);
@@ -1187,7 +1187,7 @@ void special_sweatshop_equipment()
          if(time<1)time=1;
          if(sitealarmtimer>time||sitealarmtimer==-1)sitealarmtimer=time;
 
-         alienationcheck(0);
+         alienationcheck(false);
          noticecheck(-1,DIFFICULTY_HEROIC);
          levelmap[locx][locy][locz].special=-1;
          levelmap[locx][locy][locz].flag|=SITEBLOCK_DEBRIS;
@@ -1228,7 +1228,7 @@ void special_polluter_equipment()
 
          change_public_opinion(VIEW_POLLUTION,2,1,70);
 
-         alienationcheck(0);
+         alienationcheck(false);
          noticecheck(-1,DIFFICULTY_HEROIC);
          levelmap[locx][locy][locz].special=-1;
          levelmap[locx][locy][locz].flag|=SITEBLOCK_DEBRIS;
@@ -1420,7 +1420,7 @@ void special_house_photos()
 
          if(actual)
          {
-            alienationcheck(0);
+            alienationcheck(false);
             noticecheck(-1);
             levelmap[locx][locy][locz].special=-1;
          }
@@ -1631,7 +1631,7 @@ void special_armory()
             }
          }
 
-         alienationcheck(0);
+         alienationcheck(false);
          noticecheck(-1);
          levelmap[locx][locy][locz].special=-1;
 
@@ -1688,7 +1688,7 @@ void special_corporate_files()
 
          if(actual)
          {
-            alienationcheck(0);
+            alienationcheck(false);
             noticecheck(-1);
             levelmap[locx][locy][locz].special=-1;
             sitecrime+=3;
@@ -1809,7 +1809,7 @@ void special_display_case()
          if(time<1)time=1;
          if(sitealarmtimer>time||sitealarmtimer==-1)sitealarmtimer=time;
 
-         alienationcheck(0);
+         alienationcheck(false);
          noticecheck(-1,DIFFICULTY_HEROIC);
          levelmap[locx][locy][locz].special=-1;
          levelmap[locx][locy][locz].flag|=SITEBLOCK_DEBRIS;
@@ -2330,7 +2330,7 @@ void special_bank_vault()
 
          if(actual)
          {
-            alienationcheck(0);
+            alienationcheck(false);
             noticecheck(-1);
          }
 

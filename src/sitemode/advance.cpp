@@ -257,8 +257,8 @@ void advancecreature(Creature &cr)
 {
    if(!cr.alive) return;
 
-   char incaprint;
-   if(incapacitated(cr,1,incaprint))
+   bool incaprint;
+   if(incapacitated(cr,true,incaprint))
    {
       if(incaprint)
       {

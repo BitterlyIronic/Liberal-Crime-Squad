@@ -68,11 +68,11 @@ void noticecheck(int exclude,int difficulty)
 
 
 /* checks if your liberal behavior/attack alienates anyone */
-char alienationcheck(char mistake)
+bool alienationcheck(bool mistake)
 {
    if(location[cursite]->siege.siege)return 0;
 
-   char alienate=0,alienatebig=0;
+   bool alienate=false,alienatebig=false;
 
    int oldsitealienate=sitealienate;
 
@@ -101,8 +101,8 @@ char alienationcheck(char mistake)
          n=noticer[an];
          noticer.erase(noticer.begin() + an);
 
-         if(encounter[n].align==1) alienatebig=1;
-         else alienate=1;
+         if(encounter[n].align==1) alienatebig=true;
+         else alienate=true;
       } while(len(noticer));
 
       if(alienatebig) sitealienate=2;
@@ -134,7 +134,8 @@ char alienationcheck(char mistake)
       }
    }
 
-   return alienate;
+   // nothing seems to actually check this?
+   return alienate || alienatebig;
 }
 
 

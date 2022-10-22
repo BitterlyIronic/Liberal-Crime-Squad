@@ -1525,7 +1525,7 @@ bool talk(Creature &a,int t);
 /* checks if your liberal activity is noticed */
 void noticecheck(int exclude,int difficulty=DIFFICULTY_EASY);
 /* checks if your liberal behavior/attack alienates anyone */
-char alienationcheck(char mistake);
+bool alienationcheck(bool mistake);
 /* checks if conservatives see through your disguise */
 void disguisecheck(int encounter_timer);
 /* checks if a creature's weapon is suspicious or illegal */
@@ -1557,12 +1557,12 @@ void advancecreature(Creature &cr);
 void youattack();
 void enemyattack();
 /* attack handling for an individual creature and its target */
-void attack(Creature &a,Creature &t,char mistake,char &actual,bool force_melee=false);
-void specialattack(Creature &a,Creature &t,char &actual);
+void attack(Creature &a,Creature &t,bool mistake,bool &actual,bool force_melee=false);
+void specialattack(Creature &a,Creature &t,bool &actual);
 /* modifies a combat roll based on the creature's critical injuries */
 void healthmodroll(int &aroll,Creature &a);
 /* adjusts attack damage based on armor, other factors */
-void damagemod(Creature &t,char &damtype,int &damamount,char hitlocation,char armorpenetration,int mod,int extraarmor);
+void damagemod(Creature &t,int8_t &damtype,int &damamount,int8_t hitlocation,int8_t armorpenetration,int mod,int extraarmor);
 /* destroys armor, masks, drops weapons based on severe damage */
 void severloot(Creature &cr,vector<Item *> &loot);
 /* damages the selected armor if it covers the body part specified */
@@ -1576,7 +1576,7 @@ void makeloot(Creature &cr,vector<Item *> &loot);
 /* abandoned liberal is captured by conservatives */
 void capturecreature(Creature &t);
 /* checks if the creature can fight and prints flavor text if they can't */
-char incapacitated(Creature &a,char noncombat,char &printed);
+bool incapacitated(Creature &a,bool noncombat,bool &printed);
 /* describes a character's death */
 void adddeathmessage(Creature &cr);
 /* pushes people into the current squad (used in a siege) */

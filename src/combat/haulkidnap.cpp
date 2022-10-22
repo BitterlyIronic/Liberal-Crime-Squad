@@ -145,7 +145,7 @@ void kidnapattempt()
 
          if(present)
          {
-            alienationcheck(1);
+            alienationcheck(true);
             if(!sitealarm)sitealarm=1;
             sitecrime+=5;
             criminalizeparty(LAWFLAG_KIDNAPPING);
@@ -234,7 +234,7 @@ void releasehostage()
       getkey();
 
       sitealarm=1;
-      alienationcheck(1);
+      alienationcheck(true);
    }
 }
 

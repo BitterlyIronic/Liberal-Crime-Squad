@@ -556,7 +556,7 @@ void mode_site()
 
          if(havehostage)
          {
-            alienationcheck(1);
+            alienationcheck(true);
             sitecrime+=5;
             criminalizeparty(LAWFLAG_KIDNAPPING);
          }
@@ -1550,7 +1550,7 @@ void mode_site()
                //int maxsleightofhand=0;
                int beststealer=0;
                juiceparty(1,200);
-               alienationcheck(0);
+               alienationcheck(false);
                noticecheck(-1);
                sitecrime++;
                sitestory->crime.push_back(CRIME_STOLEGROUND);
@@ -2706,7 +2706,7 @@ void open_door(bool restricted)
             // Check for people noticing you fiddling with the lock
             if(actual)
             {
-               alienationcheck(0);
+               alienationcheck(false);
                noticecheck(-1);
             }
             return;
@@ -2762,7 +2762,7 @@ void open_door(bool restricted)
 
             if(actual)
             {
-               alienationcheck(1);
+               alienationcheck(true);
                noticecheck(-1,DIFFICULTY_HEROIC);
             }
 

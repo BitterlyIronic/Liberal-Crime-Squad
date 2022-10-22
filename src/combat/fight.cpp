@@ -112,7 +112,7 @@ void youattack()
          mistake=1;
       }
 
-      char actual;
+      bool actual;
       short beforeblood=encounter[target].blood;
       if(encounter[target].align==1) mistake=1;
       attack(*activesquad->squad[p],encounter[target],mistake,actual);
@@ -213,7 +213,7 @@ void youattack()
                   mistake=1;
                }
 
-               char actual;
+               bool actual;
                attack(*pool[p],encounter[target],mistake,actual);
 
                if(actual)
@@ -282,7 +282,7 @@ void enemyattack()
 #endif
 
    int e2, e;
-   char printed;
+   bool printed;
    for(e=0;e<ENCMAX;e++)
    {
       if(!encounter[e].exists) continue;
@@ -317,7 +317,7 @@ void enemyattack()
          {
             if(encounter[e].animalgloss==ANIMALGLOSS_NONE)
             {
-               if(!incapacitated(encounter[e],0,printed))
+               if(!incapacitated(encounter[e],false,printed))
                {
                   if(printed)
                   {
@@ -405,7 +405,7 @@ void enemyattack()
           encounter[e].type==CREATURE_NEWSANCHOR||
           encounter[e].type==CREATURE_MILITARYOFFICER)&&encnum<ENCMAX) canmistake=0;
 
-      char actual;
+      bool actual;
       if(canmistake)
       {
          if(encounter[e].enemy())
@@ -467,9 +467,9 @@ void enemyattack()
 
 
 /* attack handling for an individual creature and its target */
-void attack(Creature &a,Creature &t,char mistake,char &actual,bool force_melee)
+void attack(Creature &a,Creature &t,bool mistake,bool &actual,bool force_melee)
 {
-   actual=0;
+   actual=false;
 
    char str[200];
 
@@ -478,9 +478,9 @@ void attack(Creature &a,Creature &t,char mistake,char &actual,bool force_melee)
    else set_color(COLOR_RED,COLOR_BLACK,1);
 
    //INCAPACITATED
-   char incaprint;
+   bool incaprint;
    a.forceinc=0;
-   if(incapacitated(a,0,incaprint))
+   if(incapacitated(a,false,incaprint))
    {
       if(incaprint)
       {
@@ -898,14 +898,14 @@ void attack(Creature &a,Creature &t,char mistake,char &actual,bool force_melee)
          strcat(str,attack_used->hit_description);
       }
 
-      char damtype=0;
+      int8_t damtype=0;
       int damamount=0;
-      char strengthmin=1;
-      char strengthmax=1;
+      int8_t strengthmin=1;
+      int8_t strengthmax=1;
       int severtype=-1;
 
-      char damagearmor=0;
-      char armorpiercing=0;
+      int8_t damagearmor=0;
+      int8_t armorpiercing=0;
       int extraarmor=0;
 
       if (!a.is_armed())
@@ -1650,7 +1650,7 @@ void attack(Creature &a,Creature &t,char mistake,char &actual,bool force_melee)
          getkey();
 
          goodguyattack = !goodguyattack;
-         char actual_dummy;
+         bool actual_dummy;
          attack(t,a,0,actual_dummy,true);
          goodguyattack = !goodguyattack;
       }//TODO if missed person, but vehicle is large, it might damage the car. 
@@ -1741,7 +1741,7 @@ void attack(Creature &a,Creature &t,char mistake,char &actual,bool force_melee)
       a.drop_weapon(NULL);
    }
 
-   actual=1;
+   actual=true;
    return;
 }
 
@@ -1773,8 +1773,8 @@ void healthmodroll(int &aroll,Creature &a)
 
 
 /* adjusts attack damage based on armor, other factors */
-void damagemod(Creature &t,char &damtype,int &damamount,
-               char hitlocation,char armorpenetration,int mod,int extraarmor)
+void damagemod(Creature &t,int8_t &damtype,int &damamount,
+               int8_t hitlocation,int8_t armorpenetration,int mod,int extraarmor)
 {
    int armor=t.get_armor().get_armor(hitlocation);
 
@@ -1822,7 +1822,7 @@ void damagemod(Creature &t,char &damtype,int &damamount,
 }
 
 
-void specialattack(Creature &a, Creature &t, char &actual)
+void specialattack(Creature &a, Creature &t, bool &actual)
 {
    std::string s = "";
    static const char *judge_debate[]   =
@@ -2384,9 +2384,9 @@ void capturecreature(Creature &t)
 
 
 /* checks if the creature can fight and prints flavor text if they can't */
-char incapacitated(Creature &a,char noncombat,char &printed)
+bool incapacitated(Creature &a,bool noncombat,bool &printed)
 {
-   printed=0;
+   printed=false;
 
    if(a.animalgloss==ANIMALGLOSS_TANK)
    {
@@ -2411,12 +2411,12 @@ char incapacitated(Creature &a,char noncombat,char &printed)
 
             gamelog.newline();
 
-            printed=1;
+            printed=true;
          }
-         return 1;
+         return true;
       }
 
-      return 0;
+      return false;
    }
 
    if(a.animalgloss==ANIMALGLOSS_ANIMAL)
