@@ -904,8 +904,8 @@ void trial(Creature &g)
          addjuice(g,25,200);
 
          // Check for lenience; sleeper judge will always be merciful
-         if(defensepower/3>=jury/4||sleeperjudge) penalize(g,1);
-         else penalize(g,0);
+         if(defensepower/3>=jury/4||sleeperjudge) penalize(g,true);
+         else penalize(g,false);
       }
       //CLEAN UP LAW FLAGS
       if(!keeplawflags) for(int i=0;i<LAWFLAGNUM;i++) g.crimes_suspected[i]=0;
@@ -933,8 +933,8 @@ void trial(Creature &g)
       getkey();
 
       // Check for lenience; sleeper judge will always be merciful
-      if(sleeperjudge||LCSrandom(2)) penalize(g,1);
-      else penalize(g,0);
+      if(sleeperjudge||LCSrandom(2)) penalize(g,true);
+      else penalize(g,false);
       //CLEAN UP LAW FLAGS
       for(int i=0;i<LAWFLAGNUM;i++) g.crimes_suspected[i]=0;
       //Clean up heat, confessions
@@ -952,7 +952,7 @@ void trial(Creature &g)
 
 
 /* monthly - sentence a liberal */
-void penalize(Creature &g,char lenient)
+void penalize(Creature &g,bool lenient)
 {
    set_color(COLOR_RED,COLOR_BLACK,1);
    move(3,1);
@@ -1217,7 +1217,7 @@ void imprison(Creature &g)
 
 /* monthly - advances a liberal's prison time or executes them */
 //RETURNS IF SCREEN WAS ERASED
-char prison(Creature &g)
+bool prison(Creature &g)
 {
    static const char *cruel_and_unusual_execution_methods[] =
    {
@@ -1257,7 +1257,7 @@ char prison(Creature &g)
    static const char *supposedly_painless_execution_method =
       "lethal injection";
 
-   char showed=0;
+   bool showed=false;
 
    // People not on death row or about to be released can have a scene in prison
    if(!g.deathpenalty && g.sentence!=1)
@@ -1349,7 +1349,7 @@ char prison(Creature &g)
 
             g.die();
             stat_dead++;
-            showed=1;
+            showed=true;
          }
          //SET FREE
          else
@@ -1372,7 +1372,7 @@ char prison(Creature &g)
             // homeless shelter instead.
             if(location[g.base]->renting<0) g.base=find_homeless_shelter(g);
             g.location=g.base;
-            showed=1;
+            showed=true;
          }
       }
       //NOTIFY OF IMPENDING THINGS
@@ -1389,7 +1389,7 @@ char prison(Creature &g)
 
             getkey();
 
-            showed=1;
+            showed=true;
          }
          else
          {
@@ -1402,7 +1402,7 @@ char prison(Creature &g)
 
             getkey();
 
-            showed=1;
+            showed=true;
          }
       }
       else
@@ -1420,7 +1420,7 @@ char prison(Creature &g)
 
             getkey();
 
-            showed=1;
+            showed=true;
          }
       }
    }

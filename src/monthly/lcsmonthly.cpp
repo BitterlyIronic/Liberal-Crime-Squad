@@ -31,7 +31,7 @@ This file is part of Liberal Crime Squad.                                       
 //TODO: Log the monthly report? --Addictgamer
 
 /* monthly - reports the guardian's power to the player */
-void guardianupdate(char size, int power)
+void guardianupdate(int8_t size, int power)
 {
    music.play(MUSIC_NEWSPAPER);
    erase();

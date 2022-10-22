@@ -1860,33 +1860,33 @@ void congress(bool clearformess,bool canseethings)
 }
 
 /* politics - checks if the game is won */
-char wincheck()
+bool wincheck()
 {
-   for(int e=0;e<EXECNUM;e++) if(exec[e]<ALIGN_ELITELIBERAL) return 0;
+   for(int e=0;e<EXECNUM;e++) if(exec[e]<ALIGN_ELITELIBERAL) return false;
 
-   if(wincondition==WINCONDITION_ELITE) for(int l=0;l<LAWNUM;l++) if(law[l]<ALIGN_ELITELIBERAL) return 0;
+   if(wincondition==WINCONDITION_ELITE) for(int l=0;l<LAWNUM;l++) if(law[l]<ALIGN_ELITELIBERAL) return false;
    else
    {
       int liberalLaws=0,eliteLaws=0;
       for(int l=0;l<LAWNUM;l++)
       {
-         if(law[l]<ALIGN_LIBERAL) return 0;
+         if(law[l]<ALIGN_LIBERAL) return false;
          if(law[l]==ALIGN_LIBERAL) liberalLaws++;
          else eliteLaws++;
       }
-      if(eliteLaws<liberalLaws) return 0;
+      if(eliteLaws<liberalLaws) return false;
    }
 
    int housemake[6]={0,0,0,0,0,0};
    for(int h=0;h<HOUSENUM;h++) housemake[house[h]+2]++;
-   if(housemake[4]+housemake[3]/2<((wincondition==WINCONDITION_ELITE)?HOUSESUPERMAJORITY:HOUSECOMFYMAJORITY)) return 0; // Elite Libs plus half of Libs >= 3/5 for easy, 2/3 for elite
-   if(housemake[4]<((wincondition==WINCONDITION_ELITE)?HOUSECOMFYMAJORITY:HOUSEMAJORITY)) return 0; // Elite Libs themselves >= 1/2 for easy, 3/5 for elite
+   if(housemake[4]+housemake[3]/2<((wincondition==WINCONDITION_ELITE)?HOUSESUPERMAJORITY:HOUSECOMFYMAJORITY)) return false; // Elite Libs plus half of Libs >= 3/5 for easy, 2/3 for elite
+   if(housemake[4]<((wincondition==WINCONDITION_ELITE)?HOUSECOMFYMAJORITY:HOUSEMAJORITY)) return false; // Elite Libs themselves >= 1/2 for easy, 3/5 for elite
 
    int senatemake[6]={0,0,0,0,0,0};
    for(int s=0;s<SENATENUM;s++) senatemake[senate[s]+2]++;
-   if(senatemake[4]+senatemake[3]/2<((wincondition==WINCONDITION_ELITE)?SENATESUPERMAJORITY:SENATECOMFYMAJORITY)) return 0; // Elite Libs plus half of Libs >= 3/5 for easy, 2/3 for elite
+   if(senatemake[4]+senatemake[3]/2<((wincondition==WINCONDITION_ELITE)?SENATESUPERMAJORITY:SENATECOMFYMAJORITY)) return false; // Elite Libs plus half of Libs >= 3/5 for easy, 2/3 for elite
    if(wincondition!=WINCONDITION_ELITE) senatemake[exec[EXEC_VP]+2]++; // VP counts as Senator only for breaking ties (so counts for 1/2 fraction but not higher fractions)
-   if(senatemake[4]<((wincondition==WINCONDITION_ELITE)?SENATECOMFYMAJORITY:SENATEMAJORITY)) return 0; // Elite Libs themselves >= 1/2 for easy, 3/5 for elite
+   if(senatemake[4]<((wincondition==WINCONDITION_ELITE)?SENATECOMFYMAJORITY:SENATEMAJORITY)) return false; // Elite Libs themselves >= 1/2 for easy, 3/5 for elite
 
    int elibjudge=0,libjudge=0;
    for(int c=0;c<COURTNUM;c++)
@@ -1894,9 +1894,9 @@ char wincheck()
       if(court[c]==ALIGN_ELITELIBERAL) elibjudge++;
       if(court[c]==ALIGN_LIBERAL) libjudge++;
    }
-   if(elibjudge<COURTMAJORITY&&(wincondition==WINCONDITION_ELITE||elibjudge+libjudge/2<COURTSUPERMAJORITY)) return 0;
+   if(elibjudge<COURTMAJORITY&&(wincondition==WINCONDITION_ELITE||elibjudge+libjudge/2<COURTSUPERMAJORITY)) return false;
 
-   return 1;
+   return true;
 }
 
 /*      FIXED:

@@ -1771,7 +1771,7 @@ void updateworld_laws(short *law,short *oldlaw);
  lcsmonthly.cpp
 */
 /* monthly - reports the guardian's power to the player */
-void guardianupdate(char size,int power);
+void guardianupdate(int8_t size,int power);
 /* monthly - lets the player choose a special edition for the guardian */
 int choosespecialedition(bool &clearformess);
 /* monthly - guardian - prints liberal guardian special editions */
@@ -1798,11 +1798,11 @@ void sleeper_steal(Creature &cr,bool &clearformess,bool canseethings,int (&libpo
 /* monthly - hold trial on a liberal */
 void trial(Creature &g);
 /* monthly - sentence a liberal */
-void penalize(Creature &g,char lenient);
+void penalize(Creature &g,bool lenient);
 /* monthly - move a liberal to jail */
 void imprison(Creature &g);
 /* monthly - advances a liberal's prison time or executes them */
-char prison(Creature &g);
+bool prison(Creature &g);
 /* monthly - subjects a liberal to liberal therapy */
 void reeducation(Creature &g);
 /* monthly - subjects a liberal to hard labor */
@@ -1834,7 +1834,7 @@ void congress(bool clearformess,bool canseethings);
 // letter of amnesty to the LCS from the President (you win)
 void amnesty();
 /* politics - checks if the game is won */
-char wincheck();
+bool wincheck();
 /* politics - checks the prevailing attitude on a specific law, or overall */
 int publicmood(int l);
 /* returns true if Stalinists agree with Elite Liberals on a view/law, false if they strongly disagree with libs  *
@@ -1853,7 +1853,7 @@ void reaganify(bool canseethings);
 /* endgame - attempts to pass a constitutional amendment to lose the game */
 void stalinize(bool canseethings);
 /* endgame - checks if a constitutional amendment is ratified */
-char ratify(int level,int view,int lawview,char congress,bool canseethings);
+bool ratify(int level,int view,int lawview,bool congress,bool canseethings);
 /* endgame - header for announcing constitutional amendments */
 void amendmentheading();
 

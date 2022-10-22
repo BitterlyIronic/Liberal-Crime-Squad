@@ -101,7 +101,7 @@ void tossjustices(bool canseethings)
       while(getkey()!='c');
    }
 
-   if(ratify(2,-1,-1,1,canseethings))
+   if(ratify(2,-1,-1,true,canseethings))
    {
       //BLAST JUSTICES
       for(int j=0;j<COURTNUM;j++) if(court[j]!=ALIGN_ELITELIBERAL)
@@ -163,7 +163,7 @@ void amendment_termlimits(bool canseethings)
       while(getkey()!='c');
    }
 
-   if(ratify(2,-1,-1,0,canseethings))
+   if(ratify(2,-1,-1,false,canseethings))
    {
       termlimits = true;
       if(canseethings)
@@ -245,7 +245,7 @@ void reaganify(bool canseethings)
       while(getkey()!='c');
    }
 
-   if(ratify(-2,-1,-1,1,canseethings))
+   if(ratify(-2,-1,-1,true,canseethings))
    {
       music.play(MUSIC_REAGANIFIED);
       if(canseethings)
@@ -454,7 +454,7 @@ void stalinize(bool canseethings)
       while(getkey()!='c');
    }
 
-   if(ratify(3,-2,-2,1,canseethings))
+   if(ratify(3,-2,-2,true,canseethings))
    {
       music.play(MUSIC_STALINIZED);
       if(canseethings)
@@ -607,7 +607,7 @@ void stalinize(bool canseethings)
 
 
 /* endgame - checks if a constitutional amendment is ratified */
-char ratify(int level,int lawview,int view,char congress,bool canseethings)
+bool ratify(int level,int lawview,int view,bool congress,bool canseethings)
 {
    if(canseethings)
    {
