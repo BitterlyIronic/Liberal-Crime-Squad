@@ -925,8 +925,8 @@ void setvehicles()
                {
                   activesquad->squad[c-'1']->pref_carid=vehicle[slot]->id();
                   if(activesquad->squad[c-'1']->canwalk())
-                     activesquad->squad[c-'1']->pref_is_driver=1;
-                  else activesquad->squad[c-'1']->pref_is_driver=0;
+                     activesquad->squad[c-'1']->pref_is_driver=true;
+                  else activesquad->squad[c-'1']->pref_is_driver=false;
                }
             }
          }
@@ -965,7 +965,7 @@ void setvehicles()
                if(activesquad->squad[c-'1'])
                {
                   activesquad->squad[c-'1']->pref_carid=vehicle[slot]->id();
-                  activesquad->squad[c-'1']->pref_is_driver=0;
+                  activesquad->squad[c-'1']->pref_is_driver=false;
                }
             }
          }
@@ -982,7 +982,7 @@ void setvehicles()
             if(vin>-1)
             {
                activesquad->squad[c-'1']->pref_carid=-1;
-               activesquad->squad[c-'1']->pref_is_driver=0;
+               activesquad->squad[c-'1']->pref_is_driver=false;
             }
          }
       }

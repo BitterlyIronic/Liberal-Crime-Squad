@@ -205,7 +205,7 @@ void advanceday(bool &clearformess,bool canseethings)
                      if(len(goodp))
                      {
                         int p=pickrandom(goodp);
-                        squad[sq]->squad[p]->is_driver=1;
+                        squad[sq]->squad[p]->is_driver=true;
                      }
                   }
                }
@@ -236,7 +236,7 @@ void advanceday(bool &clearformess,bool canseethings)
                      for(int p2=0;p2<len(driver);p2++)
                      {
                         if(p2==p) continue;
-                        squad[sq]->squad[driver[p2]]->is_driver=0;
+                        squad[sq]->squad[driver[p2]]->is_driver=false;
                      }
                   }
                }
@@ -249,7 +249,7 @@ void advanceday(bool &clearformess,bool canseethings)
                   if(squad[sq]->squad[p]->carid==-1)
                   {
                      squad[sq]->squad[p]->carid=pickrandom(wantcar);
-                     squad[sq]->squad[p]->is_driver=0;
+                     squad[sq]->squad[p]->is_driver=false;
                   }
          }
 

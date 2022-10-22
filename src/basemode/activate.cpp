@@ -472,7 +472,7 @@ void activate(Creature *cr)
       if(activesquad) if(activesquad->squad[0]->location!=-1) siege=&location[activesquad->squad[0]->location]->siege;
       bool sieged=false;
       if(siege) sieged=siege->siege;
-      /*char underattack=0;
+      /*bool underattack=0;
       if(siege&&sieged) underattack=siege->underattack;*/
 
       if(!sieged)

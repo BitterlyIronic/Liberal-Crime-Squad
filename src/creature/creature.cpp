@@ -394,9 +394,9 @@ void Creature::creatureinit()
       break;
    }
    carid=-1;
-   is_driver=0;
+   is_driver=false;
    pref_carid=-1;
-   pref_is_driver=0;
+   pref_is_driver=false;
    id=curcreatureid++;
    joindays=0;
    deathdays=0;
@@ -463,7 +463,7 @@ void Creature::creatureinit()
    special[SPECIALWOUND_NECK]=1;
    special[SPECIALWOUND_UPPERSPINE]=1;
    special[SPECIALWOUND_LOWERSPINE]=1;
-   forceinc=0;
+   forceinc=false;
    sentence=0;
    deathpenalty=0;
    money=0;

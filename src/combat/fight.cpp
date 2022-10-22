@@ -479,7 +479,7 @@ void attack(Creature &a,Creature &t,bool mistake,bool &actual,bool force_melee)
 
    //INCAPACITATED
    bool incaprint;
-   a.forceinc=0;
+   a.forceinc=false;
    if(incapacitated(a,false,incaprint))
    {
       if(incaprint)
@@ -492,7 +492,7 @@ void attack(Creature &a,Creature &t,bool mistake,bool &actual,bool force_melee)
          getkey();
       }
 
-      a.forceinc=1;
+      a.forceinc=true;
 
       return;
    }
@@ -2392,7 +2392,7 @@ bool incapacitated(Creature &a,bool noncombat,bool &printed)
    {
       if(a.blood<=20||(a.blood<=50&&(LCSrandom(2)||a.forceinc)))
       {
-         a.forceinc=0;
+         a.forceinc=false;
          if(noncombat)
          {
             clearmessagearea();
@@ -2423,7 +2423,7 @@ bool incapacitated(Creature &a,bool noncombat,bool &printed)
    {
       if(a.blood<=20||(a.blood<=50&&(LCSrandom(2)||a.forceinc)))
       {
-         a.forceinc=0;
+         a.forceinc=false;
          if(noncombat)
          {
             clearmessagearea();
@@ -2452,7 +2452,7 @@ bool incapacitated(Creature &a,bool noncombat,bool &printed)
 
    if(a.blood<=20||(a.blood<=50&&(LCSrandom(2)||a.forceinc)))
    {
-      a.forceinc=0;
+      a.forceinc=false;
       if(noncombat)
       {
          clearmessagearea();

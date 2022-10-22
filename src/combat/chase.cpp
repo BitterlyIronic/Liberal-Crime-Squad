@@ -1092,7 +1092,7 @@ bool drivingupdate(short &obstacle)
             if(activesquad->squad[p]->is_driver)
             {
                if(activesquad->squad[p]->canwalk()) driver=p;
-               else activesquad->squad[p]->is_driver=0;
+               else activesquad->squad[p]->is_driver=false;
             }
             passenger.push_back(p);
          }
@@ -1113,7 +1113,7 @@ bool drivingupdate(short &obstacle)
          if(len(goodp))
          {
             int p=pickrandom(goodp);
-            activesquad->squad[p]->is_driver=1;
+            activesquad->squad[p]->is_driver=true;
             driver=p;
 
             clearmessagearea();
@@ -1147,7 +1147,7 @@ bool drivingupdate(short &obstacle)
             if(encounter[p].is_driver)
             {
                if(encounter[p].canwalk()) driver=p;
-               else encounter[p].is_driver=0;
+               else encounter[p].is_driver=false;
             }
             passenger.push_back(p);
          }
@@ -1279,7 +1279,7 @@ void makechasers(long sitetype,long sitecrime)
          if(encounter[n].carid==-1)
          {
             encounter[n].carid=v->id();
-            encounter[n].is_driver=1;
+            encounter[n].is_driver=true;
             break;
          }
    }
@@ -1294,7 +1294,7 @@ void makechasers(long sitetype,long sitecrime)
          {
             v=LCSrandom(len(chaseseq.enemycar));
             encounter[n].carid=chaseseq.enemycar[v]->id();
-            encounter[n].is_driver=0;
+            encounter[n].is_driver=false;
          } while(load[v]>=4);
          load[v]++;
       }
@@ -1809,7 +1809,7 @@ bool chasesequence(Creature &cr,Vehicle &v)
    sq->squad[0]->squadid=cursquadid;
    sq->id=cursquadid;cursquadid++;
    cr.carid=v.id();
-   cr.is_driver=1;
+   cr.is_driver=true;
 
    squadst *oact=activesquad;
    short ops=party_status;

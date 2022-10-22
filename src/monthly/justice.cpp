@@ -962,7 +962,7 @@ void penalize(Creature &g,bool lenient)
    getkey();
 
    short oldsentence=g.sentence;
-   char olddeathpenalty=g.deathpenalty;
+   int8_t olddeathpenalty=g.deathpenalty;
    g.sentence=0,g.deathpenalty=0;
 
    if(!lenient&&((g.crimes_suspected[LAWFLAG_MURDER])||(g.crimes_suspected[LAWFLAG_TREASON])||

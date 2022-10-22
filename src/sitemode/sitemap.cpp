@@ -35,7 +35,7 @@ void initsite(Location &loc)
    for(int e=0;e<ENCMAX;e++)encounter[e].exists=0;
    for(int p=0;p<6;p++)
       if(activesquad->squad[p]!=NULL)
-         activesquad->squad[p]->forceinc=0;
+         activesquad->squad[p]->forceinc=false;
    delete_and_clear(groundloot);
    //MAKE MAP
    unsigned long oldseed[RNG_SIZE];

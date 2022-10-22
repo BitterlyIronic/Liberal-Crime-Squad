@@ -331,7 +331,7 @@ public:
    short type;
    std::string type_idname;
    float infiltration;
-   char animalgloss;
+   int8_t animalgloss;
    short specialattack;
    short clinic;
    short dating;
@@ -340,15 +340,15 @@ public:
    short trainingsubject;
    Creature* prisoner;
    short sentence;
-   char confessions;
-   char deathpenalty;
+   int8_t confessions;
+   int8_t deathpenalty;
    int joindays;
    int deathdays;
    int id;
    int hireid;
    int meetings;
 
-   char forceinc;
+   bool forceinc;
 
    void train(int trainedskill, int experience, int upto=MAXATTRIBUTE);
    void skill_up();
@@ -403,15 +403,15 @@ public:
    int location;
    int worklocation;
 
-   char cantbluff;
+   int8_t cantbluff;
 
    int base;
    activityst activity;
 
    int carid;
-   char is_driver;
+   bool is_driver;
    int pref_carid;
-   char pref_is_driver;
+   bool pref_is_driver;
    short flag;
 
    void stop_hauling_me();
