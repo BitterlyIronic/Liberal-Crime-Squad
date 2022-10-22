@@ -28,24 +28,24 @@ This file is part of Liberal Crime Squad.                                       
 
 #include <externs.h>
 
-char heyMisterDog(Creature &a, Creature &tk);
-char heyMisterMonster(Creature &a, Creature &tk);
+bool heyMisterDog(Creature &a, Creature &tk);
+bool heyMisterMonster(Creature &a, Creature &tk);
 
-char talkInCombat(Creature &a, Creature &tk);
-char talkToBankTeller(Creature &a, Creature &tk);
-char talkToGeneric(Creature &a, Creature &tk);
+bool talkInCombat(Creature &a, Creature &tk);
+bool talkToBankTeller(Creature &a, Creature &tk);
+bool talkToGeneric(Creature &a, Creature &tk);
 
-char wannaHearSomethingDisturbing(Creature &a, Creature &tk);
-char talkAboutIssues(Creature &a, Creature &tk);
+bool wannaHearSomethingDisturbing(Creature &a, Creature &tk);
+bool talkAboutIssues(Creature &a, Creature &tk);
 
-char doYouComeHereOften(Creature &a, Creature &tk);
+bool doYouComeHereOften(Creature &a, Creature &tk);
 
-char heyINeedAGun(Creature &a, Creature &tk);
-char heyIWantToRentARoom(Creature &a, Creature &tk);
-char heyIWantToCancelMyRoom(Creature &a, Creature &tk);
+bool heyINeedAGun(Creature &a, Creature &tk);
+bool heyIWantToRentARoom(Creature &a, Creature &tk);
+bool heyIWantToCancelMyRoom(Creature &a, Creature &tk);
 
 /* bluff, date, issues */
-char talk(Creature &a,int t)
+bool talk(Creature &a,int t)
 {
    Creature &tk = encounter[t];
 
@@ -70,7 +70,7 @@ char talk(Creature &a,int t)
    return talkToGeneric(a, tk);
 }
 
-char talkToBankTeller(Creature &a, Creature &tk)
+bool talkToBankTeller(Creature &a, Creature &tk)
 {
    clearcommandarea();clearmessagearea();clearmaparea();
    set_color(COLOR_WHITE,COLOR_BLACK,0);
@@ -175,7 +175,7 @@ char talkToBankTeller(Creature &a, Creature &tk)
          activesquad->loot.push_back(new Money(5000));
       }
       tk.cantbluff=1;
-      return 1;
+      return true;
    case 'b':
    {
       clearcommandarea();clearmessagearea();clearmaparea();
@@ -289,11 +289,11 @@ char talkToBankTeller(Creature &a, Creature &tk)
    }
    default:
    case 'c':
-      return 0;
+      return false;
    }
 }
 
-char talkToGeneric(Creature &a, Creature &tk)
+bool talkToGeneric(Creature &a, Creature &tk)
 {
    clearcommandarea();clearmessagearea();clearmaparea();
    set_color(COLOR_WHITE,COLOR_BLACK,1);
@@ -374,7 +374,7 @@ char talkToGeneric(Creature &a, Creature &tk)
          if(!tk.can_date(a)) break;
          return doYouComeHereOften(a, tk);
       case 'c':
-         return 0;
+         return false;
       case 'd':
          if(tk.type==CREATURE_LANDLORD&&location[cursite]->renting==-1)
             return heyIWantToRentARoom(a, tk);
@@ -389,7 +389,7 @@ char talkToGeneric(Creature &a, Creature &tk)
    }
 }
 
-char heyIWantToCancelMyRoom(Creature &a, Creature &tk)
+bool heyIWantToCancelMyRoom(Creature &a, Creature &tk)
 {
    clearcommandarea();
    clearmessagearea();
@@ -418,7 +418,7 @@ char heyIWantToCancelMyRoom(Creature &a, Creature &tk)
 
       getkey();
 
-      return 1;
+      return true;
    }
 
    set_color(COLOR_WHITE, COLOR_BLACK, 1);
@@ -454,10 +454,10 @@ char heyIWantToCancelMyRoom(Creature &a, Creature &tk)
    location[cursite]->compound_stores=0;
    location[cursite]->front_business=-1;
 
-   return 1;
+   return true;
 }
 
-char heyIWantToRentARoom(Creature &a, Creature &tk)
+bool heyIWantToRentARoom(Creature &a, Creature &tk)
 {
    clearcommandarea();clearmessagearea();clearmaparea();
    set_color(COLOR_WHITE,COLOR_BLACK,1);
@@ -480,7 +480,7 @@ char heyIWantToRentARoom(Creature &a, Creature &tk)
 
       getkey();
 
-      return 1;
+      return true;
    }
 
    int rent;
@@ -558,7 +558,7 @@ char heyIWantToRentARoom(Creature &a, Creature &tk)
          location[cursite]->newrental=1;
 
          basesquad(activesquad,cursite);
-         return 1;
+         return true;
 
       case 'b': // Refuse rent deal
          clearcommandarea();clearmessagearea();clearmaparea();
@@ -582,7 +582,7 @@ char heyIWantToRentARoom(Creature &a, Creature &tk)
 
          getkey();
 
-         return 1;
+         return true;
 
       case 'c': // Threaten landlord
          clearcommandarea();clearmessagearea();clearmaparea();
@@ -641,7 +641,7 @@ char heyIWantToRentARoom(Creature &a, Creature &tk)
             getkey();
 
             tk.cantbluff = 1;
-            return 1;
+            return true;
          }
          else
          {
@@ -672,13 +672,13 @@ char heyIWantToRentARoom(Creature &a, Creature &tk)
             location[cursite]->newrental=true;
 
             basesquad(activesquad,cursite);
-            return 1;
+            return true;
          }
       }
    }
 }
 
-char heyINeedAGun(Creature &a, Creature &tk)
+bool heyINeedAGun(Creature &a, Creature &tk)
 {
    clearcommandarea();clearmessagearea();clearmaparea();
 
@@ -702,7 +702,7 @@ char heyINeedAGun(Creature &a, Creature &tk)
 
       getkey();
 
-      return 1;
+      return true;
    }
    if(a.get_armor().get_itemtypename() == "ARMOR_POLICEUNIFORM" ||
       a.get_armor().get_itemtypename() == "ARMOR_POLICEARMOR" ||
@@ -719,7 +719,7 @@ char heyINeedAGun(Creature &a, Creature &tk)
 
       getkey();
 
-      return 1;
+      return true;
    }
    if(sitealarm!=0)
    {
@@ -732,7 +732,7 @@ char heyINeedAGun(Creature &a, Creature &tk)
 
       getkey();
 
-      return 1;
+      return true;
    }
    switch(location[cursite]->type)
    {
@@ -753,7 +753,7 @@ char heyINeedAGun(Creature &a, Creature &tk)
       getkey();
 
       armsdealer(cursite);
-      return 1;
+      return true;
    default:
       set_color(COLOR_WHITE,COLOR_BLACK,1);
       move(12,1);addstr(tk.name, gamelog);addstr(" responds, ", gamelog);
@@ -764,11 +764,11 @@ char heyINeedAGun(Creature &a, Creature &tk)
 
       getkey();
 
-      return 1;
+      return true;
    }
 }
 
-char wannaHearSomethingDisturbing(Creature &a, Creature &tk)
+bool wannaHearSomethingDisturbing(Creature &a, Creature &tk)
 {
    clearcommandarea();clearmessagearea();clearmaparea();
 
@@ -803,7 +803,7 @@ char wannaHearSomethingDisturbing(Creature &a, Creature &tk)
 
       getkey();
 
-      return 1;
+      return true;
    }
    else if(strcmp(tk.name,"Prisoner")!=0 && interested)
    {
@@ -837,11 +837,11 @@ char wannaHearSomethingDisturbing(Creature &a, Creature &tk)
 
       getkey();
 
-      return 1;
+      return true;
    }
 }
 
-char doYouComeHereOften(Creature &a, Creature &tk)
+bool doYouComeHereOften(Creature &a, Creature &tk)
 {
    int y=12;
    clearcommandarea();clearmessagearea();clearmaparea();
@@ -994,7 +994,7 @@ char doYouComeHereOften(Creature &a, Creature &tk)
 
       getkey();
 
-      return 1;
+      return true;
    }
 
    a.train(SKILL_SEDUCTION,LCSrandom(5)+2);
@@ -1318,9 +1318,9 @@ char doYouComeHereOften(Creature &a, Creature &tk)
       tk.cantbluff=1;
    }
 
-   return 1;
+   return true;
 }
-char talkAboutIssues(Creature &a, Creature &tk)
+bool talkAboutIssues(Creature &a, Creature &tk)
 {
    int lw = LCSrandom(LAWNUM); // pick a random law to talk about
 
@@ -1571,7 +1571,7 @@ char talkAboutIssues(Creature &a, Creature &tk)
       recruit.push_back(newrst);
 
       delenc(&tk-encounter,0);
-      return 1;
+      return true;
    }
    else
    {
@@ -1652,12 +1652,12 @@ char talkAboutIssues(Creature &a, Creature &tk)
       getkey();
 
       tk.cantbluff=1;
-      return 1;
+      return true;
    }
-   return 0;
+   return false;
 }
 
-char talkInCombat(Creature &a, Creature &tk)
+bool talkInCombat(Creature &a, Creature &tk)
 {
    clearcommandarea();
    clearmessagearea();
@@ -2353,10 +2353,10 @@ char talkInCombat(Creature &a, Creature &tk)
       }
       location[cursite]->siege.siege=0;
    }
-   return 1;
+   return true;
 }
 
-char heyMisterDog(Creature &a, Creature &tk)
+bool heyMisterDog(Creature &a, Creature &tk)
 {
    bool success = false;
    const char *pitch;
@@ -2511,10 +2511,10 @@ char heyMisterDog(Creature &a, Creature &tk)
          if(encounter[i].type == CREATURE_GUARDDOG)
             encounter[i].align = ALIGN_LIBERAL;
 
-   return 1;
+   return true;
 }
 
-char heyMisterMonster(Creature &a, Creature &tk)
+bool heyMisterMonster(Creature &a, Creature &tk)
 {
    bool success = false;
    const char *pitch;
@@ -2669,5 +2669,5 @@ char heyMisterMonster(Creature &a, Creature &tk)
          if(encounter[i].type == CREATURE_GENETIC)
             encounter[i].align = ALIGN_LIBERAL;
 
-   return 1;
+   return true;
 }

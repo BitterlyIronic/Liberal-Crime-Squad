@@ -1517,7 +1517,7 @@ void special_oval_office();
  talk.cpp
 */
 /* bluff, date, issues */
-char talk(Creature &a,int t);
+bool talk(Creature &a,int t);
 
 /*
  stealth.cpp
