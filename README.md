@@ -15,6 +15,8 @@ The changes so far:
 - The game respects the XDG Base Directory specification
     - The default save directory is now ~/.local/share/lcs
     - If the XDG_DATA_HOME environment variable is set it'll be stored there instead
+- Some effort has been put in to make the game run properly on non-x86 architectures
+    - Should now work on arches that have `unsigned char` as the default `char` type (e.g. ARM)
 - When your Liberals are studying, it displays what topic they're actually studying.
     - Pulled from a pull request on the 4.10.1 repository
 - Defaults to [PDCurses](https://www.pdcurses.org) over ncurses
