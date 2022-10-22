@@ -268,7 +268,7 @@ void listclasses(Creature *cr)
    }
 }
 
-void updateclasschoice(Creature *cr, int8_t choice)
+void updateclasschoice(Creature *cr, char choice)
 {
    if(choice=='6')
    {
