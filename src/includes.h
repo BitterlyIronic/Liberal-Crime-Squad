@@ -76,7 +76,7 @@
 // -- yetisyny
 #define PACKAGE_VERSION "4.10.5u"
 
-const int version=41040;
+const int version=41050;
 const int lowestloadversion=40100;
 const int lowestloadscoreversion=31203;
 
