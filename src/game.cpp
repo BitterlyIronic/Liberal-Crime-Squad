@@ -261,20 +261,11 @@ int main(int argc, char* argv[])
    char default_lines[] = "25";
    char default_cols[] = "80";
 
-   // check to see if a size is being passed in
-   auto result = std::find(args.begin(), args.end(), lines);
+   args.push_back(lines);
+   args.push_back(default_lines);
 
-   if (result == args.end()) {
-      args.push_back(lines);
-      args.push_back(default_lines);
-   }
-
-   result = std::find(args.begin(), args.end(), cols);
-
-   if (result == args.end()) {
-      args.push_back(cols);
-      args.push_back(default_cols);
-   }
+   args.push_back(cols);
+   args.push_back(default_cols);
 
    Xinitscr(args.size(), &args[0]);
 
@@ -283,7 +274,7 @@ int main(int argc, char* argv[])
       //using private values pulled out of XCurses to make the window not resizable
       //the game doesn't support it, so it doesn't really make sense to allow it
       XtVaSetValues(pdc_toplevel, XtNminWidth, pdc_wwidth, XtNminHeight, pdc_wheight,
-                                 XtNmaxWidth, pdc_wwidth, XtNmaxHeight, pdc_wheight, NULL);
+                                  XtNmaxWidth, pdc_wwidth, XtNmaxHeight, pdc_wheight, NULL);
       #endif
    #endif
 
