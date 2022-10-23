@@ -61,14 +61,14 @@ work.
 To do this under Ubuntu (and most likely Debian too) issue the following
 commands:
 
-sudo apt-get install build-essential autoconf libncurses5-dev
+sudo apt-get install build-essential autoconf libncurses6-dev
 
 The actual compilation will be done by changing your working directory to the
 lcs folder and issuing:
 
 chmod 744 bootstrap
 ./bootstrap
-./configure
+./configure --with-ncurses
 make
 
 If the compilation was successful no errors should be issued but you will
