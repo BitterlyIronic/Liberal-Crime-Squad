@@ -8,7 +8,7 @@ Read [COMPILE_README.txt](COMPILE_README.txt) for instructions on how to compile
 
 ## This Repo
 
-This repo is a fork of [4.10.1](https://github.com/Kamal-Sadek/Liberal-Crime-Squad), which is the last version/fork of vanilla LCS that compiles for Linux. There are a few Linux specific tweaks and whatever other little changes I thought would be nice.
+This repo is a fork of [4.10.1](https://github.com/Kamal-Sadek/Liberal-Crime-Squad), which is the last version/fork of vanilla LCS that compiles for Linux. There are a few Linux specific tweaks and whatever other little changes I feel like (probably not a lot).
 
 The changes so far:
 

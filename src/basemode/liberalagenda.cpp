@@ -289,7 +289,7 @@ bool liberalagenda(int8_t won)
             {
                case LAW_WOMEN:
                   if(won==-2)addstr("Women are usually drafted into the armed forces to fight in place of men.");
-                  else if(won==-1)addstr("Women are considered property, and rape has been legalized.");
+                  else if(won==-1)addstr("Women are considered property, and have no legal rights.");
                   else if(law[l]==ALIGN_ARCHCONSERVATIVE)
                      addstr("Women are second-class citizens.");
                   else if(law[l]==-1)addstr("Non-discrimination laws do not apply to gender.");

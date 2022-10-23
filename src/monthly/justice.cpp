@@ -1668,13 +1668,13 @@ void prisonscene(Creature &g)
    {
       " gets sick for a few days from nasty prison food.",
       " spends too much time working out at the prison gym.",
-      " is raped by another prison inmate, repeatedly.",
+      " mouths off to a prison guard and ends up in solitary.",
       " writes a letter to the warden swearing off political activism.",
       " rats out one of the other inmates in exchange for benefits."
    };
    static const char *general_experiences[] =
    {
-      " mouths off to a prison guard and ends up in solitary.",
+      " gets into a heated arguement with a cellmate.",
       " gets high off drugs smuggled into the prison.",
       " does nothing but read books at the prison library.",
       " gets into a fight and is punished with latrine duty.",

@@ -171,7 +171,7 @@ void constructeventstory(char *story,short view,int8_t positive)
                strcat(story,dstr);
                strcat(story," ");
                strcat(story,dstr2);
-               strcat(story," is a known faggot");
+               strcat(story," is a known homo");
             }
             else if(law[LAW_GAY]==-2)strcat(story,", even though being gay is deviant, as we all know.");
             else strcat(story,".");
@@ -316,7 +316,7 @@ void constructeventstory(char *story,short view,int8_t positive)
             case 8: strcat(story,"Iraqi"); break;
             case 9: strcat(story,"Bolivian"); break;
             case 10: strcat(story,"Columbian"); break;
-            default: strcat(story,"Elbonian"); break; // Dilbert
+            default: strcat(story,"Malatoran"); break; // hehe
             }
             strcat(story," author ");
             char c[2]={0,0};
