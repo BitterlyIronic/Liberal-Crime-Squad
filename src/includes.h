@@ -74,7 +74,7 @@
 
 //PACKAGE_VERSION must be defined here or the game won't compile on Windows! Don't remove it!!!
 // -- yetisyny
-#define PACKAGE_VERSION "4.10.4u"
+#define PACKAGE_VERSION "4.10.5u"
 
 const int version=41040;
 const int lowestloadversion=40100;
