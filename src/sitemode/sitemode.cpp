@@ -1831,7 +1831,7 @@ void mode_site()
                      if(location[cursite]->siege.underattack)sitestory->type=NEWSSTORY_SQUAD_KILLED_SIEGEATTACK;
                      else sitestory->type=NEWSSTORY_SQUAD_KILLED_SIEGEESCAPE;
 
-                     location[cursite]->siege.siege=0;
+                     location[cursite]->siege.siege=false;
                   }
                   else
                   {

@@ -277,7 +277,7 @@ void siegecheck(bool canseethings)
                addstr(location[l]->getname(), gamelog);
                addstr("!", gamelog);
                gamelog.newline();
-               location[l]->siege.underattack=0;
+               location[l]->siege.underattack=false;
 
                getkey();
 
@@ -312,10 +312,10 @@ void siegecheck(bool canseethings)
                // "You are wanted for blahblah and other crimes."
                statebrokenlaws(l);
 
-               location[l]->siege.siege=1;
+               location[l]->siege.siege=true;
                location[l]->siege.siegetype=SIEGE_POLICE;
-               location[l]->siege.lights_off=0;
-               location[l]->siege.cameras_off=0;
+               location[l]->siege.lights_off=false;
+               location[l]->siege.cameras_off=false;
             }
             else
             {
@@ -422,11 +422,11 @@ void siegecheck(bool canseethings)
 
             getkey();
 
-            location[l]->siege.siege=1;
+            location[l]->siege.siege=true;
             location[l]->siege.siegetype=SIEGE_CORPORATE;
-            location[l]->siege.underattack=1;
-            location[l]->siege.lights_off=0;
-            location[l]->siege.cameras_off=0;
+            location[l]->siege.underattack=true;
+            location[l]->siege.lights_off=false;
+            location[l]->siege.cameras_off=false;
             offended_corps=0;
          }
          else if(location[l]->siege.timeuntilcorps==0)location[l]->siege.timeuntilcorps=-1; // Silently call off foiled corp raids
@@ -569,11 +569,11 @@ void siegecheck(bool canseethings)
 
                   getkey();
 
-                  location[l]->siege.siege=1;
+                  location[l]->siege.siege=true;
                   location[l]->siege.siegetype=SIEGE_CCS;
-                  location[l]->siege.underattack=1;
-                  location[l]->siege.lights_off=0;
-                  location[l]->siege.cameras_off=0;
+                  location[l]->siege.underattack=true;
+                  location[l]->siege.lights_off=false;
+                  location[l]->siege.cameras_off=false;
                }
             }
             else if(location[l]->siege.timeuntilccs==0)location[l]->siege.timeuntilccs=-1; // Silently call off foiled ccs raids
@@ -653,11 +653,11 @@ void siegecheck(bool canseethings)
 
             getkey();
 
-            location[l]->siege.siege=1;
+            location[l]->siege.siege=true;
             location[l]->siege.siegetype=SIEGE_CIA;
-            location[l]->siege.underattack=1;
-            location[l]->siege.lights_off=1;
-            location[l]->siege.cameras_off=1;
+            location[l]->siege.underattack=true;
+            location[l]->siege.lights_off=true;
+            location[l]->siege.cameras_off=true;
          }
          else if(location[l]->siege.timeuntilcia==0)location[l]->siege.timeuntilcia=-1; // Silently call off foiled cia raids
 
@@ -678,11 +678,11 @@ void siegecheck(bool canseethings)
 
             getkey();
 
-            location[l]->siege.siege=1;
+            location[l]->siege.siege=true;
             location[l]->siege.siegetype=SIEGE_HICKS;
-            location[l]->siege.underattack=1;
-            location[l]->siege.lights_off=0;
-            location[l]->siege.cameras_off=0;
+            location[l]->siege.underattack=true;
+            location[l]->siege.lights_off=false;
+            location[l]->siege.cameras_off=false;
             offended_amradio=0;
          }
          if(!location[l]->siege.siege&&offended_cablenews&&attitude[VIEW_CABLENEWS]<=35&&!LCSrandom(600)&&numpres>0)
@@ -701,11 +701,11 @@ void siegecheck(bool canseethings)
 
             getkey();
 
-            location[l]->siege.siege=1;
+            location[l]->siege.siege=true;
             location[l]->siege.siegetype=SIEGE_HICKS;
-            location[l]->siege.underattack=1;
-            location[l]->siege.lights_off=0;
-            location[l]->siege.cameras_off=0;
+            location[l]->siege.underattack=true;
+            location[l]->siege.lights_off=false;
+            location[l]->siege.cameras_off=false;
             offended_cablenews=0;
          }
          //Firemen
@@ -779,11 +779,11 @@ void siegecheck(bool canseethings)
 
             getkey();
 
-            location[l]->siege.siege=1;
+            location[l]->siege.siege=true;
             location[l]->siege.siegetype=SIEGE_FIREMEN;
-            location[l]->siege.underattack=1;
-            location[l]->siege.lights_off=0;
-            location[l]->siege.cameras_off=0;
+            location[l]->siege.underattack=true;
+            location[l]->siege.lights_off=false;
+            location[l]->siege.cameras_off=false;
             offended_firemen=0;
          }
          else if(law[LAW_FREESPEECH]==-2 && location[l]->siege.timeuntilfiremen==0)
@@ -936,7 +936,7 @@ void siegeturn(bool clearformess)
 
             gamelog.newline();
 
-            location[l]->siege.siege=0;
+            location[l]->siege.siege=false;
          }
 
          if(!location[l]->siege.underattack)
@@ -1002,7 +1002,7 @@ void siegeturn(bool clearformess)
 
                getkey();
 
-               location[l]->siege.underattack=1;
+               location[l]->siege.underattack=true;
             }
             else
             {
@@ -1023,7 +1023,7 @@ void siegeturn(bool clearformess)
 
                   getkey();
 
-                  location[l]->siege.lights_off=1;
+                  location[l]->siege.lights_off=true;
                }
 
                //SNIPER
@@ -1177,7 +1177,7 @@ void siegeturn(bool clearformess)
                         getkey();
 
                         location[l]->compound_walls&=~COMPOUND_GENERATOR;
-                        location[l]->siege.lights_off=1;
+                        location[l]->siege.lights_off=true;
                      }
                      if(!LCSrandom(2))
                      {
@@ -1637,7 +1637,7 @@ void giveup()
          }
       }
 
-      location[loc]->siege.siege=0;
+      location[loc]->siege.siege=false;
    }
    else
    {
@@ -1682,7 +1682,7 @@ void giveup()
       endcheck();
       cursite=tmp;
 
-      location[loc]->siege.siege=0;
+      location[loc]->siege.siege=false;
    }
 
    //CONFISCATE MATERIAL
@@ -2236,7 +2236,7 @@ void escapesiege(bool won)
    }
 
    //SET UP NEW SIEGE CHARACTERISTICS, INCLUDING TIMING
-   location[cursite]->siege.siege=0;
+   location[cursite]->siege.siege=false;
    if(won&&location[cursite]->siege.siegetype==SIEGE_POLICE)
    {
       location[cursite]->siege.timeuntillocated=LCSrandom(4)+4;

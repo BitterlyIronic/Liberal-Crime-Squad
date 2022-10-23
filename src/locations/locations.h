@@ -158,17 +158,17 @@ enum SiegeTypes
 
 struct siegest
 {
-   char siege;
+   bool siege;
    //Puzz:  Temporary siege thing for organizations
    int orgID;
    short siegetype;
-   char underattack;
+   bool underattack;
    int attacktime;
    short kills;
    short tanks;
    short escalationstate;
-   char lights_off;
-   char cameras_off;
+   bool lights_off;
+   bool cameras_off;
    short timeuntillocated;
    short timeuntilcorps;
    short timeuntilcia;
@@ -181,15 +181,15 @@ struct siteblockst
 {
    short special;
    int flag;
-   char siegeflag;
+   int8_t siegeflag;
 };
 
 struct sitechangest
 {
-   char x,y,z;
+   int8_t x,y,z;
    int flag;
    sitechangest() { }
-   sitechangest(char x_, char y_, char z_, int flag_) :  x(x_), y(y_), z(z_), flag(flag_) { }
+   sitechangest(int8_t x_, int8_t y_, int8_t z_, int flag_) :  x(x_), y(y_), z(z_), flag(flag_) { }
 };
 
 #define MAPX 70
@@ -221,7 +221,7 @@ class Location
 public:
    char name[LOCATION_NAMELEN];
    char shortname[LOCATION_SHORTNAMELEN];
-   char type;
+   int8_t type;
    int city;
    int area;
    int parent;
@@ -230,8 +230,8 @@ public:
    vector<Item *> loot;
    vector<sitechangest> changes;
    int renting;
-   char newrental;
-   char needcar;
+   bool newrental;
+   bool needcar;
    int closed;
    bool hidden;
    bool mapped;
@@ -249,9 +249,9 @@ public:
 
    unsigned long mapseed[RNG_SIZE];
 
-   Location(char type_, int parent_=-1);
+   Location(int8_t type_, int parent_=-1);
    Location() { }
-   Location* addchild(char type_);
+   Location* addchild(int8_t type_);
    ~Location() { delete_and_clear(loot); }
    void init();
    void update_heat_protection();

@@ -1299,7 +1299,7 @@ void makecharacter()
             location[l]->compound_stores+=100;
             break;
          }
-         location[l]->newrental=1;
+         location[l]->newrental=true;
 
          switch(recruits)
          {

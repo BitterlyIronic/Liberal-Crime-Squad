@@ -39,7 +39,7 @@ int findlocation_id(int id)
 }
 
 // Locations - Construct a new location with the specified parameters
-Location::Location(char type_, int parent_)
+Location::Location(int8_t type_, int parent_)
  : type(type_),city(-1),parent(parent_),renting(RENTING_NOCONTROL),needcar(false),hidden(false),upgradable(false)
 {
    if(this->parent!=-1)
@@ -54,7 +54,7 @@ Location::Location(char type_, int parent_)
    initlocation(*this);
 }
 
-Location* Location::addchild(char type_)
+Location* Location::addchild(int8_t type_)
 {
    Location *newloc = new Location(type_, findlocation(this->type, this->city));
    location.push_back(newloc);
@@ -64,7 +64,7 @@ Location* Location::addchild(char type_)
 void Location::init()
 {
    haveflag=0;
-   newrental=0;
+   newrental=false;
    heat=0;
    heat_protection=0;
    closed=0;

@@ -70,7 +70,7 @@ void noticecheck(int exclude,int difficulty)
 /* checks if your liberal behavior/attack alienates anyone */
 bool alienationcheck(bool mistake)
 {
-   if(location[cursite]->siege.siege)return 0;
+   if(location[cursite]->siege.siege) return false;
 
    bool alienate=false,alienatebig=false;
 

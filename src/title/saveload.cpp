@@ -143,15 +143,15 @@ void savegame(const string& filename)
 
          fwrite(location[l]->name,sizeof(char),LOCATION_NAMELEN,h);
          fwrite(location[l]->shortname,sizeof(char),LOCATION_SHORTNAMELEN,h);
-         fwrite(&location[l]->type,sizeof(char),1,h);
+         fwrite(&location[l]->type,sizeof(int8_t),1,h);
          fwrite(&location[l]->city,sizeof(int),1,h);
          fwrite(&location[l]->area,sizeof(int),1,h);
          fwrite(&location[l]->parent,sizeof(int),1,h);
          fwrite(&location[l]->id,sizeof(int),1,h);
 
          fwrite(&location[l]->renting,sizeof(int),1,h);
-         fwrite(&location[l]->newrental,sizeof(char),1,h);
-         fwrite(&location[l]->needcar,sizeof(char),1,h);
+         fwrite(&location[l]->newrental,sizeof(bool),1,h);
+         fwrite(&location[l]->needcar,sizeof(bool),1,h);
          fwrite(&location[l]->closed,sizeof(int),1,h);
          fwrite(&location[l]->hidden,sizeof(bool),1,h);
          fwrite(&location[l]->mapped,sizeof(bool),1,h);
@@ -495,15 +495,15 @@ bool load(const string& filename)
 
             fread(location[l]->name,sizeof(char),LOCATION_NAMELEN,h);
             fread(location[l]->shortname,sizeof(char),LOCATION_SHORTNAMELEN,h);
-            fread(&location[l]->type,sizeof(char),1,h);
+            fread(&location[l]->type,sizeof(int8_t),1,h);
             fread(&location[l]->city,sizeof(int),1,h);
             fread(&location[l]->area,sizeof(int),1,h);
             fread(&location[l]->parent,sizeof(int),1,h);
             fread(&location[l]->id,sizeof(int),1,h);
 
             fread(&location[l]->renting,sizeof(int),1,h);
-            fread(&location[l]->newrental,sizeof(char),1,h);
-            fread(&location[l]->needcar,sizeof(char),1,h);
+            fread(&location[l]->newrental,sizeof(bool),1,h);
+            fread(&location[l]->needcar,sizeof(bool),1,h);
             fread(&location[l]->closed,sizeof(int),1,h);
             fread(&location[l]->hidden,sizeof(bool),1,h);
             fread(&location[l]->mapped,sizeof(bool),1,h);

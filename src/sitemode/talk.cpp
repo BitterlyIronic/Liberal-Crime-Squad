@@ -555,7 +555,7 @@ bool heyIWantToRentARoom(Creature &a, Creature &tk)
 
          ledger.subtract_funds(rent,EXPENSE_RENT);
          location[cursite]->renting=rent;
-         location[cursite]->newrental=1;
+         location[cursite]->newrental=true;
 
          basesquad(activesquad,cursite);
          return true;
@@ -2351,7 +2351,7 @@ bool talkInCombat(Creature &a, Creature &tk)
          }
          activesquad->squad[i]=NULL;
       }
-      location[cursite]->siege.siege=0;
+      location[cursite]->siege.siege=false;
    }
    return true;
 }

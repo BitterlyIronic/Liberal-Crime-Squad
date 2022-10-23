@@ -103,7 +103,7 @@ void passmonth(bool &clearformess,bool canseethings)
    }
 
    //CLEAR RENT EXEMPTIONS
-   for(l=0;l<len(location);l++) location[l]->newrental=0;
+   for(l=0;l<len(location);l++) location[l]->newrental=false;
 
    //YOUR PAPER AND PUBLIC OPINION AND STUFF
    vector<int> nploc;

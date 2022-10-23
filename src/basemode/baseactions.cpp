@@ -343,7 +343,7 @@ void stopevil()
                set_color(COLOR_GREEN,COLOR_BLACK,1);
             addstr(" ($"+tostring(ticketprice)+")");
          }
-         if(this_location->siege.siege > 0) {
+         if(this_location->siege.siege) {
             set_color(COLOR_RED,COLOR_BLACK,0);
             addstr(" (Under Siege)");
          }
