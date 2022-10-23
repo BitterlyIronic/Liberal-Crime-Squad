@@ -57,7 +57,7 @@ void constructeventstory(char *story,short view,int8_t positive)
             strcat(story," Clinic yesterday.  ");
             strcat(story,"Dr. ");
             char dstr[200],dstr2[200];
-            char gn=(LCSrandom(2)?GENDER_MALE:GENDER_FEMALE);
+            int8_t gn=(LCSrandom(2)?GENDER_MALE:GENDER_FEMALE);
             generate_name(dstr,dstr2,gn);
             strcat(story,dstr);
             strcat(story," ");
@@ -97,7 +97,7 @@ void constructeventstory(char *story,short view,int8_t positive)
             strcat(story," is survived by ");
             strcat(story,gen);
             strcat(story," ");
-            char spouse=(LCSrandom(2)?GENDER_MALE:GENDER_FEMALE);
+            int8_t spouse=(LCSrandom(2)?GENDER_MALE:GENDER_FEMALE);
             if(law[LAW_GAY]<=1)
                spouse=(gn==GENDER_FEMALE?GENDER_MALE:GENDER_FEMALE);
             strcat(story,(spouse==GENDER_FEMALE?"wife":"husband"));
@@ -963,7 +963,7 @@ void constructeventstory(char *story,short view,int8_t positive)
             strcat(story," was overturned by a federal judge yesterday.  ");
             strcat(story,"Justice ");
             char jstr[200],jstr2[200];
-            char gn=(LCSrandom(2)==1?GENDER_MALE:GENDER_FEMALE);
+            int8_t gn=(LCSrandom(2)==1?GENDER_MALE:GENDER_FEMALE);
             generate_name(jstr,jstr2,gn);
             strcat(story,jstr);
             strcat(story," ");
@@ -1294,14 +1294,14 @@ void constructeventstory(char *story,short view,int8_t positive)
             strcat(story,jstr);
             strcat(story," Correctional Facility ended tragically yesterday with the ");
             strcat(story,"death of both the prison guard being held hostage and ");
-            char ggn=(LCSrandom(2)==1?GENDER_MALE:GENDER_FEMALE);
+            int8_t ggn=(LCSrandom(2)==1?GENDER_MALE:GENDER_FEMALE);
             strcat(story,(ggn==GENDER_FEMALE?"her":"his"));
             strcat(story," captor.");
             strcat(story,"&r");
             if(law[LAW_FREESPEECH]==-2)strcat(story,"   Two weeks ago, convicted [reproduction fiend] ");
             else strcat(story,"   Two weeks ago, convicted rapist ");
             char dstr[200],dstr2[200];
-            char dgn=(LCSrandom(2)==1?GENDER_MALE:GENDER_FEMALE);
+            int8_t dgn=(LCSrandom(2)==1?GENDER_MALE:GENDER_FEMALE);
             generate_name(dstr,dstr2,dgn);
             strcat(story,dstr);
             strcat(story," ");
@@ -1709,10 +1709,10 @@ void displaymajoreventstory(newsstoryst& ns,char* story,short* storyx_s,short* s
 
 void run_television_news_stories()
 {
-   char del;
+   bool del;
    for(int n=len(newsstory)-1;n>=0;n--)
    {
-      del=0;
+      del=false;
       if(newsstory[n]->type==NEWSSTORY_MAJOREVENT)
       {
          if(newsstory[n]->positive)
@@ -1738,7 +1738,7 @@ void run_television_news_stories()
 
                   getkey();
 
-                  del=1;
+                  del=true;
                   break;
                case VIEW_CABLENEWS:
                {
@@ -1810,7 +1810,7 @@ void run_television_news_stories()
 
                   getkey();
 
-                  del=1;
+                  del=true;
                   break;
                }
             }
@@ -1838,7 +1838,7 @@ void run_television_news_stories()
 
                   getkey();
 
-                  del=1;
+                  del=true;
                   break;
                case VIEW_CABLENEWS:
                   music.play(MUSIC_ANCHOR);
@@ -1859,7 +1859,7 @@ void run_television_news_stories()
 
                   getkey();
 
-                  del=1;
+                  del=true;
                   break;
                case VIEW_WOMEN:
                   music.play(MUSIC_ABORT);
@@ -1882,7 +1882,7 @@ void run_television_news_stories()
 
                   getkey();
 
-                  del=1;
+                  del=true;
                   break;
             }
          }

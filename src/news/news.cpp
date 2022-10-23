@@ -201,12 +201,12 @@ void clean_up_empty_news_stories()
          newsstory[n]->type==NEWSSTORY_GRAFFITIARREST ||
          newsstory[n]->type==NEWSSTORY_BURIALARREST)
       {
-         char conf=0;
+         bool conf=false;
          for(int c=0;c<len(newsstory[n]->crime);c++)
          {
             if(newsstory[n]->crime[c]==CRIME_KILLEDSOMEBODY)
             {
-               conf=1;
+               conf=true;
                break;
             }
          }
@@ -248,11 +248,11 @@ void assign_page_numbers_to_newspaper_stories()
       }
       newsstory[n]->page=-1;
    }
-   char acted;
+   bool acted;
    int curpage=1,curguardianpage=1;
    do
    {
-      acted=0;
+      acted=false;
       // Sort the major newspapers
       int maxn=-1,maxp=-1;
       for(int n=0;n<len(newsstory);n++)
@@ -277,7 +277,7 @@ void assign_page_numbers_to_newspaper_stories()
          newsstory[maxn]->guardianpage=curguardianpage;
          curpage++;
          curguardianpage++;
-         acted=1;
+         acted=true;
       }
    } while(acted);
 }
@@ -1806,7 +1806,7 @@ void displaynewspicture(int p,int y)
 void displaynewsstory(char *story,short *storyx_s,short *storyx_e,int y)
 {
    vector<char *> text;
-   vector<char> centered;
+   vector<bool> centered;
 
    int totalwidth;
    int curpos=0;
@@ -1814,16 +1814,16 @@ void displaynewsstory(char *story,short *storyx_s,short *storyx_e,int y)
    int addstrcur;
    char addstring[500];
 
-   char content;
+   bool content;
    int cury=y;
    int length;
-   char endparagraph=0;
-   char iscentered=0;
+   int8_t endparagraph=0;
+   bool iscentered=false;
    int i=0;
 
    while(curpos<len(story)&&cury<25)
    {
-      content=0;
+      content=false;
       totalwidth=0;
       addstrcur=0;
       length=storyx_e[cury]-storyx_s[cury]+1;
@@ -1834,10 +1834,10 @@ void displaynewsstory(char *story,short *storyx_s,short *storyx_e,int y)
          if(story[i]=='&'&&story[i+1]!='&')
          {
             i++;
-            if(story[i]=='c')iscentered=1;
+            if(story[i]=='c')iscentered=true;
             if(story[i]=='r')
             {
-               content=1;
+               content=true;
                i++;
                addstrcur+=1;
                addstring[addstrcur-1]=' ';
@@ -1848,7 +1848,7 @@ void displaynewsstory(char *story,short *storyx_s,short *storyx_e,int y)
          }
          else
          {
-            content=1;
+            content=true;
 
             if(story[i]=='&')i++;
             addstring[addstrcur]=story[i];
@@ -1870,7 +1870,7 @@ void displaynewsstory(char *story,short *storyx_s,short *storyx_e,int y)
       if(len(addstring)&&content)
       {
          int words=0;
-         char silent=1;
+         bool silent=true;
          vector<int> spacex;
          for(int s2=0;s2<len(addstring);s2++)
          {
@@ -1878,7 +1878,7 @@ void displaynewsstory(char *story,short *storyx_s,short *storyx_e,int y)
             {
                if(!silent)
                {
-                  silent=1;
+                  silent=true;
                   words++;
                   spacex.push_back(s2);
                }
@@ -1888,7 +1888,7 @@ void displaynewsstory(char *story,short *storyx_s,short *storyx_e,int y)
                if(silent)
                {
                   words++;
-                  silent=0;
+                  silent=false;
                }
             }
          }
@@ -1911,7 +1911,7 @@ void displaynewsstory(char *story,short *storyx_s,short *storyx_e,int y)
          centered.push_back(iscentered);
          cury++;
          if(endparagraph>0)
-            endparagraph--,iscentered=0;
+            endparagraph--,iscentered=false;
       }
 
       curpos=i;
