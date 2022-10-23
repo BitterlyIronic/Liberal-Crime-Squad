@@ -211,7 +211,7 @@ void printwall(int x, int y, int z, int px, int py)
    bool visible[8]     = {false,false,false,false,false,false,false,false};
    bool bloody[8]      = {false,false,false,false,false,false,false,false};
    char graffiti[4][4] = {"   ","   ","   ","   "};
-   char graffiticolor[4] = {COLOR_BLACK,COLOR_BLACK,COLOR_BLACK,COLOR_BLACK};
+   int8_t graffiticolor[4] = {COLOR_BLACK,COLOR_BLACK,COLOR_BLACK,COLOR_BLACK};
 
    int type = levelmap[x][y][z].flag; // What are we drawing here? Wall/door? Locked/jammed? Metal/normal?
 
@@ -423,25 +423,26 @@ void printblock(int x,int y,int z,int px, int py)
       return;
    }
    int backcolor=COLOR_BLACK;
-   char blink=0,ch=' ';
+   bool blink=false;
+   char ch=' ';
    if(levelmap[x][y][z].flag & SITEBLOCK_RESTRICTED)
    {
-      set_color(COLOR_BLACK,COLOR_BLACK,1);
+      set_color(COLOR_BLACK,COLOR_BLACK,true);
       ch='+';
    }
    else if(levelmap[x][y][z].flag & SITEBLOCK_GRASSY)
    {
-      set_color(COLOR_GREEN,COLOR_BLACK,0);
+      set_color(COLOR_GREEN,COLOR_BLACK,false);
       ch='.';
    }
    else if(levelmap[x][y][z].flag & SITEBLOCK_OUTDOOR)
    {
-      set_color(COLOR_BLACK,COLOR_BLACK,1);
+      set_color(COLOR_BLACK,COLOR_BLACK,true);
       ch=' ';
    }
    else
    {
-      set_color(COLOR_BLACK,COLOR_BLACK,1);
+      set_color(COLOR_BLACK,COLOR_BLACK,true);
       ch=' ';
    }
 

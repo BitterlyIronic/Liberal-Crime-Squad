@@ -459,8 +459,8 @@ void makecharacter()
    bool makelawyer=false;
    bool gaylawyer=false;
    Vehicle * startcar = NULL;
-   char recruits = RECRUITS_NONE;
-   char base = SITE_RESIDENTIAL_SHELTER;
+   int8_t recruits = RECRUITS_NONE;
+   int8_t base = SITE_RESIDENTIAL_SHELTER;
 
    for(int q=0;q<10;q++)
    {
@@ -476,7 +476,7 @@ void makecharacter()
       //D - Generalist/Sleepers
       //E - Recruiter
 
-      char selection = LCSrandom(5);
+      int8_t selection = LCSrandom(5);
 
       switch(q)
       {

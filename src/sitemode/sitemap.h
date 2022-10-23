@@ -48,9 +48,9 @@ public:
    void configure(const std::string& command, const std::string& value);
    void build();
 private:
-   char xstart, xend, ystart, yend, zstart, zend;
+   int8_t xstart, xend, ystart, yend, zstart, zend;
    int tile;
-   char addtype;
+   int8_t addtype;
 };
 
 // Executes a complex set of code during map creation
@@ -61,8 +61,8 @@ public:
    void configure(const std::string& command, const std::string& value);
    void build();
 private:
-   char xstart, xend, ystart, yend, zstart, zend;
-   char script;
+   int8_t xstart, xend, ystart, yend, zstart, zend;
+   int8_t script;
 
    /* recursive dungeon-generating algorithm */
    void generateroom(int rx,int ry,int dx,int dy,int z);
@@ -83,8 +83,8 @@ public:
    void configure(const std::string& command, const std::string& value);
    void build();
 private:
-   char xstart, xend, ystart, yend, zstart, zend;
-   char special;
+   int8_t xstart, xend, ystart, yend, zstart, zend;
+   int8_t special;
    int freq;
 };
 
@@ -96,8 +96,8 @@ public:
    void configure(const std::string& command, const std::string& value);
    void build();
 private:
-   char xstart, xend, ystart, yend, zstart, zend;
-   char unique;
+   int8_t xstart, xend, ystart, yend, zstart, zend;
+   int8_t unique;
 };
 
 // Adds a loot type during map creation
@@ -108,7 +108,7 @@ public:
    void configure(const std::string& command, const std::string& value);
    void build();
 private:
-   //char loot;
+   //int8_t loot;
    std::string loot;
    int weight;
 };

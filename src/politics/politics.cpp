@@ -379,13 +379,13 @@ void elections(bool clearformess,bool canseethings)
 
    vector<int> prop, propdir, canlaw;
    int pnum=LCSrandom(4)+4; // this expression for pnum has a maximum value of 7, important later on
-   char lawtaken[LAWNUM];
-   memset(lawtaken,0,LAWNUM*sizeof(char));
+   bool lawtaken[LAWNUM];
+   memset(lawtaken,false,LAWNUM*sizeof(bool));
 
    int lawpriority[LAWNUM];
    memset(lawpriority,0,LAWNUM*sizeof(int));
-   char lawdir[LAWNUM];
-   memset(lawdir,0,LAWNUM*sizeof(char));
+   int8_t lawdir[LAWNUM];
+   memset(lawdir,0,LAWNUM*sizeof(int8_t));
    //DETERMINE PROPS
    int pmood, pvote;
    for(l=0;l<LAWNUM;l++)
@@ -440,7 +440,7 @@ void elections(bool clearformess,bool canseethings)
 
       prop[p]=pickrandom(canlaw);
 
-      lawtaken[prop[p]]=1;
+      lawtaken[prop[p]]=true;
 
       propdir[p]=lawdir[prop[p]];
 
@@ -1045,8 +1045,8 @@ void supremecourt(bool clearformess,bool canseethings)
 
    vector<int> scase, scasedir;
    int cnum=LCSrandom(5)+2, bias=0;
-   char lawtaken[LAWNUM];
-   memset(lawtaken,0,LAWNUM*sizeof(char));
+   bool lawtaken[LAWNUM];
+   memset(lawtaken,false,LAWNUM*sizeof(bool));
 
    scase.resize(cnum);
    scasedir.resize(cnum);
@@ -1057,7 +1057,7 @@ void supremecourt(bool clearformess,bool canseethings)
          scase[c]=LCSrandom(LAWNUM);
       } while(lawtaken[scase[c]]);
 
-      lawtaken[scase[c]]=1;
+      lawtaken[scase[c]]=true;
 
       //Constitutional bias -- free speech, flag burning issues, supreme court
       //is extra liberal, gun control, supreme court is extra conservative
@@ -1217,7 +1217,7 @@ void supremecourt(bool clearformess,bool canseethings)
 
    for(c=0;c<cnum;c++)
    {
-      char yeswin=0;
+      bool yeswin=false;
       int yesvotes=0,vote;
       //Constitutional bias -- free speech, flag burning issues, supreme court
       //is extra liberal, gun control, supreme court is extra conservative
@@ -1240,7 +1240,7 @@ void supremecourt(bool clearformess,bool canseethings)
          if(law[scase[c]]>vote && scasedir[c]==-1) yesvotes++;
          if(law[scase[c]]<vote && scasedir[c]==1) yesvotes++;
 
-         if(l==COURTNUM-1&&yesvotes>=COURTMAJORITY) yeswin=1;
+         if(l==COURTNUM-1&&yesvotes>=COURTMAJORITY) yeswin=true;
 
          if(canseethings)
          {
@@ -1357,7 +1357,7 @@ enum BillStatus
 
 //Some politicians listen to public opinion, but no politician will radically deviate from their alignment.
 //More extreme politicians are less likely to deviate from their views. Moderates always consult public opinion.
-char determine_politician_vote(char alignment,int law)
+int8_t determine_politician_vote(int8_t alignment,int law)
 {
    int8_t vote=alignment;
    int mood=publicmood(law);
@@ -1420,13 +1420,13 @@ void congress(bool clearformess,bool canseethings)
 
    vector<int> bill,billdir,killbill;
    int cnum=LCSrandom(3)+1;
-   char lawtaken[LAWNUM];
-   memset(lawtaken,0,LAWNUM*sizeof(char));
+   bool lawtaken[LAWNUM];
+   memset(lawtaken,false,LAWNUM*sizeof(bool));
 
    int lawpriority[LAWNUM];
    memset(lawpriority,0,LAWNUM*sizeof(int));
-   char lawdir[LAWNUM];
-   memset(lawdir,0,LAWNUM*sizeof(char));
+   int8_t lawdir[LAWNUM];
+   memset(lawdir,0,LAWNUM*sizeof(int8_t));
 
    //DETERMINE BILLS
    int pup,pdown,pprior;
@@ -1497,7 +1497,7 @@ void congress(bool clearformess,bool canseethings)
 
       bill[c]=pickrandom(canlaw);
 
-      lawtaken[bill[c]]=1;
+      lawtaken[bill[c]]=true;
 
       billdir[c]=lawdir[bill[c]];
 
@@ -1631,7 +1631,7 @@ void congress(bool clearformess,bool canseethings)
 
    for(c=0;c<cnum;c++)
    {
-      char yeswin_h=0, yeswin_s=0;
+      bool yeswin_h=false, yeswin_s=false;
       int yesvotes_h=0, yesvotes_s=0;
       int vote, s=0;
 
@@ -1644,7 +1644,7 @@ void congress(bool clearformess,bool canseethings)
 
          if(l==HOUSENUM-1)
          {
-            if(yesvotes_h>=HOUSEMAJORITY) yeswin_h=1;
+            if(yesvotes_h>=HOUSEMAJORITY) yeswin_h=true;
             if(yesvotes_h>=HOUSESUPERMAJORITY) killbill[c]=BILL_OVERRIDE_VETO;
          }
 
@@ -1675,7 +1675,7 @@ void congress(bool clearformess,bool canseethings)
 
          if(l==HOUSENUM-1)
          {
-            if(yesvotes_s>=SENATEMAJORITY) yeswin_s=1;
+            if(yesvotes_s>=SENATEMAJORITY) yeswin_s=true;
             if(yesvotes_s<SENATESUPERMAJORITY&&killbill[c]==BILL_OVERRIDE_VETO) killbill[c]=BILL_PASSED_CONGRESS;
             if(yesvotes_s==SENATEMAJORITY-1)
             {  //TIE BREAKER
@@ -1696,8 +1696,8 @@ void congress(bool clearformess,bool canseethings)
                   }
                }
 
-               if(law[bill[c]]>vote&&billdir[c]==-1) yeswin_s=1;
-               if(law[bill[c]]<vote&&billdir[c]==1) yeswin_s=1;
+               if(law[bill[c]]>vote&&billdir[c]==-1) yeswin_s=true;
+               if(law[bill[c]]<vote&&billdir[c]==1) yeswin_s=true;
 
                //ASSURED SIGNING BY PRESIDENT IF VP VOTED YES
                if(yeswin_s) killbill[c]=BILL_SIGNED;

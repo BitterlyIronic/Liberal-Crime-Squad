@@ -68,7 +68,7 @@ void special_bouncer_assess_squad()
 {
    if(location[cursite]->renting==RENTING_PERMANENT) return;
 
-   bool autoadmit=0;
+   bool autoadmit=false;
    char sleepername[80];
    for(int e=0;e<ENCMAX;e++)encounter[e].exists=0;
 
@@ -78,7 +78,7 @@ void special_bouncer_assess_squad()
    {
       if(pool[p]->base==cursite&&pool[p]->type==CREATURE_BOUNCER)
       {
-         autoadmit=1;
+         autoadmit=true;
          strcpy(sleepername,pool[p]->name);
          strcpy(encounter[0].name,sleepername);
          encounter[0].align=1;
@@ -110,7 +110,7 @@ void special_bouncer_assess_squad()
 
    getkey();
 
-   char rejected=NOT_REJECTED;
+   int8_t rejected=NOT_REJECTED;
 
    // Size up the squad for entry
    if(!autoadmit)
@@ -460,7 +460,7 @@ void special_nuclear_onoff()
          clearmessagearea();
          levelmap[locx][locy][locz].special=-1;
 
-         char max=DIFFICULTY_HARD;
+         int8_t max=DIFFICULTY_HARD;
          Creature* maxs=0;
 
          for(int p=0;p<6;p++)
@@ -808,7 +808,7 @@ void special_courthouse_jury()
       {
          levelmap[locx][locy][locz].special=-1;
 
-         char succeed=0;
+         bool succeed=false;
 
          int maxattack=0;
          int maxp = -1;
@@ -842,7 +842,7 @@ void special_courthouse_jury()
             activesquad->squad[p]->train(SKILL_LAW,20);
 
             if(activesquad->squad[p]->skill_check(SKILL_PERSUASION,DIFFICULTY_HARD) &&
-               activesquad->squad[p]->skill_check(SKILL_LAW,DIFFICULTY_CHALLENGING))succeed=1;
+               activesquad->squad[p]->skill_check(SKILL_LAW,DIFFICULTY_CHALLENGING))succeed=true;
 
             if(succeed)
             {
@@ -1881,7 +1881,7 @@ void spawn_security()
 
 void special_security(bool metaldetect)
 {
-   char autoadmit=0;
+   int8_t autoadmit=0;
    char sleepername[80];
    for(int e=0;e<ENCMAX;e++)encounter[e].exists=0;
 
@@ -1931,7 +1931,7 @@ void special_security(bool metaldetect)
 
    getkey();
 
-   char rejected=NOT_REJECTED;
+   int8_t rejected=NOT_REJECTED;
 
    // Size up the squad for entry
    for(int s=0;s<6;s++)

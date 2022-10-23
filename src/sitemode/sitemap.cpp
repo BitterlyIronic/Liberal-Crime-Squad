@@ -264,7 +264,7 @@ void initsite(Location &loc)
    // End of old build code. SAV
    }
    //CLEAR AWAY BLOCKED DOORWAYS
-   char block,opennum;
+   int8_t block,opennum;
    for(    x=0;x<MAPX;x++)
    for(int y=0;y<MAPY;y++)
    for(int z=0;z<MAPZ;z++)
@@ -496,10 +496,10 @@ void initsite(Location &loc)
    }
    // SAV - End more old map stuff.
    //Clear out restrictions
-   char acted;
+   bool acted;
    do
    {
-      acted=0;
+      acted=false;
       for(int x=2;x<MAPX-2;x++)
       for(int y=2;y<MAPY-2;y++)
       for(int z=0;z<MAPZ  ;z++)
@@ -519,7 +519,7 @@ void initsite(Location &loc)
                 !(levelmap[x][y+1][z].flag & SITEBLOCK_BLOCK)))
             {
                levelmap[x][y][z].flag&=~SITEBLOCK_RESTRICTED;
-               acted=1;
+               acted=true;
                continue;
             }
          }
@@ -538,7 +538,7 @@ void initsite(Location &loc)
             {  //Unlock and unrestrict
                levelmap[x][y][z].flag&=~SITEBLOCK_LOCKED;
                levelmap[x][y][z].flag&=~SITEBLOCK_RESTRICTED;
-               acted=1;
+               acted=true;
                continue;
             }
             //Unrestricted on at least one side and I'm not locked?
@@ -549,7 +549,7 @@ void initsite(Location &loc)
                      !(levelmap[x][y][z].flag   & SITEBLOCK_LOCKED))
             {  //Lock doors leading to restricted areas
                levelmap[x][y][z].flag|=SITEBLOCK_LOCKED;
-               acted=1;
+               acted=true;
                continue;
             }
          }
@@ -889,7 +889,7 @@ void configSiteScript::generatehallway_y(int rx, int ry, int dx, int dy, int z)
       if(y%4==0)
       {
          // Pick a door location for the left
-         char door_y=y+LCSrandom(3)-1;
+         int8_t door_y=y+LCSrandom(3)-1;
          // Create the left door
          levelmap[rx-1][(int)door_y][z].flag&=~SITEBLOCK_BLOCK;
          levelmap[rx-1][(int)door_y][z].flag|=SITEBLOCK_DOOR;
@@ -1129,10 +1129,10 @@ void configSiteUnique::build()
    //int count=0;
    vector<coordinates> secure, unsecure;
    //Clear out restrictions
-   char acted;
+   bool acted;
    do
    {
-      acted=0;
+      acted=false;
       for(int x=2;x<MAPX-2;x++)
       for(int y=2;y<MAPY-2;y++)
       for(int z=0;z<MAPZ;z++)
@@ -1153,7 +1153,7 @@ void configSiteUnique::build()
                !(levelmap[x][y+1][z].flag & SITEBLOCK_BLOCK)))
             {
                levelmap[x][y][z].flag&=~SITEBLOCK_RESTRICTED;
-               acted=1;
+               acted=true;
                continue;
             }
          }
@@ -1173,7 +1173,7 @@ void configSiteUnique::build()
                //Unlock and unrestrict
                levelmap[x][y][z].flag&=~SITEBLOCK_LOCKED;
                levelmap[x][y][z].flag&=~SITEBLOCK_RESTRICTED;
-               acted=1;
+               acted=true;
                continue;
             }
             //Unrestricted on at least one side and I'm not locked?
@@ -1184,7 +1184,7 @@ void configSiteUnique::build()
                !(levelmap[x][y][z].flag & SITEBLOCK_LOCKED))
             {  //Lock doors leading to restricted areas
                levelmap[x][y][z].flag|=SITEBLOCK_LOCKED;
-               acted=1;
+               acted=true;
                continue;
             }
          }

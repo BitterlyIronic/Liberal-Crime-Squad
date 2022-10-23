@@ -229,12 +229,12 @@ void mode_site()
 
    showcarprefs=-1;
 
-   char bail_on_base=1;
-   if(cursite==activesquad->squad[0]->base)bail_on_base=0;
+   bool bail_on_base=true;
+   if(cursite==activesquad->squad[0]->base)bail_on_base=false;
 
    knowmap(locx,locy,locz);
 
-   char hostcheck=0;
+   bool hostcheck=false;
 
    int encounter_timer=0;
 
@@ -528,10 +528,10 @@ void mode_site()
       printsitemap(locx,locy,locz);
 
       //CHECK IF YOU HAVE A SQUIRMING AMATEUR HOSTAGE
-         //hostcheck SHOULD ONLY BE 1 WHEN A NEWENC IS CREATED
+         //hostcheck SHOULD ONLY BE TRUE WHEN A NEWENC IS CREATED
       if(hostcheck)
       {
-         char havehostage=0;
+         bool havehostage=false;
          //Check your whole squad
          for(int p=0;p<6;p++)
          {
@@ -548,7 +548,7 @@ void mode_site()
                      activesquad->squad[p]->prisoner->flag|=CREATUREFLAG_KIDNAPPED;
                      if(activesquad->squad[p]->type==CREATURE_RADIOPERSONALITY)offended_amradio=1;
                      if(activesquad->squad[p]->type==CREATURE_NEWSANCHOR)offended_cablenews=1;
-                     havehostage=1;
+                     havehostage=true;
                   }
                }
             }
@@ -560,7 +560,7 @@ void mode_site()
             sitecrime+=5;
             criminalizeparty(LAWFLAG_KIDNAPPING);
          }
-         hostcheck=0;
+         hostcheck=false;
 
          clearmessagearea();
       }
@@ -612,7 +612,7 @@ void mode_site()
       {
          int olocx=locx,olocy=locy,olocz=locz;
 
-         char override=0;
+         bool override=false;
 
          if(c=='v'&&enemy&&sitealarm)
          {
@@ -629,7 +629,7 @@ void mode_site()
                   c2==KEY_LEFT||c2==KEY_RIGHT||c2==KEY_UP||c2==KEY_DOWN)
                {
                   c=c2;
-                  override=1;
+                  override=true;
                   break;
                }
 
@@ -1847,18 +1847,18 @@ void mode_site()
             }
 
             //SEE IF THERE IS AN ENCOUNTER
-            char newenc=0;
+            bool newenc=false;
 
             // 10% chance of encounter normally (100% if waiting)
             // 20% chance of encounter after massive response
             // 0% chance of encounter during sieges
             if(!location[cursite]->siege.siege)
             {
-               if(postalarmtimer>80) { if(!LCSrandom(5)) newenc=1; }
-               else if(!LCSrandom(10)||c=='s') newenc=1;
+               if(postalarmtimer>80) { if(!LCSrandom(5)) newenc=true; }
+               else if(!LCSrandom(10)||c=='s') newenc=true;
             }
 
-            for(int e=0;e<ENCMAX;e++) if(encounter[e].exists) newenc=0;
+            for(int e=0;e<ENCMAX;e++) if(encounter[e].exists) newenc=false;
 
             // Handle special tiles that activate when you step on them
             // (rather than those that must be manually activated)
@@ -1882,7 +1882,7 @@ void mode_site()
                case SPECIAL_OVAL_OFFICE_SW:
                case SPECIAL_OVAL_OFFICE_SE:
                   makespecial=levelmap[locx][locy][locz].special;
-                  newenc=1;
+                  newenc=true;
                   break;
             }
 
@@ -1891,7 +1891,7 @@ void mode_site()
             {
                open_door(levelmap[olocx][olocy][olocz].flag&SITEBLOCK_RESTRICTED);
                locx=olocx,locy=olocy,locz=olocz;
-               if(encsize>0) newenc=0;
+               if(encsize>0) newenc=false;
             }
 
             //BAIL UPON VICTORY (version 2 -- defeated CCS safehouse)
@@ -2498,7 +2498,7 @@ void mode_site()
 
                      break;
                }
-               hostcheck=1;
+               hostcheck=true;
             }
 
             if(!location[cursite]->siege.siege)
