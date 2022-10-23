@@ -1,11 +1,11 @@
 #include <externs.h>
 
-void displaysinglead(bool liberalguardian,char addplace[2][3],short* storyx_s,short* storyx_e,int& it2)
+void displaysinglead(bool liberalguardian,int8_t addplace[2][3],short* storyx_s,short* storyx_e,int& it2)
 {
    int x,y;
    do x=LCSrandom(2),y=LCSrandom(3); while(addplace[x][y]);
 
-   char choice=LCSrandom(6)+1; // choose an ad from 1 to 6 that isn't already taken
+   int8_t choice=LCSrandom(6)+1; // choose an ad from 1 to 6 that isn't already taken
    for(int x2=0;x2<2;x2++) for(int y2=0;y2<3;y2++) // loop thru ad places to see ads already up
       if(addplace[x2][y2]==choice) choice=LCSrandom(6)+1,x2=0,y2=-1; // choose again and restart loop if already taken
    addplace[x][y]=choice; // we got an ad chosen that isn't a duplicate
@@ -226,7 +226,7 @@ void displayads(newsstoryst& ns, bool liberalguardian, short* storyx_s, short* s
       if(ns.guardianpage>=5)adnumber+=LCSrandom(2)+1;
       if(ns.guardianpage>=6)adnumber+=LCSrandom(2)+1;
    }
-   char addplace[2][3]={{0,0,0},{0,0,0}};
+   int8_t addplace[2][3]={{0,0,0},{0,0,0}};
    for(adnumber=(adnumber>6?6:adnumber);adnumber>0;adnumber--)
       displaysinglead(liberalguardian,addplace,storyx_s,storyx_e,it2);
 }
